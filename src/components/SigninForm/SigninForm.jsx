@@ -2,6 +2,7 @@ import { Button } from "@/shadcn-components/ui/button";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { Checkbox } from "@/shadcn-components/ui/checkbox";
 
 const SigninForm = () => {
   const {
@@ -21,39 +22,39 @@ const SigninForm = () => {
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-80 min-[500px]:w-96 border border-black rounded-md p-5 flex flex-col   justify-center"
+      className="w-full min-[500px]:w-[500px] m-2 shadow-xl rounded-md p-5 py-10 px-6 flex flex-col  bg-stone-50  justify-center"
     >
-      <p className="text-center text-2xl font-semibold ">SIGNIN</p>
-      <p className="text-gray-500 text-center mb-2 text-sm">
-        Enter your email and password to Signin:
-      </p>
-      {/* <div className="flex flex-col justify-center w-full "> */}
-      <label className="text-black font-semibold">Email</label>
+      <p className="text-xl mb-5 ">Hi, Welcome Back!</p>
+
       <input
         {...register("email", { required: true })}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter Email..."
-        className="border border-black rounded-md p-2 mb-2 "
+        placeholder="Email Address"
+        className="border border-black rounded-md p-2 my-4 "
       />
-      <label className="text-black font-semibold">Password</label>
+
       <input
         {...register("password", { required: true })}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Enter Password..."
-        className="border border-black rounded-md p-2 "
+        placeholder="Password"
+        className="border border-black rounded-md p-2 mt-2  "
       />
-      {/* </div> */}
-      {/* <div className="flex justify-end w-"> */}
-      <p className="text-black text-end  text-sm mt-1 cursor-pointer underline-offset-4 hover:underline mb-5">
-        Forgot your Password?
-      </p>
-      {/* </div> */}
 
-      {/* <input type="submit" /> */}
-      <Button className="w-full bg-black">Submit</Button>
-      <p className="text-black text-center text-sm mt-2">
+      <div className="flex  justify-between items-center my-8">
+        <div className="flex items-center">
+          <Checkbox />
+          <p className="ms-2 font-medium">Keep me signed in</p>
+        </div>
+
+        <p className="text-neutral-500 text-end     hover:text-black  cursor-pointer  ">
+          Forgot?
+        </p>
+      </div>
+
+      <Button className="w-full bg-black text-md">Signin</Button>
+      <p className="text-black text-center  mt-4">
         Don't have an account?{" "}
         <Link
           to="/account/signup"

@@ -13,8 +13,10 @@ const SigninForm = () => {
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const onSubmit = (data) => console.log(data);
 
   console.log(watch("example")); // watch input value by passing the name of it
@@ -23,54 +25,70 @@ const SigninForm = () => {
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-80 min-[500px]:w-96 border border-black   p-5 flex flex-col    justify-center"
+      className="w-full min-[500px]:w-[500px] m-2 shadow-xl rounded-md p-5 py-10 px-6 flex flex-col  bg-stone-50  justify-center"
     >
-      <p className="text-center text-2xl font-semibold ">SIGNUP</p>
+      {/* <p className="text-center text-2xl font-semibold ">SIGNUP</p>
       <p className="text-gray-500 text-center mb-2 text-sm">
         Please fill in the information below:
-      </p>
+      </p> */}
       {/* <div className="flex flex-col justify-center w-full "> */}
-      {/* <label className="text-black font-semibold">First Name</label> */}
+      {/* <label className="text-black font-medium">First Name</label>
       <input
         {...register("firstName", { required: true })}
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
-        placeholder="Enter First Name..."
-        className="border-b border-black rounded- p-2 my-2 outline-none"
+        placeholder="First Name"
+        className="border border-black rounded-md p-2 mb-6"
       />{" "}
-      {/* <label className="text-black font-semibold">Last Name</label> */}
+      <label className="text-black font-medium">Last Name</label>
       <input
         {...register("lastName", { required: true })}
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
-        placeholder="Enter Last Name..."
-        className="border-b border-black rounded- p-2 my-2 outline-none"
+        placeholder="Last Name"
+        className="border border-black rounded-md p-2 mb-6"
+      /> */}
+      <label className="text-black font-medium">User Name</label>
+      <input
+        {...register("userName", { required: true })}
+        value={userName}
+        onChange={(e) => setUserName(e.target.value)}
+        placeholder="User Name"
+        className="border border-black rounded-md p-2 mb-6"
       />
-      {/* <label className="text-black font-semibold">Email</label> */}
+      <label className="text-black font-medium">Email Address</label>
       <input
         {...register("email", { required: true })}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter Email..."
-        className="border-b border-black rounded- p-2 my-2 outline-none "
+        placeholder="Email Address"
+        className="border border-black rounded-md p-2 mb-6 "
       />
-      {/* <label className="text-black font-semibold">Password</label> */}
+      <label className="text-black font-medium">Password</label>
       <input
         {...register("password", { required: true })}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Enter Password..."
-        className="border-b border-black rounded- p-2 my-2 outline-none"
+        placeholder="Password"
+        className="border border-black rounded-md p-2 mb-6"
+      />
+      <label className="text-black font-medium">Password Confirm</label>
+      <input
+        {...register("passwordConfirm", { required: true })}
+        value={passwordConfirm}
+        onChange={(e) => setPasswordConfirm(e.target.value)}
+        placeholder="Password Confirm"
+        className="border border-black rounded-md p-2 mb-6"
       />
       {/* </div> */}
       {/* <input type="submit" /> */}
       <Button
-        variant="outline"
-        className="w-full border-black hover:bg-black hover:text-white mt-4"
+        // variant="outline"
+        className="w-full border-black mt-4 text-md"
       >
-        Submit
+        Signup
       </Button>
-      <p className="text-black text-center text-sm mt-2">
+      <p className="text-black text-center mt-4">
         Already have an account?{" "}
         <Link
           to="/account/signin"
