@@ -9,10 +9,11 @@ import KidsPage from "./containers/KidsPage/KidsPage";
 import AccessoriesPage from "./containers/AccessoriesPage/AccessoriesPage";
 import SignupPage from "./containers/SignupPage/SignupPage";
 import SigninPage from "./containers/SigninPage/SigninPage";
+import SingleProductPage from "./containers/SingleProductPage/SingleProductPage";
 
 function App() {
   return (
-    <div style={{ fontFamily: "Roboto, sans-serif" }}>
+    <div style={{ fontFamily: "Lato, sans-serif" }}>
       {/* <Banner />
       <Header /> */}
       <Routes>
@@ -23,6 +24,7 @@ function App() {
         <Route path="/collections/accessories" element={<AccessoriesPage />} />
         <Route path="/account/signup" element={<SignupPage />} />
         <Route path="/account/signin" element={<SigninPage />} />
+        <Route path="/products/productId" element={<SingleProductPage />} />
       </Routes>{" "}
     </div>
   );

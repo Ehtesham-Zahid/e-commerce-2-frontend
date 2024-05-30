@@ -42,7 +42,6 @@ const SideDrawer = () => {
             </SheetTrigger>
 
             <SheetContent side="top" className="w-full flex flex-col">
-              {/* <SheetHeader></SheetHeader> */}
               <div className=" flex">
                 <SearchIcon
                   className="me-2 ms-1   text-neutral-400 mt-1"
