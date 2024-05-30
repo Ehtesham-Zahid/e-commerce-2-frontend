@@ -9,15 +9,15 @@ const ProductImagesSlider = () => {
       <div className="flex justify-between items-stretch md:flex-col md:justify-center   md:w-36 md:mr-5">
         <img
           src={PImage}
-          className="max-[500px]:w-24 w-36 border-black  border-2 rounded-lg  mb-5"
+          className="max-[390px]:w-24 max-[500px]:w-28 w-36 border-black  border-2 rounded-lg  mb-5"
         />
         <img
           src={PImage}
-          className="max-[500px]:w-24 w-36 border-2 rounded-lg  mb-5"
+          className="max-[390px]:w-24 max-[500px]:w-28 w-36 border-2 rounded-lg  mb-5"
         />
         <img
           src={PImage}
-          className="max-[500px]:w-24 w-36 border-2 rounded-lg  mb-5"
+          className="max-[390px]:w-24 max-[500px]:w-28 w-36 border-2 rounded-lg  mb-5"
         />
       </div>
       {/* <Zoom> */}
