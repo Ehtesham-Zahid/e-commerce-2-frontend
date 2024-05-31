@@ -112,7 +112,10 @@ const SideDrawer = () => {
           </li>
           <li className="border-b-2 border-neutral-300 w-full  my-4 min-[500px]:hidden">
             <SheetClose asChild>
-              <Link to="/" className="font-semibold flex justify-between  ">
+              <Link
+                to="/account"
+                className="font-semibold flex justify-between  "
+              >
                 ACCOUNT
                 <KeyboardArrowRightIcon />
               </Link>

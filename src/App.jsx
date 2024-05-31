@@ -29,7 +29,7 @@ function App() {
         <Route path="/account/signin" element={<SigninPage />} />
         <Route path="/products/:productId" element={<SingleProductPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/dashboard" element={<AccountPage />} />
+        <Route path="/account" element={<AccountPage />} />
       </Routes>{" "}
       <Footer />
     </div>
