@@ -3,6 +3,7 @@ import ProductCard from "../ProductCard/ProductCard";
 import Toolbar from "../Toolbar/Toolbar";
 
 const ProductsSection = () => {
+  // const products = useSelector((state) => state.products);
   // flex justify-around  flex-wrap overflow-auto gap-y-5  items-center my-5
   const products = useSelector((state) => state.products);
   let sectionClass;
@@ -17,20 +18,20 @@ const ProductsSection = () => {
   }
   return (
     <div className={sectionClass}>
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
+      {products.productsByCategory.map((product) => {
+        return (
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            title={product.title}
+            price={product.price}
+            description={product.description}
+            category={product.category}
+            color={product.color}
+            image={product.imageUrls[0]}
+          />
+        );
+      })}
     </div>
     // <div className="">
     // {/* <Toolbar /> */}

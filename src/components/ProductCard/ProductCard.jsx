@@ -1,20 +1,18 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 
-import Product1 from "../../assets/Images/Products/product-1.webp";
-import { Button } from "@/shadcn-components/ui/button";
 import { Link } from "react-router-dom";
 
-const ProductCard = () => {
+const ProductCard = (props) => {
   return (
     <div className="">
-      <Link to="/products/productId">
-        <img src={Product1} className="rounded-sm" />
+      <Link to={`/products/${props.id}`}>
+        <img src={props.image} className="rounded-sm" />
       </Link>
-      <Link to="/products/productId">
-        <p className="text-sm my-1.5">Cloud Feel Muscle Tee</p>
+      <Link to={`/products/${props.id}`}>
+        <p className="text-sm my-1.5">{props.title}</p>
       </Link>
-      <p className="text-sm mb-1.5 ">White</p>
-      <p className="font-semibold my-1.5">Rs. 2,500</p>
+      <p className="text-sm mb-1.5 ">{props.color}</p>
+      <p className="font-semibold my-1.5 capitalize">Rs. {props.price}</p>
     </div>
   );
 };

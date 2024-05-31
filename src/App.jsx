@@ -11,6 +11,8 @@ import SignupPage from "./containers/SignupPage/SignupPage";
 import SigninPage from "./containers/SigninPage/SigninPage";
 import SingleProductPage from "./containers/SingleProductPage/SingleProductPage";
 import CheckoutPage from "./containers/CheckoutPage/CheckoutPage";
+import Footer from "./components/Footer/Footer";
+import AccountPage from "./containers/AccountPage/AccountPage";
 
 function App() {
   return (
@@ -25,9 +27,11 @@ function App() {
         <Route path="/collections/accessories" element={<AccessoriesPage />} />
         <Route path="/account/signup" element={<SignupPage />} />
         <Route path="/account/signin" element={<SigninPage />} />
-        <Route path="/products/productId" element={<SingleProductPage />} />
+        <Route path="/products/:productId" element={<SingleProductPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/account" element={<AccountPage />} />
       </Routes>{" "}
+      <Footer />
     </div>
   );
 }

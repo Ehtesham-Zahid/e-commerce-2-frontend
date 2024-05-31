@@ -3,8 +3,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Checkbox } from "@/shadcn-components/ui/checkbox";
+import { useDispatch } from "react-redux";
+import { login } from "@/store/features/auth/authSlice";
 
 const SigninForm = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -14,7 +17,14 @@ const SigninForm = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const onSubmit = (data) => console.log(data);
+
+  const loginData = {
+    email,
+    password,
+  };
+  const onSubmit = (data) => {
+    dispatch(login(loginData));
+  };
 
   console.log(watch("example")); // watch input value by passing the name of it
 
@@ -26,22 +36,31 @@ const SigninForm = () => {
     >
       <p className="text-xl mb-5 ">Hi, Welcome Back!</p>
 
-      <input
-        {...register("email", { required: true })}
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email Address"
-        className="border border-black rounded-md p-2 my-4 "
-      />
+      <div className="my-4 flex flex-col">
+        <input
+          {...register("email", { required: true })}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email Address"
+          className="border border-black rounded-md p-2  "
+        />
+        {errors.email && (
+          <p className="text-red-500 font-semibold">Enter the email</p>
+        )}
+      </div>
 
-      <input
-        {...register("password", { required: true })}
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        className="border border-black rounded-md p-2 mt-2  "
-      />
-
+      <div className="mt-2 flex flex-col">
+        <input
+          {...register("password", { required: true })}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          className="border border-black rounded-md p-2  "
+        />
+        {errors.password && (
+          <p className="text-red-500 font-semibold  ">Enter the password</p>
+        )}
+      </div>
       <div className="flex  justify-between items-center my-8">
         <div className="flex items-center">
           <Checkbox />

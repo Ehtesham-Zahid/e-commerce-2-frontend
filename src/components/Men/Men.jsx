@@ -3,9 +3,21 @@ import Banner from "../Banner/Banner";
 import Header from "../Header/Header";
 import ProductsSection from "../ProductsSection/ProductsSection";
 import Toolbar from "../Toolbar/Toolbar";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchProducts,
+  fetchProductsByCategory,
+} from "@/store/features/products/productsSlice";
 
 const Men = () => {
+  // -----VARIABLES DECALARATION------
+  const dispatch = useDispatch();
+
   const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchProductsByCategory("men"));
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +33,7 @@ const Men = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [scrolled]);
+
   return (
     <div>
       <Banner />
