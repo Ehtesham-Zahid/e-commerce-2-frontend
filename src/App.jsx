@@ -10,6 +10,7 @@ import AccessoriesPage from "./containers/AccessoriesPage/AccessoriesPage";
 import SignupPage from "./containers/SignupPage/SignupPage";
 import SigninPage from "./containers/SigninPage/SigninPage";
 import SingleProductPage from "./containers/SingleProductPage/SingleProductPage";
+import CheckoutPage from "./containers/CheckoutPage/CheckoutPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/account/signup" element={<SignupPage />} />
         <Route path="/account/signin" element={<SigninPage />} />
         <Route path="/products/productId" element={<SingleProductPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>{" "}
     </div>
   );

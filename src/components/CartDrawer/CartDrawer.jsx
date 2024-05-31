@@ -13,6 +13,7 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { X } from "lucide-react";
 import CartCard from "../CartCard/CartCard";
 import { Button } from "@/shadcn-components/ui/button";
+import { Link } from "react-router-dom";
 
 const CartDrawer = () => {
   return (
@@ -34,13 +35,15 @@ const CartDrawer = () => {
           <CartCard /> <CartCard /> <CartCard /> <CartCard />
         </div>
         <div className="bg-neutral-50 border-t border-gray-400 absolute bottom-0 w-full h-20 flex justify-center items-center">
-          <Button>
-            <p>CHECKOUT</p>
-            <p className="mx-8">
-              <FiberManualRecordIcon fontSize="xs" />
-            </p>
-            <p>RS.10,000</p>
-          </Button>
+          <Link to="/checkout">
+            <Button>
+              <p>CHECKOUT</p>
+              <p className="mx-8">
+                <FiberManualRecordIcon fontSize="xs" />
+              </p>
+              <p>RS.10,000</p>
+            </Button>
+          </Link>
         </div>
       </SheetContent>
     </Sheet>
