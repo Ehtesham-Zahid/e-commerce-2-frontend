@@ -1,12 +1,13 @@
 import { Button } from "@/shadcn-components/ui/button";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "@/shadcn-components/ui/checkbox";
 import { useDispatch } from "react-redux";
 import { login } from "@/store/features/auth/authSlice";
 
 const SigninForm = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
     register,
@@ -23,7 +24,15 @@ const SigninForm = () => {
     password,
   };
   const onSubmit = (data) => {
-    dispatch(login(loginData));
+    dispatch(login(loginData))
+      .then((result) => {
+        result.meta.requestStatus === "fulfilled"
+          ? navigate("/account/")
+          : null;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   console.log(watch("example")); // watch input value by passing the name of it

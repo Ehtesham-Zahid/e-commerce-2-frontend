@@ -13,6 +13,8 @@ import SingleProductPage from "./containers/SingleProductPage/SingleProductPage"
 import CheckoutPage from "./containers/CheckoutPage/CheckoutPage";
 import Footer from "./components/Footer/Footer";
 import AccountPage from "./containers/AccountPage/AccountPage";
+import AddressesPage from "./containers/AddressesPage/AddressesPage";
+import PrivateRoutes from "./utils/PrivateRoutes";
 
 function App() {
   return (
@@ -29,7 +31,10 @@ function App() {
         <Route path="/account/signin" element={<SigninPage />} />
         <Route path="/products/:productId" element={<SingleProductPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/account" element={<AccountPage />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path="/account" element={<AccountPage />} />
+          <Route path="/account/addresses" element={<AddressesPage />} />
+        </Route>
       </Routes>{" "}
       <Footer />
     </div>

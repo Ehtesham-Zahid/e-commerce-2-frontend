@@ -21,6 +21,7 @@ import CartDrawer from "../CartDrawer/CartDrawer";
 import SearchBar from "../SearchBar/SearchBar";
 
 const Navbar = () => {
+  const token = localStorage.getItem("token");
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -74,7 +75,7 @@ const Navbar = () => {
 
       <div className="">
         <SearchBar />
-        <Link to="/account/signin">
+        <Link to={token ? "/account" : "/account/signin"}>
           <PersonIcon className="mx-2 cursor-pointer transition ease-in-out  hover:translate-z-2 hover:scale-110   duration-300" />
         </Link>
         <CartDrawer />

@@ -32,16 +32,16 @@ export const login = createAsyncThunk(
 );
 export const signup = createAsyncThunk(
   "authentication/signup",
-  async (signUpData, { rejectWithValue }) => {
+  async (signupData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/v1/users/signup`,
-        signUpData
+        `http://localhost:5000/api/v1/users/signup/`,
+        signupData
       );
 
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("email", response.data.user.email);
       localStorage.setItem("userId", response.data.user._id);
+      // localStorage.setItem("email", response.data.user.email);
 
       return response.data;
     } catch (error) {
@@ -120,6 +120,8 @@ const authSlice = createSlice({
       state.error = "";
     },
     logout(state) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
       state.token = null;
       state.user = null;
       state.error = "";
