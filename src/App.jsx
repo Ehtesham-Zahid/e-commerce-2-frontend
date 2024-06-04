@@ -29,7 +29,10 @@ function App() {
         <Route path="/collections/accessories" element={<AccessoriesPage />} />
         <Route path="/account/signup" element={<SignupPage />} />
         <Route path="/account/signin" element={<SigninPage />} />
-        <Route path="/products/:productId" element={<SingleProductPage />} />
+        <Route
+          path="/products/:productId/:color"
+          element={<SingleProductPage />}
+        />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route element={<PrivateRoutes />}>
           <Route path="/account" element={<AccountPage />} />

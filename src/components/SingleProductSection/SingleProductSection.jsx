@@ -30,8 +30,10 @@ const SingleProductSection = () => {
   // -----VARIABLES DECALARATION------
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
-  const { productId } = useParams();
+  const { productId, color } = useParams();
 
+  const [selectedSize, setSelectedSize] = useState("XS");
+  const [currentVariation, setCurrentVariation] = useState(null);
   const [scrolled, setScrolled] = useState(false);
   console.log(productId);
   useEffect(() => {
@@ -53,6 +55,13 @@ const SingleProductSection = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [scrolled]);
+  useEffect(() => {
+    const selectedVariation = products?.singleProduct?.variations.find(
+      (variation) => variation.color == color
+    );
+
+    setCurrentVariation(selectedVariation);
+  }, [productId, color]);
 
   // -----HANDLERS-------
   // const addToLocalCartHandler = (product) => {
@@ -67,6 +76,8 @@ const SingleProductSection = () => {
     cart.push(products.singleProduct.id);
     localStorage.setItem("cart", JSON.stringify(cart));
   };
+
+  const Sizes = ["XS", "S", "M", "L", "XL", "XXL"];
   return (
     <div className="">
       <Banner />
@@ -79,8 +90,12 @@ const SingleProductSection = () => {
         <div className="flex justify-center">
           <div className="flex justify-center flex-col    w-11/12 xl:w-5/6 2xl:w-3/4">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4  mt-10">
+              {/* {products.singleProduct?.variations.map((variation)=>{
+                variation
+              })} */}
+
               <ProductImagesSlider
-                imageUrls={products.singleProduct?.imageUrls}
+                imageUrls={currentVariation?.imageUrls}
                 // image1={products.singleProduct?.imageUrls[0]}
               />
               <div className="col-span-1  py-4 ">
@@ -95,7 +110,7 @@ const SingleProductSection = () => {
                 </p>
                 <Separator className="mb-12" />
                 <p className=" mb-2 text-lg font-medium text-gray-500 ">
-                  Color - {products.singleProduct?.color}
+                  Color - {color}
                   {/* <span className="   py-2 px-4  rounded-full     bg-black"></span> */}
                 </p>
                 <p className="text-lg font-medium text-gray-500">Colors:</p>
@@ -109,27 +124,24 @@ const SingleProductSection = () => {
                 <p className="text-lg font-medium text-gray-500 ">Size</p>
                 {/* <div className="flex justify"> */}
                 <div className="flex justify-between  flex-wrap overflow-auto gap-y-5 gap-x-2 items-center mb-12 ">
-                  <p className="rounded-sm  border-2 border-gray-300 text-gray-400   text-center py-1.5 w-20 ">
-                    XS
-                  </p>
-                  <p className="rounded-sm  border-2 border-gray-300 text-gray-400   text-center py-1.5 w-20 ">
-                    S
-                  </p>{" "}
-                  <p className="rounded-sm  border-2 border-gray-300 text-gray-400   text-center py-1.5 w-20 ">
-                    M
-                  </p>{" "}
-                  <p className="rounded-sm  border-2 border-gray-300 text-gray-400   text-center py-1.5 w-20 ">
-                    L
-                  </p>
-                  <p className="rounded-sm  border-2 border-gray-300 text-gray-400   text-center py-1.5 w-20 ">
-                    XL
-                  </p>{" "}
-                  <p className="rounded-sm  border-2 border-gray-300 text-gray-400   text-center py-1.5 w-20 ">
-                    XXL
-                  </p>
+                  {Sizes.map((size) => {
+                    return (
+                      <button
+                        key={size}
+                        onClick={() => setSelectedSize(size)}
+                        className={`rounded-sm py-1.5 border-2  text-center buttony-1.5 w-20 ${
+                          selectedSize === size
+                            ? "border-black text-black"
+                            : " border-gray-300 text-gray-400 "
+                        }`}
+                      >
+                        {size}
+                      </button>
+                    );
+                  })}
                 </div>
                 <Separator className="mb-10" />
-                {/* <p className="rounded-sm  border  px-6 py-4">S</p>{" "}
+                {/* <p className="rounded-sm    border  px-6 py-4">S</p>{" "}
             <p className="rounded-sm  border  px-6 py-4">S</p>{" "}
             <p className="rounded-sm  border  px-6 py-4">S</p> */}
                 {/* </div> */}

@@ -19,20 +19,55 @@ const ProductsSection = () => {
   return (
     <div className={sectionClass}>
       {products.productsByCategory.map((product) => {
-        return (
+        return product.variations?.length > 1 ? (
+          <>
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              title={product.title}
+              price={product.price}
+              // description={product.description}
+              category={product.category}
+              color={product?.variations[0]?.color}
+              image={product?.variations[0]?.imageUrls[0]}
+            />
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              title={product.title}
+              price={product.price}
+              // description={product.description}
+              category={product.category}
+              color={product?.variations[1]?.color}
+              image={product?.variations[1]?.imageUrls[0]}
+            />
+          </>
+        ) : (
           <ProductCard
             key={product.id}
             id={product.id}
             title={product.title}
             price={product.price}
-            description={product.description}
+            // description={product.description}
             category={product.category}
-            color={product.color}
-            image={product.imageUrls[0]}
+            color={product?.variations[0]?.color}
+            image={product?.variations[0]?.imageUrls[0]}
           />
         );
       })}
     </div>
+    // return (
+    //   <ProductCard
+    //     key={product.id}
+    //     id={product.id}
+    //     title={product.title}
+    //     price={product.price}
+    //     // description={product.description}
+    //     category={product.category}
+    //     // color={product.color}
+    //     // image={product.imageUrls[0]}
+    //   />
+    // );
     // <div className="">
     // {/* <Toolbar /> */}
     // </div>
