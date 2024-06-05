@@ -40,13 +40,16 @@ const CartDrawer = () => {
           </SheetClose>
         </div>
         <div className="overflow-auto px-4 mb-20">
-          {cart.items.map((item) => {
+          {cart.items.map((item, index) => {
             return (
               <CartCard
                 key={item._id}
+                index={index}
                 title={item.title}
                 price={item.price}
                 selectedSize={item.selectedSize}
+                quantity={item.quantity}
+                color={item.variations[0].color}
                 image={item.variations[0].imageUrls[0]}
               />
             );

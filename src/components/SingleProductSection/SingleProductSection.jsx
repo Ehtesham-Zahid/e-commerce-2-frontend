@@ -1,6 +1,7 @@
+import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import Header from "../Header/Header";
 import Banner from "../Banner/Banner";
@@ -26,38 +27,25 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import WarningIcon from "@mui/icons-material/Warning";
 import { fetchSingleProduct } from "@/store/features/products/productsSlice";
 import {
-  addToLocalCart,
+  // addToLocalCart,
   fetchProductsByVariants,
 } from "@/store/features/cart/cartSlice";
-import toast from "react-hot-toast";
 
 const SingleProductSection = () => {
   // -----VARIABLES DECALARATION------
+
   const Sizes = ["XS", "S", "M", "L", "XL", "XXL"];
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
   const { productId, color } = useParams();
 
   // --------USE STATES-----------
+
   const [selectedSize, setSelectedSize] = useState("XS");
-  // const [currentVariation, setCurrentVariation] = useState(null);
-  const [currentColor, setCurrentColor] = useState("");
   const [scrolled, setScrolled] = useState(false);
 
-  // products?.singleProduct?.variations?.map((variation) => {
-  //   if (variation.color === "navy") {
-  //     setCurrentColor("bg-blue-700");
-  //   } else if (variation.color === "maroon") {
-  //     setCurrentColor("bg-red-500");
-  //   } else if (variation.color === "white") {
-  //     setCurrentColor("bg-white");
-  //   } else {
-  //     setCurrentColor("bg-black");
-  //     return null;
-  //   }
-  // });
-
   // ----------USE EFFECTS------------
+
   useEffect(() => {
     dispatch(fetchSingleProduct({ productId, color }));
   }, [productId, color]);
@@ -80,13 +68,34 @@ const SingleProductSection = () => {
   // --------HANDLERS----------
 
   const addToLocalCartHandler = () => {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.push({ product: `${productId}/${color}`, selectedSize });
-    localStorage.setItem("cart", JSON.stringify(cart));
-    // dispatch(fetchProductsByVariants()).then((result));
-    toast.success("Added To Cart!");
+    // if (isItemAlreadyInCart) {
+    //     console.log('Item is already in the cart. Not adding it again.');
+    // } else {
+    //     // Add the item to the cart
+    //     cart.push(itemToAdd);
+    //     console.log('Item added to the cart.');
+    // }
 
-    dispatch(fetchProductsByVariants());
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const isItemAlreadyInCart = cart.some(
+      (item) =>
+        item.product === `${productId}/${color}` &&
+        item.selectedSize === selectedSize
+    );
+
+    if (isItemAlreadyInCart) {
+      toast.success("Item Already In Cart");
+    } else {
+      cart.push({
+        product: `${productId}/${color}`,
+        selectedSize,
+        quantity: 1,
+      });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      toast.success("Added To Cart!");
+
+      dispatch(fetchProductsByVariants());
+    }
   };
 
   return (
@@ -143,18 +152,6 @@ const SingleProductSection = () => {
                       </Link>
                     );
                   })}
-                  {/* {products?.singleProduct?.variations?.map((variation) => {
-                    return (
-                      <Avatar
-                        key={variation._id}
-                        className={`bg-${variation.color} border-2 border-stone-900 me-3`}
-                      />
-                    );
-                  })} */}
-                  {/* <Avatar className="bg-black  " />
-                  <Avatar className="bg-gray-500  " />
-                  <Avatar className="bg-red-600  " />
-                  <Avatar className="bg-red-600  " /> */}
                 </div>
                 <p className="text-lg font-medium text-gray-500 ">Size</p>
                 {/* <div className="flex justify"> */}
@@ -176,10 +173,6 @@ const SingleProductSection = () => {
                   })}
                 </div>
                 <Separator className="mb-10" />
-                {/* <p className="rounded-sm    border  px-6 py-4">S</p>{" "}
-            <p className="rounded-sm  border  px-6 py-4">S</p>{" "}
-            <p className="rounded-sm  border  px-6 py-4">S</p> */}
-                {/* </div> */}
                 <Button
                   className="w-full 2xl:mt-10 py-5"
                   onClick={addToLocalCartHandler}
