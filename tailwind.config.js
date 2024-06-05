@@ -16,6 +16,11 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    // colors: {
+    //   // transparent: "transparent",
+    //   // current: "currentColor",
+    //   navy: "#1e40af",
+    // },
     extend: {
       keyframes: {
         "accordion-down": {

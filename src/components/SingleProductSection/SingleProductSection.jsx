@@ -1,6 +1,10 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+
 import Header from "../Header/Header";
 import Banner from "../Banner/Banner";
-import { useEffect, useState } from "react";
+import Spinner from "../Spinner/Spinner";
 import ProductImagesSlider from "../ProductImagesSlider/ProductImagesSlider";
 
 import {
@@ -14,32 +18,49 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/shadcn-components/ui/accordion";
-
 import { Button } from "@/shadcn-components/ui/button";
 import { Separator } from "@/shadcn-components/ui/separator";
+
 import RecyclingIcon from "@mui/icons-material/Recycling";
 import DescriptionIcon from "@mui/icons-material/Description";
 import WarningIcon from "@mui/icons-material/Warning";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleProduct } from "@/store/features/products/productsSlice";
-import { useParams } from "react-router-dom";
-import { addToLocalCart } from "@/store/features/cart/cartSlice";
-import Spinner from "../Spinner/Spinner";
+import {
+  addToLocalCart,
+  fetchProductsByVariants,
+} from "@/store/features/cart/cartSlice";
+import toast from "react-hot-toast";
 
 const SingleProductSection = () => {
   // -----VARIABLES DECALARATION------
+  const Sizes = ["XS", "S", "M", "L", "XL", "XXL"];
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
   const { productId, color } = useParams();
 
+  // --------USE STATES-----------
   const [selectedSize, setSelectedSize] = useState("XS");
-  const [currentVariation, setCurrentVariation] = useState(null);
+  // const [currentVariation, setCurrentVariation] = useState(null);
+  const [currentColor, setCurrentColor] = useState("");
   const [scrolled, setScrolled] = useState(false);
-  console.log(productId);
+
+  // products?.singleProduct?.variations?.map((variation) => {
+  //   if (variation.color === "navy") {
+  //     setCurrentColor("bg-blue-700");
+  //   } else if (variation.color === "maroon") {
+  //     setCurrentColor("bg-red-500");
+  //   } else if (variation.color === "white") {
+  //     setCurrentColor("bg-white");
+  //   } else {
+  //     setCurrentColor("bg-black");
+  //     return null;
+  //   }
+  // });
+
+  // ----------USE EFFECTS------------
   useEffect(() => {
-    console.log(productId);
-    dispatch(fetchSingleProduct(productId));
-  }, []);
+    dispatch(fetchSingleProduct({ productId, color }));
+  }, [productId, color]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,29 +76,19 @@ const SingleProductSection = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [scrolled]);
-  useEffect(() => {
-    const selectedVariation = products?.singleProduct?.variations.find(
-      (variation) => variation.color == color
-    );
 
-    setCurrentVariation(selectedVariation);
-  }, [productId, color]);
-
-  // -----HANDLERS-------
-  // const addToLocalCartHandler = (product) => {
-  //   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  //   cart.push(product);
-  //   localStorage.setItem("cart", JSON.stringify(cart));
-  // };
-  console.log(products.singleProduct);
+  // --------HANDLERS----------
 
   const addToLocalCartHandler = () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.push(products.singleProduct.id);
+    cart.push({ product: `${productId}/${color}`, selectedSize });
     localStorage.setItem("cart", JSON.stringify(cart));
+    // dispatch(fetchProductsByVariants()).then((result));
+    toast.success("Added To Cart!");
+
+    dispatch(fetchProductsByVariants());
   };
 
-  const Sizes = ["XS", "S", "M", "L", "XL", "XXL"];
   return (
     <div className="">
       <Banner />
@@ -95,7 +106,7 @@ const SingleProductSection = () => {
               })} */}
 
               <ProductImagesSlider
-                imageUrls={currentVariation?.imageUrls}
+                imageUrls={products.currentVariation?.imageUrls}
                 // image1={products.singleProduct?.imageUrls[0]}
               />
               <div className="col-span-1  py-4 ">
@@ -113,13 +124,37 @@ const SingleProductSection = () => {
                   Color - {color}
                   {/* <span className="   py-2 px-4  rounded-full     bg-black"></span> */}
                 </p>
-                <p className="text-lg font-medium text-gray-500">Colors:</p>
-                <div className="flex items-center justify-between w-64 mb-8">
-                  <Avatar className="bg-red-600  " />
-                  <Avatar className="bg-black  " />
+                {/* <p className="text-lg font-medium text-gray-500">Colors:</p> */}
+                <div className="flex items-center justify-start w-64 mb-8 mt-4">
+                  {products.singleProduct?.variations?.map((variation) => {
+                    return (
+                      <Link
+                        key={variation._id}
+                        to={`/products/${productId}/${variation.color}`}
+                      >
+                        <img
+                          src={variation.imageUrls[0]}
+                          className={`w-24 me-4 border-2 rounded-sm ${
+                            variation._id === products.currentVariation._id
+                              ? "border-black"
+                              : null
+                          }`}
+                        />
+                      </Link>
+                    );
+                  })}
+                  {/* {products?.singleProduct?.variations?.map((variation) => {
+                    return (
+                      <Avatar
+                        key={variation._id}
+                        className={`bg-${variation.color} border-2 border-stone-900 me-3`}
+                      />
+                    );
+                  })} */}
+                  {/* <Avatar className="bg-black  " />
                   <Avatar className="bg-gray-500  " />
                   <Avatar className="bg-red-600  " />
-                  <Avatar className="bg-red-600  " />
+                  <Avatar className="bg-red-600  " /> */}
                 </div>
                 <p className="text-lg font-medium text-gray-500 ">Size</p>
                 {/* <div className="flex justify"> */}

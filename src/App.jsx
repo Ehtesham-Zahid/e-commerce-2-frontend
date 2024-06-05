@@ -15,10 +15,12 @@ import Footer from "./components/Footer/Footer";
 import AccountPage from "./containers/AccountPage/AccountPage";
 import AddressesPage from "./containers/AddressesPage/AddressesPage";
 import PrivateRoutes from "./utils/PrivateRoutes";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <div style={{ fontFamily: "Lato, sans-serif" }}>
+      <Toaster />
       {/* <Banner />
       <Header /> */}
       <Routes>

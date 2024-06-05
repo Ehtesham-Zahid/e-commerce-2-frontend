@@ -14,8 +14,18 @@ import { X } from "lucide-react";
 import CartCard from "../CartCard/CartCard";
 import { Button } from "@/shadcn-components/ui/button";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const CartDrawer = () => {
+  // const cart = localStorage.getItem("cart");
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    dispatch(fetchProductsByVariants());
+  }, []);
   return (
     <Sheet className=" ">
       <SheetTrigger>
@@ -30,9 +40,17 @@ const CartDrawer = () => {
           </SheetClose>
         </div>
         <div className="overflow-auto px-4 mb-20">
-          <CartCard />
-          <CartCard /> <CartCard /> <CartCard />
-          <CartCard /> <CartCard /> <CartCard /> <CartCard />
+          {cart.items.map((item) => {
+            return (
+              <CartCard
+                key={item._id}
+                title={item.title}
+                price={item.price}
+                selectedSize={item.selectedSize}
+                image={item.variations[0].imageUrls[0]}
+              />
+            );
+          })}
         </div>
         <div className="bg-neutral-50 border-t border-gray-400 absolute bottom-0 w-full h-20 flex justify-center items-center">
           <Link to="/checkout">

@@ -5,6 +5,7 @@ const initialState = {
   allProducts: [],
   productsByCategory: [],
   singleProduct: {},
+  currentVariation: {},
   loading: false,
   error: null,
   gridView: "2",
@@ -42,13 +43,18 @@ export const fetchProductsByCategory = createAsyncThunk(
 );
 export const fetchSingleProduct = createAsyncThunk(
   "products/fetchSingleProduct",
-  async (productId, { rejectWithValue }) => {
+  async ({ productId, color }, { rejectWithValue }) => {
     try {
       const response = await axios.get(
         `http://localhost:5000/api/v1/products/${productId}`
       );
       console.log(response);
-      return response.data;
+      return {
+        product: response.data,
+        variation: response.data.variations.find(
+          (variation) => variation.color == color
+        ),
+      };
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.response.data.error.message);
@@ -99,7 +105,8 @@ const productsSlice = createSlice({
     });
     builder.addCase(fetchSingleProduct.fulfilled, (state, action) => {
       state.loading = false;
-      state.singleProduct = action.payload;
+      state.singleProduct = action.payload.product;
+      state.currentVariation = action.payload.variation;
       state.error = "";
     });
     builder.addCase(fetchSingleProduct.rejected, (state, action) => {
