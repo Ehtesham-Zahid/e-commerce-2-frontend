@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import ProductCard from "../ProductCard/ProductCard";
 import Toolbar from "../Toolbar/Toolbar";
+import Spinner from "../Spinner/Spinner";
 
 const ProductsSection = () => {
   // const products = useSelector((state) => state.products);
@@ -18,9 +19,34 @@ const ProductsSection = () => {
   }
   return (
     <div className={sectionClass}>
-      {products.productsByCategory.map((product) => {
-        return product.variations?.length > 1 ? (
-          <>
+      {products.loading ? (
+        <Spinner />
+      ) : (
+        products.productsByCategory.map((product) => {
+          return product.variations?.length > 1 ? (
+            <>
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                title={product.title}
+                price={product.price}
+                // description={product.description}
+                category={product.category}
+                color={product?.variations[0]?.color}
+                image={product?.variations[0]?.imageUrls[0]}
+              />
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                title={product.title}
+                price={product.price}
+                // description={product.description}
+                category={product.category}
+                color={product?.variations[1]?.color}
+                image={product?.variations[1]?.imageUrls[0]}
+              />
+            </>
+          ) : (
             <ProductCard
               key={product.id}
               id={product.id}
@@ -31,30 +57,9 @@ const ProductsSection = () => {
               color={product?.variations[0]?.color}
               image={product?.variations[0]?.imageUrls[0]}
             />
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              title={product.title}
-              price={product.price}
-              // description={product.description}
-              category={product.category}
-              color={product?.variations[1]?.color}
-              image={product?.variations[1]?.imageUrls[0]}
-            />
-          </>
-        ) : (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            title={product.title}
-            price={product.price}
-            // description={product.description}
-            category={product.category}
-            color={product?.variations[0]?.color}
-            image={product?.variations[0]?.imageUrls[0]}
-          />
-        );
-      })}
+          );
+        })
+      )}
     </div>
     // return (
     //   <ProductCard

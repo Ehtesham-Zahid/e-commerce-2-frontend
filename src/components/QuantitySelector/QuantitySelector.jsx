@@ -13,7 +13,7 @@ const QuantitySelector = (props) => {
     //some logic here
     if (quantity > 1) {
       setQuantity(quantity - 1);
-      const cart = JSON.parse(localStorage.getItem("cart"));
+      let cart = JSON.parse(localStorage.getItem("cart"));
       cart[props.index].quantity = quantity - 1;
       localStorage.setItem("cart", JSON.stringify(cart));
 
@@ -37,7 +37,7 @@ const QuantitySelector = (props) => {
       >
         <RemoveIcon fontSize="xs" className="text-gray-400 cursor-pointer" />
       </p>
-      <p className="">{quantity}</p>
+      <p className="">{props.quantity}</p>
       <p className=" " onClick={incrementQuantityHandler}>
         <AddIcon fontSize="xs" className="text-gray-400 cursor-pointer" />
       </p>

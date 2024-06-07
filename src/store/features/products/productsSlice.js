@@ -6,6 +6,7 @@ const initialState = {
   productsByCategory: [],
   singleProduct: {},
   currentVariation: {},
+  currentCategory: null,
   loading: false,
   error: null,
   gridView: "2",
@@ -28,11 +29,13 @@ export const fetchProducts = createAsyncThunk(
 
 export const fetchProductsByCategory = createAsyncThunk(
   "products/fetchProductsByCategory",
-  async (category, { rejectWithValue }) => {
+  async ({ category, sort }, { rejectWithValue }) => {
+    console.log(category);
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/products/category/${category}`
+        `http://localhost:5000/api/v1/products/category/${category}?sort=${sort}`
       );
+      console.log(sort);
       console.log(response);
       return response.data.products;
     } catch (error) {
@@ -68,6 +71,9 @@ const productsSlice = createSlice({
   reducers: {
     setGridView(state, action) {
       state.gridView = action.payload;
+    },
+    setCategory(state, action) {
+      state.currentCategory = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -116,6 +122,6 @@ const productsSlice = createSlice({
   },
 });
 
-export const { setGridView } = productsSlice.actions;
+export const { setGridView, setCategory } = productsSlice.actions;
 
 export default productsSlice.reducer;

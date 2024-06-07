@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProducts,
   fetchProductsByCategory,
+  setCategory,
 } from "@/store/features/products/productsSlice";
 
 const Men = () => {
@@ -16,7 +17,8 @@ const Men = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchProductsByCategory("men"));
+    dispatch(fetchProductsByCategory({ category: "men" }));
+    dispatch(setCategory("men"));
   }, []);
 
   useEffect(() => {

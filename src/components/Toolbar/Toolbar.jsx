@@ -26,8 +26,12 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import SquareIcon from "@mui/icons-material/Square";
 import { useMediaQuery } from "react-responsive";
 import { useDispatch, useSelector } from "react-redux";
-import { setGridView } from "@/store/features/products/productsSlice";
+import {
+  fetchProductsByCategory,
+  setGridView,
+} from "@/store/features/products/productsSlice";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Toolbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -48,20 +52,32 @@ const Toolbar = () => {
   }, [scrolled]);
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
+
   const isMobile = useMediaQuery({ maxWidth: 768 });
+  // ---------HANDLERS---------
+  const sortProductsHandler = (sort) => {
+    dispatch(
+      fetchProductsByCategory({ category: products.currentCategory, sort })
+    );
+  };
+
   return isMobile ? (
     <div
       className={`w-screen flex justify-between items-center bg-neutral-100 h-10  `}
     >
-      <Select>
+      <Select onValueChange={(value) => sortProductsHandler(value)}>
         <SelectTrigger className=" w-[100px] sm:w-[135px]">
           <SelectValue placeholder="Sort By" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="light">Price, low to high</SelectItem>
-          <SelectItem value="dark">Price, high to low</SelectItem>
-          <SelectItem value="system">Alphabetically, A-Z</SelectItem>
-          <SelectItem value="system">Alphabetically, Z-A</SelectItem>
+          <SelectItem value="price-low-to-high">Price, low to high</SelectItem>
+          <SelectItem value="price-high-to-low">Price, high to low</SelectItem>
+          <SelectItem value="alphabetically-A-Z">
+            Alphabetically, A-Z
+          </SelectItem>
+          <SelectItem value="alphabetically-Z-A">
+            Alphabetically, Z-A
+          </SelectItem>
         </SelectContent>
         {/* <Separator orientation="vertical" /> */}
       </Select>
@@ -127,15 +143,23 @@ const Toolbar = () => {
       <p className="hidden lg:flex">100 Products</p>
       <div className="flex sm:mx-5 h-full">
         <Separator orientation="vertical" />
-        <Select>
+        <Select onValueChange={(value) => sortProductsHandler(value)}>
           <SelectTrigger className=" w-[100px] sm:w-[135px]">
             <SelectValue placeholder="Sort By" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="light">Price, low to high</SelectItem>
-            <SelectItem value="dark">Price, high to low</SelectItem>
-            <SelectItem value="system">Alphabetically, A-Z</SelectItem>
-            <SelectItem value="system">Alphabetically, Z-A</SelectItem>
+            <SelectItem value="price-low-to-high">
+              Price, low to high
+            </SelectItem>
+            <SelectItem value="price-high-to-low">
+              Price, high to low
+            </SelectItem>
+            <SelectItem value="alphabetically-A-Z">
+              Alphabetically, A-Z
+            </SelectItem>
+            <SelectItem value="alphabetically-Z-A">
+              Alphabetically, Z-A
+            </SelectItem>
           </SelectContent>
         </Select>
         <Separator orientation="vertical" />
