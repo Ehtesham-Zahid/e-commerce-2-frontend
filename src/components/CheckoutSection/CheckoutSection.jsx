@@ -2,10 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
 import CheckoutHeader from "../CheckoutHeader/CheckoutHeader";
 import CheckoutProductCard from "../CheckoutProductCard/CheckoutProductCard";
-import ProductCardMini from "../ProductCardMini/ProductCardMini";
+
 import { useEffect } from "react";
 import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
-import { fetchAddresses } from "@/store/features/address/addressSlice";
 
 const CheckoutSection = () => {
   const cart = useSelector((state) => state.cart);
