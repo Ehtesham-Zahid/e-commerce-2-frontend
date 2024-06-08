@@ -26,9 +26,7 @@ const SigninForm = () => {
   const onSubmit = (data) => {
     dispatch(login(loginData))
       .then((result) => {
-        result.meta.requestStatus === "fulfilled"
-          ? navigate("/account/")
-          : null;
+        result.meta.requestStatus === "fulfilled" ? navigate(-1) : null;
       })
       .catch((err) => {
         console.log(err);

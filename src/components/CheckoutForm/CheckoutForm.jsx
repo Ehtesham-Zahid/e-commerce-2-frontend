@@ -19,10 +19,20 @@ import {
 } from "@/shadcn-components/ui/accordion";
 import { Separator } from "@/shadcn-components/ui/separator";
 import CheckoutProductCard from "../CheckoutProductCard/CheckoutProductCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "@/store/features/auth/authSlice";
+import { Link } from "react-router-dom";
 
 const CheckoutForm = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
+  const [isLoggedIn, setIsLoggedIn] = useState(token);
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    setIsLoggedIn(false);
+  };
   return (
     <div className="flex justify-center lg:justify-end">
       <form className="col-span-1 p-6   w-full md:w-5/6 xl:w-4/5  2xl:w-2/3">
@@ -45,7 +55,12 @@ const CheckoutForm = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-lg">
-                  <p className="text-blue-400 text-sm">Logout</p>
+                  <p
+                    className="text-blue-400 text-sm cursor-pointer"
+                    onClick={logoutHandler}
+                  >
+                    Logout
+                  </p>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>{" "}
@@ -66,7 +81,9 @@ const CheckoutForm = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-lg">
-                  <p className="text-blue-400 text-sm">Logout</p>
+                  <p className="text-blue-400 text-sm" onClick={logoutHandler}>
+                    Logout
+                  </p>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>{" "}
@@ -75,7 +92,7 @@ const CheckoutForm = () => {
           <div>
             <div className="my-2 flex justify-between ">
               <p className="font-semibold text-2xl">Contact</p>
-              <p>Login</p>
+              <Link to="/account/signin">Login</Link>
             </div>
             <input
               placeholder="Email"

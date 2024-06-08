@@ -2,7 +2,7 @@ import CheckoutSection from "@/components/CheckoutSection/CheckoutSection";
 
 const CheckoutPage = () => {
   return (
-    <div>
+    <div className=" ">
       <CheckoutSection />
     </div>
   );

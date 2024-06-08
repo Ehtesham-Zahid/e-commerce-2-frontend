@@ -16,11 +16,17 @@ import {
 import { Button } from "@/shadcn-components/ui/button";
 import { Link } from "react-router-dom";
 import { logout } from "@/store/features/auth/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchAddresses,
+  fetchPrimaryAddress,
+} from "@/store/features/address/addressSlice";
+import AddressCard from "../AddressCard/AddressCard";
 
 const AccountSection = () => {
   // -----VARIABLES DECALARATION------
   const dispatch = useDispatch();
+  const address = useSelector((state) => state.address);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -37,6 +43,11 @@ const AccountSection = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [scrolled]);
+
+  useEffect(() => {
+    // dispatch(fetchAddresses());
+    dispatch(fetchPrimaryAddress());
+  }, []);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -118,17 +129,17 @@ const AccountSection = () => {
               </TableBody>
             </Table>
             <div>
-              <Table className=" w-72">
-                {/* <TableCaption>A list of your recent orders.</TableCaption> */}
+              {/* <Table className=" w-72">
+                 
                 <TableHeader>
                   <TableRow>
-                    {/* <TableHead className="w-[100px]">Invoice</TableHead> */}
+                
                     <TableHead>PRIMARY ADDRESS</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   <TableRow className="flex flex-col">
-                    {/* <TableCell className="font-medium">INV001</TableCell> */}
+                
                     <TableCell className="text-black font-medium text-base ">
                       Ehtesham Zahid Abbas park lane no.1 pattoki Pattoki 55300
                       Pakistan
@@ -138,7 +149,18 @@ const AccountSection = () => {
                     <Button className="m-4">MANAGE</Button>
                   </Link>
                 </TableBody>
-              </Table>
+              </Table> */}
+              <AddressCard
+                firstName={address.primaryAddress.firstName}
+                lastName={address.primaryAddress.lastName}
+                phoneNumber={address.primaryAddress.phoneNumber}
+                address={address.primaryAddress.address}
+                city={address.primaryAddress.city}
+                zipcode={address.primaryAddress.zipcode}
+                country={address.primaryAddress.country}
+                addressTitle={"PRIMARY ADDRESS"}
+                page="account"
+              />
             </div>
           </div>
         </div>
