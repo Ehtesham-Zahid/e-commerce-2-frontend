@@ -151,13 +151,13 @@ const AccountSection = () => {
                 </TableBody>
               </Table> */}
               <AddressCard
-                firstName={address.primaryAddress.firstName}
-                lastName={address.primaryAddress.lastName}
-                phoneNumber={address.primaryAddress.phoneNumber}
-                address={address.primaryAddress.address}
-                city={address.primaryAddress.city}
-                zipcode={address.primaryAddress.zipcode}
-                country={address.primaryAddress.country}
+                firstName={address.primaryAddress?.firstName}
+                lastName={address.primaryAddress?.lastName}
+                phoneNumber={address.primaryAddress?.phoneNumber}
+                address={address.primaryAddress?.address}
+                city={address.primaryAddress?.city}
+                zipcode={address.primaryAddress?.zipcode}
+                country={address.primaryAddress?.country}
                 addressTitle={"PRIMARY ADDRESS"}
                 page="account"
               />
