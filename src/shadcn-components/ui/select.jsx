@@ -20,8 +20,8 @@ const SelectTrigger = React.forwardRef(
       )}
       {...props}
     >
-      {/* {children} */}
-      Sort By
+      {children}
+      {/* Sort By */}
       <SelectPrimitive.Icon asChild>
         <ChevronDown className="h-4 w-4  ms-1.5 sm:ms-3 " />
       </SelectPrimitive.Icon>

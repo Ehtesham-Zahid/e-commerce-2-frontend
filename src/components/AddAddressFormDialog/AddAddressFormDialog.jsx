@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Button } from "@/shadcn-components/ui/button";
 import { Checkbox } from "@/shadcn-components/ui/checkbox";
+import AddIcon from "@mui/icons-material/Add";
 // import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { useForm } from "react-hook-form";
 import {
@@ -18,6 +19,7 @@ import {
   fetchAddresses,
   updateAddress,
 } from "@/store/features/address/addressSlice";
+import { SelectItem } from "@/shadcn-components/ui/select";
 
 const AddAddressFormDialog = (props) => {
   const [firstName, setFirstName] = useState("");
@@ -59,13 +61,26 @@ const AddAddressFormDialog = (props) => {
 
   return (
     <>
-      <Button
-        onClick={() => {
-          document.getElementById("my_modal_1").showModal();
-        }}
-      >
-        ADD ADDRESS
-      </Button>
+      {props.page === "checkout" ? (
+        <p
+          className="font-medium flex items-center cursor-pointer "
+          onClick={() => {
+            document.getElementById("my_modal_1").showModal();
+          }}
+        >
+          <AddIcon className="me-1 " fontSize="small" />
+          <span className=" ">ADD ANOTHER ADDRESS</span>
+        </p>
+      ) : (
+        <Button
+          onClick={() => {
+            document.getElementById("my_modal_1").showModal();
+          }}
+        >
+          ADD ADDRESS
+        </Button>
+      )}
+
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
           <form method="dialog  ">

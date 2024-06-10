@@ -6,7 +6,9 @@ import { RadioGroup, RadioGroupItem } from "@/shadcn-components/ui/radio-group";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/shadcn-components/ui/select";
@@ -20,12 +22,14 @@ import {
 import { Separator } from "@/shadcn-components/ui/separator";
 import CheckoutProductCard from "../CheckoutProductCard/CheckoutProductCard";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/features/auth/authSlice";
 import { Link } from "react-router-dom";
+import AddAddressFormDialog from "../AddAddressFormDialog/AddAddressFormDialog";
 
 const CheckoutForm = () => {
   const dispatch = useDispatch();
+  const address = useSelector((state) => state.address);
   const token = localStorage.getItem("token");
   const [isLoggedIn, setIsLoggedIn] = useState(token);
 
@@ -63,8 +67,45 @@ const CheckoutForm = () => {
                   </p>
                 </AccordionContent>
               </AccordionItem>
-            </Accordion>{" "}
-            <Accordion
+            </Accordion>
+            <Select>
+              <SelectTrigger className="w-full flex justify-between mt-3 outline-none">
+                <div className="flex justify-start flex-col items-start  tracking-normal">
+                  <p className=" text-gray-500 font-semibold text-sm my-2">
+                    Ship to
+                  </p>
+                  <SelectValue
+                    // placeholder={`${address.primaryAddress.firstName} ${address.primaryAddress.lastName}, ${address.primaryAddress.address}, ${address.primaryAddress.city} ${address.primaryAddress.zipcode}, ${address.primaryAddress.phoneNumber}`}
+                    placeholder="Select Address"
+                  />
+                </div>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Select Address</SelectLabel>
+                  {address.addresses.map((address) => {
+                    return (
+                      <SelectItem
+                        key={address._id}
+                        value={address._id}
+                        className="tracking-normal"
+                      >
+                        {address.firstName} {address.lastName},{" "}
+                        {address.address}, {address.city} {address.zipcode},{" "}
+                        {address.phoneNumber}
+                      </SelectItem>
+                    );
+                  })}
+                  <div className="px-6 py-1.5">
+                    <AddAddressFormDialog
+                      page="checkout"
+                      // className="px-4 py-2"
+                    />
+                  </div>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            {/* <Accordion
               type="single"
               collapsible
               className="border-b border-gray-400  "
@@ -75,8 +116,26 @@ const CheckoutForm = () => {
                     <p className="text-gray-500 font-semibold text-sm">
                       Ship to
                     </p>
-                    <p className="text-sm mt-3     no-underline">
-                      shamimalick321@gmail.com
+                    <p className="text-sm mt-3 tracking-wide    no-underline">
+                      <span className="me-1">
+                        {address.primaryAddress.firstName}
+                      </span>
+                      <span className="me-1">
+                        {address.primaryAddress.lastName},
+                      </span>
+                      <span className="me-1">
+                        {address.primaryAddress.address},
+                      </span>
+
+                      <span className="me-1">
+                        {address.primaryAddress.city}
+                      </span>
+                      <span className="me-1">
+                        {address.primaryAddress.zipcode},
+                      </span>
+                      <span className="me-1">
+                        {address.primaryAddress.phoneNumber}
+                      </span>
                     </p>
                   </div>
                 </AccordionTrigger>
@@ -86,7 +145,7 @@ const CheckoutForm = () => {
                   </p>
                 </AccordionContent>
               </AccordionItem>
-            </Accordion>{" "}
+            </Accordion> */}
           </>
         ) : (
           <div>
@@ -104,7 +163,7 @@ const CheckoutForm = () => {
               <input
                 placeholder="First Name"
                 className="border border-gray-400    rounded-md p-2.5 mb-6 w-full me-2"
-              />{" "}
+              />
               <input
                 placeholder="Last Name"
                 className="border border-gray-400  rounded-md p-2.5 mb-6 w-full ms-2"
@@ -122,7 +181,7 @@ const CheckoutForm = () => {
               <input
                 placeholder="City"
                 className="border border-gray-400  rounded-md p-2.5 mb-6 w-full me-2"
-              />{" "}
+              />
               <input
                 placeholder="Postal Code"
                 className="border border-gray-400  rounded-md p-2.5 mb-6 w-full ms-2"
@@ -175,7 +234,7 @@ const CheckoutForm = () => {
               <CheckoutProductCard /> <CheckoutProductCard />
             </AccordionContent>
           </AccordionItem>
-        </Accordion>{" "}
+        </Accordion>
         <Button className="w-full my-8">PAY NOW</Button>
       </form>
     </div>

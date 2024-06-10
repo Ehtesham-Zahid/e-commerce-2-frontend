@@ -5,6 +5,10 @@ import CheckoutProductCard from "../CheckoutProductCard/CheckoutProductCard";
 
 import { useEffect } from "react";
 import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
+import {
+  fetchAddresses,
+  fetchPrimaryAddress,
+} from "@/store/features/address/addressSlice";
 
 const CheckoutSection = () => {
   const cart = useSelector((state) => state.cart);
@@ -12,6 +16,8 @@ const CheckoutSection = () => {
 
   useEffect(() => {
     dispatch(fetchProductsByVariants());
+    dispatch(fetchPrimaryAddress());
+    dispatch(fetchAddresses());
   }, []);
   return (
     <div>
