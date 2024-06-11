@@ -51,6 +51,7 @@ const AddAddressFormDialog = (props) => {
   };
 
   const onSubmit = () => {
+    // e.preventDefault();
     dispatch(addAddress(data)).then((result) => {
       if (result.meta.requestStatus === "fulfilled") {
         dispatch(fetchAddresses());
@@ -63,13 +64,14 @@ const AddAddressFormDialog = (props) => {
     <>
       {props.page === "checkout" ? (
         <p
-          className="font-medium flex items-center cursor-pointer "
+          className="flex items-center  border-b border-black rounded-none  p-3 cursor-pointer"
           onClick={() => {
             document.getElementById("my_modal_1").showModal();
           }}
         >
-          <AddIcon className="me-1 " fontSize="small" />
-          <span className=" ">ADD ANOTHER ADDRESS</span>
+          <AddIcon />
+
+          <p className="font-semibold">ADD NEW ADDRESS</p>
         </p>
       ) : (
         <Button
@@ -93,7 +95,10 @@ const AddAddressFormDialog = (props) => {
               ✕
             </button>
           </form>
-          <form className="mt-6 " onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="mt-6 "
+            // onSubmit={handleSubmit(onSubmit)}
+          >
             <div className="flex  justify-between mb-3">
               <div className="flex jus flex-col">
                 <input
@@ -206,7 +211,13 @@ const AddAddressFormDialog = (props) => {
               </label>
             </div>
             {/* <DialogClose asChild> */}
-            <Button className="w-full">SAVE ADDRESS</Button>
+            <Button
+              className="w-full"
+              type="button"
+              onClick={handleSubmit(onSubmit)}
+            >
+              SAVE ADDRESS
+            </Button>
           </form>
         </div>
         <form method="dialog" className="modal-backdrop">

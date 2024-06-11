@@ -5,6 +5,7 @@ const initialState = {
   items: [],
   addresses: [],
   primaryAddress: {},
+  selectedAddress: {},
   loading: false,
   error: null,
 };
@@ -22,6 +23,29 @@ export const fetchAddresses = createAsyncThunk(
       };
       const response = await axios.get(
         "http://localhost:5000/api/v1/addresses/",
+        config
+      );
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data.error.message);
+    }
+  }
+);
+
+export const fetchAddress = createAsyncThunk(
+  "addresses/fetchAddress",
+  async (addressId, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.get(
+        `http://localhost:5000/api/v1/addresses/${addressId}`,
         config
       );
       console.log(response);
@@ -143,6 +167,20 @@ const addressSlice = createSlice({
       state.error = "";
     });
     builder.addCase(fetchAddresses.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
+    builder.addCase(fetchAddress.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(fetchAddress.fulfilled, (state, action) => {
+      state.loading = false;
+      state.selectedAddress = action.payload;
+      state.error = "";
+    });
+    builder.addCase(fetchAddress.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
