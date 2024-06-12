@@ -29,11 +29,12 @@ export const fetchProducts = createAsyncThunk(
 
 export const fetchProductsByCategory = createAsyncThunk(
   "products/fetchProductsByCategory",
-  async ({ category, sort }, { rejectWithValue }) => {
+  async ({ category, sort, limit }, { rejectWithValue }) => {
+    // Default limit is 4
     console.log(category);
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/products/category/${category}?sort=${sort}`
+        `http://localhost:5000/api/v1/products/category/${category}?sort=${sort}&limit=${limit}`
       );
       console.log(sort);
       console.log(response);

@@ -25,7 +25,7 @@ import CheckoutProductCard from "../CheckoutProductCard/CheckoutProductCard";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/features/auth/authSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AddAddressFormDialog from "../AddAddressFormDialog/AddAddressFormDialog";
 import {
   createOrderAuth,
@@ -50,6 +50,8 @@ const CheckoutForm = () => {
   // const [country, setCountry] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
 
+  const navigate = useNavigate();
+
   const logoutHandler = () => {
     dispatch(logout());
     setIsLoggedIn(false);
@@ -69,7 +71,7 @@ const CheckoutForm = () => {
     email,
     firstName,
     lastName,
-    streetAddress,
+    address: streetAddress,
     phoneNumber,
     city,
     zipcode,
@@ -92,8 +94,16 @@ const CheckoutForm = () => {
     console.log(selectedAddress);
 
     token
-      ? dispatch(createOrderAuth(authData))
-      : dispatch(createOrderUnAuth(unAuthData));
+      ? dispatch(createOrderAuth(authData)).then((result) =>
+          result.meta.requestStatus === "fulfilled"
+            ? navigate("/order-success")
+            : null
+        )
+      : dispatch(createOrderUnAuth(unAuthData)).then((result) =>
+          result.meta.requestStatus === "fulfilled"
+            ? navigate("/order-success")
+            : null
+        );
 
     // dispatch(createOrderAuth(authData));
   };

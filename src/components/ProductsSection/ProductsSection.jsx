@@ -34,6 +34,7 @@ const ProductsSection = () => {
                 category={product.category}
                 color={product?.variations[0]?.color}
                 image={product?.variations[0]?.imageUrls[0]}
+                image2={product?.variations[0]?.imageUrls[1]}
               />
               <ProductCard
                 key={product.id}
@@ -44,6 +45,7 @@ const ProductsSection = () => {
                 category={product.category}
                 color={product?.variations[1]?.color}
                 image={product?.variations[1]?.imageUrls[0]}
+                image2={product?.variations[1]?.imageUrls[1]}
               />
             </>
           ) : (
@@ -56,6 +58,7 @@ const ProductsSection = () => {
               category={product.category}
               color={product?.variations[0]?.color}
               image={product?.variations[0]?.imageUrls[0]}
+              image2={product?.variations[0]?.imageUrls[1]}
             />
           );
         })

@@ -3,8 +3,20 @@ import Banner from "../Banner/Banner";
 import Header from "../Header/Header";
 import ProductsSection from "../ProductsSection/ProductsSection";
 import Toolbar from "../Toolbar/Toolbar";
+import {
+  fetchProductsByCategory,
+  setCategory,
+} from "@/store/features/products/productsSlice";
+import { useDispatch } from "react-redux";
 const KidsSection = () => {
+  // -----VARIABLES DECALARATION------
+  const dispatch = useDispatch();
   const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchProductsByCategory({ category: "kids" }));
+    dispatch(setCategory("kids"));
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {

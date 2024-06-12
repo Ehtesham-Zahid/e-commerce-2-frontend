@@ -1,8 +1,18 @@
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import ProductCard from "../ProductCard/ProductCard";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {
+  fetchProducts,
+  fetchProductsByCategory,
+} from "@/store/features/products/productsSlice";
 
 const HomeProductSection = (props) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
   return (
     <div className="w-screen px-2 sm:px-5  lg:px-20">
       <div className="flex justify-between items-center  mt-10 mb-5">
