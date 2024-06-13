@@ -7,7 +7,9 @@ import { fetchProducts } from "@/store/features/products/productsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
+  // ---------VARIABLE DECALARATIONS---------
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
@@ -22,15 +24,11 @@ const Home = () => {
       acc[category] = [];
     }
 
-    // Add the current person to the array for their category group
+    // Add the current product to the array for their category group
     acc[category].push(product);
 
     return acc;
   }, {});
-
-  console.log(groupedByCategory);
-
-  console.log(groupedByCategory.men?.splice(0, 4));
 
   const [scrolled, setScrolled] = useState(false);
 
