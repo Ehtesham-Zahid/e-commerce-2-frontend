@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import ProductCard from "../ProductCard/ProductCard";
 import { Link } from "react-router-dom";
@@ -28,10 +29,21 @@ const HomeProductSection = (props) => {
         </Link>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-2 my-5">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {props.productsArray?.map((product) => {
+          return (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              title={product.title}
+              price={product.price}
+              // description={product.description}
+              category={product.category}
+              color={product?.variations[0]?.color}
+              image={product?.variations[0]?.imageUrls[0]}
+              image2={product?.variations[0]?.imageUrls[1]}
+            />
+          );
+        })}
       </div>
     </div>
   );

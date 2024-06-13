@@ -32,14 +32,16 @@ const ProductImagesSlider = (props) => {
             currentImage === props?.imageUrls[1] ? "border-black" : null
           }`}
         />
-        <img
-          src={props?.imageUrls[2]}
-          alt="product"
-          onClick={() => setCurrentImage(props?.imageUrls[2])}
-          className={`max-[390px]:w-24 max-[500px]:w-28 w-36 border-2 rounded-lg  mb-5 cursor-pointer ${
-            currentImage === props?.imageUrls[2] ? "border-black" : null
-          }`}
-        />
+        {props?.imageUrls[2] ? (
+          <img
+            src={props?.imageUrls[2]}
+            alt="product"
+            onClick={() => setCurrentImage(props?.imageUrls[2])}
+            className={`max-[390px]:w-24 max-[500px]:w-28 w-36 border-2 rounded-lg  mb-5 cursor-pointer ${
+              currentImage === props?.imageUrls[2] ? "border-black" : null
+            }`}
+          />
+        ) : null}
       </div>
       {/* <Zoom> */}
       <img src={currentImage} className="md:w-3/4    " />

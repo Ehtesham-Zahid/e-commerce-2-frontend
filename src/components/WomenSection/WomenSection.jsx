@@ -4,7 +4,10 @@ import Header from "../Header/Header";
 import ProductsSection from "../ProductsSection/ProductsSection";
 import Toolbar from "../Toolbar/Toolbar";
 import { useDispatch } from "react-redux";
-import { fetchProductsByCategory } from "@/store/features/products/productsSlice";
+import {
+  fetchProductsByCategory,
+  setCategory,
+} from "@/store/features/products/productsSlice";
 const WomenSection = () => {
   // -----VARIABLES DECALARATION------
   const dispatch = useDispatch();
@@ -12,7 +15,8 @@ const WomenSection = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchProductsByCategory("women"));
+    dispatch(fetchProductsByCategory({ category: "women" }));
+    dispatch(setCategory("women"));
   }, []);
 
   useEffect(() => {
