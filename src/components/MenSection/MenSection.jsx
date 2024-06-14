@@ -10,7 +10,7 @@ import {
   setCategory,
 } from "@/store/features/products/productsSlice";
 
-const Men = () => {
+const MenSection = () => {
   // -----VARIABLES DECALARATION------
   const dispatch = useDispatch();
 
@@ -37,7 +37,7 @@ const Men = () => {
   }, [scrolled]);
 
   return (
-    <div>
+    <div className="min-h-screen">
       <Banner />
       <div className={`${scrolled ? "fixed top-0" : ""}`}>
         <Header />
@@ -48,4 +48,4 @@ const Men = () => {
   );
 };
 
-export default Men;
+export default MenSection;

@@ -20,9 +20,11 @@ const ProductsSection = () => {
   return (
     <div className={sectionClass}>
       {products.loading ? (
-        <Spinner />
+        <div className="flex justify-center items-center w-screen  mt-52 md:mt-64">
+          <Spinner />
+        </div>
       ) : (
-        products.productsByCategory.map((product) => {
+        products.productsByCategory?.map((product) => {
           return product.variations?.length > 1 ? (
             <>
               <ProductCard
@@ -64,21 +66,6 @@ const ProductsSection = () => {
         })
       )}
     </div>
-    // return (
-    //   <ProductCard
-    //     key={product.id}
-    //     id={product.id}
-    //     title={product.title}
-    //     price={product.price}
-    //     // description={product.description}
-    //     category={product.category}
-    //     // color={product.color}
-    //     // image={product.imageUrls[0]}
-    //   />
-    // );
-    // <div className="">
-    // {/* <Toolbar /> */}
-    // </div>
   );
 };
 

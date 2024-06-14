@@ -3,17 +3,15 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import ProductCard from "../ProductCard/ProductCard";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProducts,
   fetchProductsByCategory,
 } from "@/store/features/products/productsSlice";
+import Spinner from "../Spinner/Spinner";
 
 const HomeProductSection = (props) => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
+  const products = useSelector((state) => state.products);
   return (
     <div className="w-screen px-2 sm:px-5  lg:px-20">
       <div className="flex justify-between items-center  mt-10 mb-5">
@@ -28,23 +26,29 @@ const HomeProductSection = (props) => {
           View All <ArrowRightAltIcon fontSize="large" />
         </Link>
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-2 my-5">
-        {props.productsArray?.map((product) => {
-          return (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              title={product.title}
-              price={product.price}
-              // description={product.description}
-              category={product.category}
-              color={product?.variations[0]?.color}
-              image={product?.variations[0]?.imageUrls[0]}
-              image2={product?.variations[0]?.imageUrls[1]}
-            />
-          );
-        })}
-      </div>
+      {products.loading ? (
+        <div className="flex justify-center items-center py-10">
+          <Spinner />
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-2 my-5">
+          {props.productsArray?.map((product) => {
+            return (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                title={product.title}
+                price={product.price}
+                // description={product.description}
+                category={product.category}
+                color={product?.variations[0]?.color}
+                image={product?.variations[0]?.imageUrls[0]}
+                image2={product?.variations[0]?.imageUrls[1]}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

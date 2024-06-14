@@ -1,4 +1,4 @@
-import Men from "@/components/Men/Men";
+import Men from "@/components/MenSection/MenSection";
 
 const MenPage = () => {
   return (

@@ -4,7 +4,6 @@ import axios from "axios";
 const initialState = {
   allProducts: [],
   productsByCategory: [],
-  singleProduct: {},
   currentVariation: {},
   currentCategory: null,
   loading: false,
@@ -39,26 +38,6 @@ export const fetchProductsByCategory = createAsyncThunk(
       console.log(sort);
       console.log(response);
       return response.data.products;
-    } catch (error) {
-      console.log(error);
-      return rejectWithValue(error.response.data.error.message);
-    }
-  }
-);
-export const fetchSingleProduct = createAsyncThunk(
-  "products/fetchSingleProduct",
-  async ({ productId, color }, { rejectWithValue }) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5000/api/v1/products/${productId}`
-      );
-      console.log(response);
-      return {
-        product: response.data,
-        variation: response.data.variations.find(
-          (variation) => variation.color == color
-        ),
-      };
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.response.data.error.message);
@@ -102,21 +81,6 @@ const productsSlice = createSlice({
       state.error = "";
     });
     builder.addCase(fetchProductsByCategory.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
-    builder.addCase(fetchSingleProduct.pending, (state) => {
-      state.loading = true;
-
-      state.error = "";
-    });
-    builder.addCase(fetchSingleProduct.fulfilled, (state, action) => {
-      state.loading = false;
-      state.singleProduct = action.payload.product;
-      state.currentVariation = action.payload.variation;
-      state.error = "";
-    });
-    builder.addCase(fetchSingleProduct.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

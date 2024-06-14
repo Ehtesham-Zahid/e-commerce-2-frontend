@@ -3,6 +3,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
+import AddToCartModal from "../AddToCartModal/AddToCartModal";
 
 const ProductCard = (props) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -29,15 +30,15 @@ const ProductCard = (props) => {
       <Link to={`/products/${props.id}`}>
         <p className="text-sm my-1.5">{props.title}</p>
       </Link>
-      <p className="text-sm mb-1.5 capitalize ">{props.color}</p>
-      <p className="font-semibold my-1.5 capitalize">Rs. {props.price}</p>
-      {isHovered ? (
-        <div className="relative">
-          <div className="absolute transition scale-110 translate-z-5 ease-in-out duration-300 bottom-24 right-5 bg-white border border-black rounded-sm px-1.5 py-1 ">
-            <AddIcon />
-          </div>
+      <div className="flex justify-between items-center">
+        <div>
+          <p className="text-sm mb-1.5 capitalize ">{props.color}</p>
+          <p className="font-semibold my-1.5 capitalize">Rs. {props.price}</p>
         </div>
-      ) : null}
+        {isHovered ? (
+          <AddToCartModal productId={props.id} color={props.color} />
+        ) : null}
+      </div>
     </div>
   );
 };

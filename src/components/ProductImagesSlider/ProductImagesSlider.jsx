@@ -14,16 +14,33 @@ const ProductImagesSlider = (props) => {
   // const { productId, color } = useParams();
 
   return (
-    <div className=" col-span-1 lg:col-span-2 flex  flex-col md:flex-row">
-      <div className="flex justify-between items-stretch md:flex-col md:justify-center   md:w-36 md:mr-5">
+    <div
+      className={` col-span-1    flex  flex-col ${
+        !props.modal ? "md:flex-row lg:col-span-2" : null
+      } `}
+    >
+      <div
+        className={`flex justify-between items-stretch ${
+          !props.modal
+            ? "md:flex-col md:justify-center   md:w-36 md:mr-5"
+            : null
+        }  `}
+      >
         <img
           src={props?.imageUrls[0]}
           alt="product"
           onClick={() => setCurrentImage(props?.imageUrls[0])}
-          className={`max-[390px]:w-24 max-[500px]:w-28 w-36 border-2 rounded-lg  mb-5 cursor-pointer ${
-            currentImage === props?.imageUrls[0] ? "border-black" : null
+          className={`${
+            props.modal
+              ? `max-[390px]:w-24 max-[500px]:w-28 w-36 border-2 rounded-lg mb-5 cursor-pointer ${
+                  currentImage === props?.imageUrls[0] ? "border-black" : ""
+                }`
+              : `max-[390px]:w-24 max-[500px]:w-28 w-36 border-2 rounded-lg mb-5 cursor-pointer ${
+                  currentImage === props?.imageUrls[0] ? "border-black" : ""
+                }`
           }`}
         />
+
         <img
           src={props?.imageUrls[1]}
           alt="product"
@@ -44,7 +61,10 @@ const ProductImagesSlider = (props) => {
         ) : null}
       </div>
       {/* <Zoom> */}
-      <img src={currentImage} className="md:w-3/4    " />
+      <img
+        src={currentImage}
+        className={` ${!props.modal ? " md:w-3/4" : null}    `}
+      />
       {/* </Zoom> */}
     </div>
   );

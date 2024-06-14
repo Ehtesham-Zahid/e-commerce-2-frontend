@@ -34,7 +34,7 @@ const WomenSection = () => {
     };
   }, [scrolled]);
   return (
-    <div>
+    <div className="min-h-screen">
       <Banner />
       <div className={`${scrolled ? "fixed top-0" : ""}`}>
         <Header />

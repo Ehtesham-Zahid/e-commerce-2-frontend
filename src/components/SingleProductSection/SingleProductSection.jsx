@@ -25,7 +25,8 @@ import { Separator } from "@/shadcn-components/ui/separator";
 import RecyclingIcon from "@mui/icons-material/Recycling";
 import DescriptionIcon from "@mui/icons-material/Description";
 import WarningIcon from "@mui/icons-material/Warning";
-import { fetchSingleProduct } from "@/store/features/products/productsSlice";
+import { fetchSingleProduct } from "@/store/features/singleProduct/singleProductSlice";
+
 import {
   // addToLocalCart,
   fetchProductsByVariants,
@@ -36,7 +37,7 @@ const SingleProductSection = () => {
 
   const Sizes = ["XS", "S", "M", "L", "XL", "XXL"];
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
+  const singleProduct = useSelector((state) => state.singleProduct);
   const { productId, color } = useParams();
 
   // --------USE STATES-----------
@@ -104,7 +105,7 @@ const SingleProductSection = () => {
       <div className={`${scrolled ? "fixed top-0 z-10" : ""}`}>
         <Header />
       </div>
-      {products.loading ? (
+      {singleProduct.loading ? (
         <Spinner />
       ) : (
         <div className="flex justify-center">
@@ -115,18 +116,18 @@ const SingleProductSection = () => {
               })} */}
 
               <ProductImagesSlider
-                imageUrls={products.currentVariation?.imageUrls}
-                // image1={products.singleProduct?.imageUrls[0]}
+                imageUrls={singleProduct.currentVariation?.imageUrls}
+                // image1={singleProduct.singleProduct?.imageUrls[0]}
               />
               <div className="col-span-1  py-4 ">
                 <p className="text-2xl font-bold ">
-                  {products.singleProduct?.title}
+                  {singleProduct.singleProduct?.title}
                 </p>
                 <p className=" text-sm text-gray-500 mb-4 uppercase">
-                  {products.singleProduct?.category}
+                  {singleProduct.singleProduct?.category}
                 </p>
                 <p className="text-xl font-bold mb-10">
-                  Rs.{products.singleProduct?.price}
+                  Rs.{singleProduct.singleProduct?.price}
                 </p>
                 <Separator className="mb-12" />
                 <p className=" mb-2 text-lg font-medium text-gray-500 ">
@@ -135,7 +136,7 @@ const SingleProductSection = () => {
                 </p>
                 {/* <p className="text-lg font-medium text-gray-500">Colors:</p> */}
                 <div className="flex items-center justify-start w-64 mb-8 mt-4">
-                  {products.singleProduct?.variations?.map((variation) => {
+                  {singleProduct.singleProduct?.variations?.map((variation) => {
                     return (
                       <Link
                         key={variation._id}
@@ -144,7 +145,7 @@ const SingleProductSection = () => {
                         <img
                           src={variation.imageUrls[0]}
                           className={`w-24 me-4 border-2 rounded-sm ${
-                            variation._id === products.currentVariation._id
+                            variation._id === singleProduct.currentVariation._id
                               ? "border-black"
                               : null
                           }`}
