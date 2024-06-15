@@ -15,29 +15,18 @@ const ProductImagesSlider = (props) => {
 
   return (
     <div
-      className={` col-span-1    flex  flex-col ${
-        !props.modal ? "md:flex-row lg:col-span-2" : null
-      } `}
+      className={` col-span-1    flex  flex-col md:flex-row lg:col-span-2
+       `}
     >
       <div
-        className={`flex justify-between items-stretch ${
-          !props.modal
-            ? "md:flex-col md:justify-center   md:w-36 md:mr-5"
-            : null
-        }  `}
+        className={`flex justify-between items-stretch    md:flex-col md:justify-center   md:w-36 md:mr-5`}
       >
         <img
           src={props?.imageUrls[0]}
           alt="product"
           onClick={() => setCurrentImage(props?.imageUrls[0])}
-          className={`${
-            props.modal
-              ? `max-[390px]:w-24 max-[500px]:w-28 w-36 border-2 rounded-lg mb-5 cursor-pointer ${
-                  currentImage === props?.imageUrls[0] ? "border-black" : ""
-                }`
-              : `max-[390px]:w-24 max-[500px]:w-28 w-36 border-2 rounded-lg mb-5 cursor-pointer ${
-                  currentImage === props?.imageUrls[0] ? "border-black" : ""
-                }`
+          className={`max-[390px]:w-24 max-[500px]:w-28 w-36 border-2 rounded-lg  mb-5 cursor-pointer ${
+            currentImage === props?.imageUrls[0] ? "border-black" : null
           }`}
         />
 

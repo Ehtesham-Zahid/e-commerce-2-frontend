@@ -31,6 +31,7 @@ import {
   // addToLocalCart,
   fetchProductsByVariants,
 } from "@/store/features/cart/cartSlice";
+import SingleProductSectionSkeleton from "../SingleProductSectionSkeleton/SingleProductSectionSkeleton";
 
 const SingleProductSection = () => {
   // -----VARIABLES DECALARATION------
@@ -105,11 +106,14 @@ const SingleProductSection = () => {
       <div className={`${scrolled ? "fixed top-0 z-10" : ""}`}>
         <Header />
       </div>
-      {singleProduct.loading ? (
+      {/* {singleProduct.loading ? (
         <Spinner />
-      ) : (
-        <div className="flex justify-center">
-          <div className="flex justify-center flex-col    w-11/12 xl:w-5/6 2xl:w-3/4">
+      ) : ( */}
+      <div className="flex justify-center">
+        <div className="flex justify-center flex-col    w-11/12 xl:w-5/6 2xl:w-3/4">
+          {singleProduct.loading ? (
+            <SingleProductSectionSkeleton />
+          ) : (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4  mt-10">
               {/* {products.singleProduct?.variations.map((variation)=>{
                 variation
@@ -182,82 +186,82 @@ const SingleProductSection = () => {
                 </Button>
               </div>
             </div>
-            <div className="my-10">
-              <Accordion
-                type="single"
-                collapsible
-                className="border-y border-gray-400  "
-              >
-                <AccordionItem value="item-1">
-                  <AccordionTrigger className="text-lg text-gray-700">
-                    <p className="flex items-center">
-                      <DescriptionIcon className="me-3" fontSize="small" />{" "}
-                      DESCRIPTION
-                    </p>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-medium tracking-wider leading-7">
-                    Yes. It adheres to the WAI-ARIA design pattern. Yes. It
-                    adheres to the WAI-ARIA design pattern. Yes. It adheres to
-                    the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA
-                    design pattern. Yes. It adheres to the WAI-ARIA design
-                    pattern. Yes. It adheres to the WAI-ARIA design pattern.
-                    Yes. It adheres to the WAI-ARIA design pattern. Yes. It
-                    adheres to the WAI-ARIA design pattern. Yes. It adheres to
-                    the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA
-                    design pattern. Yes. It adheres to the WAI-ARIA design
-                    pattern. Yes. It adheres to the WAI-ARIA design pattern.
-                    Yes. It adheres to the WAI-ARIA design pattern. Yes. It
-                    adheres to the WAI-ARIA design pattern. Yes. It adheres to
-                    the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA
-                    design pattern. Yes. It adheres to the WAI-ARIA design
-                    pattern.
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-              <Accordion
-                type="single"
-                collapsible
-                className="border-b border-gray-400"
-              >
-                <AccordionItem value="item-1">
-                  <AccordionTrigger className="text-lg text-gray-700 ">
-                    <p className="flex items-center">
-                      <RecyclingIcon className="me-3" fontSize="small" />{" "}
-                      COMPOSITION
-                    </p>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-lg">
-                    Cotton 100%
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>{" "}
-              <Accordion
-                type="single"
-                collapsible
-                className="border-b border-gray-400"
-              >
-                <AccordionItem value="item-1">
-                  <AccordionTrigger className="text-lg text-gray-700">
-                    <p className="flex items-center">
-                      <WarningIcon className="me-3" fontSize="small" /> MATERIAL
-                      & CARE
-                    </p>
-                  </AccordionTrigger>
-                  <AccordionContent className="tracking-wide leading-6">
-                    <p>o Do not bleach</p>
-                    <p>o Do not dry clean</p>
-                    <p>o Low iron if needed</p>
-                    <p>o Machine wash cold</p>
-                    <p>o Do not use fabric softener</p>
-                    <p>o Use mild detergent only</p>
-                    <p>o Wash with like colors</p>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </div>
+          )}
+          <div className="my-10">
+            <Accordion
+              type="single"
+              collapsible
+              className="border-y border-gray-400  "
+            >
+              <AccordionItem value="item-1">
+                <AccordionTrigger className="text-lg text-gray-700">
+                  <p className="flex items-center">
+                    <DescriptionIcon className="me-3" fontSize="small" />{" "}
+                    DESCRIPTION
+                  </p>
+                </AccordionTrigger>
+                <AccordionContent className="text-medium tracking-wider leading-7">
+                  Yes. It adheres to the WAI-ARIA design pattern. Yes. It
+                  adheres to the WAI-ARIA design pattern. Yes. It adheres to the
+                  WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA
+                  design pattern. Yes. It adheres to the WAI-ARIA design
+                  pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes.
+                  It adheres to the WAI-ARIA design pattern. Yes. It adheres to
+                  the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA
+                  design pattern. Yes. It adheres to the WAI-ARIA design
+                  pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes.
+                  It adheres to the WAI-ARIA design pattern. Yes. It adheres to
+                  the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA
+                  design pattern. Yes. It adheres to the WAI-ARIA design
+                  pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes.
+                  It adheres to the WAI-ARIA design pattern.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+            <Accordion
+              type="single"
+              collapsible
+              className="border-b border-gray-400"
+            >
+              <AccordionItem value="item-1">
+                <AccordionTrigger className="text-lg text-gray-700 ">
+                  <p className="flex items-center">
+                    <RecyclingIcon className="me-3" fontSize="small" />{" "}
+                    COMPOSITION
+                  </p>
+                </AccordionTrigger>
+                <AccordionContent className="text-lg">
+                  Cotton 100%
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>{" "}
+            <Accordion
+              type="single"
+              collapsible
+              className="border-b border-gray-400"
+            >
+              <AccordionItem value="item-1">
+                <AccordionTrigger className="text-lg text-gray-700">
+                  <p className="flex items-center">
+                    <WarningIcon className="me-3" fontSize="small" /> MATERIAL &
+                    CARE
+                  </p>
+                </AccordionTrigger>
+                <AccordionContent className="tracking-wide leading-6">
+                  <p>o Do not bleach</p>
+                  <p>o Do not dry clean</p>
+                  <p>o Low iron if needed</p>
+                  <p>o Machine wash cold</p>
+                  <p>o Do not use fabric softener</p>
+                  <p>o Use mild detergent only</p>
+                  <p>o Wash with like colors</p>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
-      )}
+      </div>
+      {/* )} */}
     </div>
   );
 };

@@ -9,6 +9,7 @@ const initialState = {
   loading: false,
   error: null,
   gridView: "2",
+  searchedProducts: [],
 };
 
 // Generate pending, fulfilled and rejected action types
@@ -55,6 +56,13 @@ const productsSlice = createSlice({
     setCategory(state, action) {
       state.currentCategory = action.payload;
     },
+    setSearchedProducts(state, action) {
+      action.payload.length === 0
+        ? (state.searchedProducts = [])
+        : (state.searchedProducts = state.allProducts.filter((product) =>
+            product.title.toLowerCase().includes(action.payload.toLowerCase())
+          ));
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
@@ -87,6 +95,7 @@ const productsSlice = createSlice({
   },
 });
 
-export const { setGridView, setCategory } = productsSlice.actions;
+export const { setGridView, setCategory, setSearchedProducts } =
+  productsSlice.actions;
 
 export default productsSlice.reducer;

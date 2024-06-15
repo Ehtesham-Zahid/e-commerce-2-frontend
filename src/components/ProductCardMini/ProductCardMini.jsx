@@ -1,15 +1,34 @@
-import CardImage from "../../assets/Images/Products/product-1.webp";
+/* eslint-disable react/prop-types */
+import { SheetClose } from "@/shadcn-components/ui/sheet";
+import { Link } from "react-router-dom";
 
-const ProductCardMini = () => {
-  return (
-    <div className="flex items-center justify-start my-2">
-      <img className="w-20 h-20 rounded-lg" src={CardImage} />
+const ProductCardMini = (props) => {
+  return props.searchBar ? (
+    <SheetClose asChild>
+      <Link
+        to={`/products/${props.id}/${props.color}`}
+        className="flex items-center justify-start my-2"
+      >
+        <img className="w-20 h-20 rounded-lg" src={props.image} />
+
+        <div>
+          <p className="text-lg tracking-wide m-2">{props.title}</p>
+          <p className="font-semibold m-2">Rs. {props.price}</p>
+        </div>
+      </Link>
+    </SheetClose>
+  ) : (
+    <Link
+      to={`/products/${props.id}/${props.color}`}
+      className="flex items-center justify-start my-2"
+    >
+      <img className="w-20 h-20 rounded-lg" src={props.image} />
 
       <div>
-        <p className="text-sm m-2">Cloud Feel Muscle Tee</p>
-        <p className="font-semibold m-2">Rs. 2,500</p>
+        <p className="text-lg tracking-wide m-2">{props.title}</p>
+        <p className="font-semibold m-2">Rs. {props.price}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

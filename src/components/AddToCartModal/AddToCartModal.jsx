@@ -20,6 +20,7 @@ import {
 import ImageSlider from "../ImageSlider/ImageSlider";
 import toast from "react-hot-toast";
 import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
+import AddToCartModalSkeleton from "../AddToCartModalSkeleton/AddToCartModalSkeleton";
 
 const AddToCartModal = (props) => {
   const Sizes = ["XS", "S", "M", "L", "XL", "XXL"];
@@ -76,76 +77,71 @@ const AddToCartModal = (props) => {
         {/* </div> */}
       </DialogTrigger>
       <DialogContent className="w-fit md:w-[650px] lg:w-[800px]">
-        {/* <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </DialogDescription>
-        </DialogHeader> */}
-        <div className="grid md:grid-cols-2 gap-6">
-          {/* <ProductImagesSlider
-            imageUrls={products.currentVariation?.imageUrls}
-            modal={true}
-          /> */}
-          <ImageSlider imageUrls={singleProduct.currentVariation?.imageUrls} />
-          <div className="col-span-1    ">
-            <p className="text-xl font-bold ">
-              {singleProduct.singleProduct?.title}
-            </p>
-            <p className=" text-sm text-gray-500 mb-2 uppercase">
-              {singleProduct.singleProduct?.category}
-            </p>
-            <p className="text-base font-bold mb-4">
-              Rs.{singleProduct.singleProduct?.price}
-            </p>
-            <Separator className="mb-4" />
-            <p className=" mb-2 text-lg font-medium text-gray-500 ">
-              Color - {props.color}
-              {/* <span className="   py-2 px-4  rounded-full     bg-black"></span> */}
-            </p>
+        {singleProduct.loading ? (
+          <AddToCartModalSkeleton />
+        ) : (
+          <div className="grid md:grid-cols-2 gap-6">
+            <ImageSlider
+              imageUrls={singleProduct.currentVariation?.imageUrls}
+            />
+            <div className="col-span-1    ">
+              <p className="text-xl font-bold ">
+                {singleProduct.singleProduct?.title}
+              </p>
+              <p className=" text-sm text-gray-500 mb-2 uppercase">
+                {singleProduct.singleProduct?.category}
+              </p>
+              <p className="text-base font-bold mb-4">
+                Rs.{singleProduct.singleProduct?.price}
+              </p>
+              <Separator className="mb-4" />
+              <p className=" mb-2 text-lg font-medium text-gray-500 ">
+                Color - {props.color}
+                {/* <span className="   py-2 px-4  rounded-full     bg-black"></span> */}
+              </p>
 
-            <p className="text-lg font-medium text-gray-500 ">Size</p>
-            {/* <div className="flex justify"> */}
-            <div className="flex justify-between  flex-wrap overflow-auto gap-y-5 gap-x-2 items-center mb-6 ">
-              {Sizes.map((size) => {
-                return (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    className={`rounded-sm py-1.5 border-2  text-center buttony-1.5 w-20 ${
-                      selectedSize === size
-                        ? "border-black text-black"
-                        : " border-gray-300 text-gray-400 "
-                    }`}
+              <p className="text-lg font-medium text-gray-500 ">Size</p>
+              {/* <div className="flex justify"> */}
+              <div className="flex justify-between  flex-wrap overflow-auto gap-y-5 gap-x-2 items-center mb-6 ">
+                {Sizes.map((size) => {
+                  return (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      className={`rounded-sm py-1.5 border-2  text-center buttony-1.5 w-20 ${
+                        selectedSize === size
+                          ? "border-black text-black"
+                          : " border-gray-300 text-gray-400 "
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  );
+                })}
+              </div>
+              <Separator className="mb-4" />
+              <div className="flex">
+                <Link to={`/products/${props.id}/${props.color}`}>
+                  <Button
+                    className="w-full 2xl:mt-4 py-5 me-2 border border-black hover:bg-slate-200"
+                    variant="ghost"
+                    //   onClick={addToLocalCartHandler}
                   >
-                    {size}
-                  </button>
-                );
-              })}
-            </div>
-            <Separator className="mb-4" />
-            <div className="flex">
-              <Link to={`/products/${props.id}/${props.color}`}>
-                <Button
-                  className="w-full 2xl:mt-4 py-5 me-2 border border-black hover:bg-slate-200"
-                  variant="ghost"
-                  //   onClick={addToLocalCartHandler}
-                >
-                  VIEW FULL DETAILS
-                </Button>
-              </Link>
-              <DialogClose className="w-full">
-                <Button
-                  className="w-full 2xl:mt-4 py-5 ms-2"
-                  onClick={addToLocalCartHandler}
-                >
-                  ADD TO CART
-                </Button>
-              </DialogClose>
+                    VIEW FULL DETAILS
+                  </Button>
+                </Link>
+                <DialogClose className="w-full">
+                  <Button
+                    className="w-full 2xl:mt-4 py-5 ms-2"
+                    onClick={addToLocalCartHandler}
+                  >
+                    ADD TO CART
+                  </Button>
+                </DialogClose>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </DialogContent>
     </Dialog>
   );

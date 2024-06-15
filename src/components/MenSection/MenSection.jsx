@@ -9,6 +9,7 @@ import {
   fetchProductsByCategory,
   setCategory,
 } from "@/store/features/products/productsSlice";
+import SingleProductSectionSkeleton from "../SingleProductSectionSkeleton/SingleProductSectionSkeleton";
 
 const MenSection = () => {
   // -----VARIABLES DECALARATION------

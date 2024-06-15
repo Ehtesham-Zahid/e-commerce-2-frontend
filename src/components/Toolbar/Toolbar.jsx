@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   Select,
   SelectContent,
@@ -33,7 +34,7 @@ import {
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const Toolbar = () => {
+const Toolbar = (props) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -63,24 +64,36 @@ const Toolbar = () => {
 
   return isMobile ? (
     <div
-      className={`w-screen flex justify-between items-center bg-neutral-100 h-10  `}
+      className={`w-screen flex ${
+        props.searchPage ? "justify-center" : "justify-between"
+      }   items-center bg-neutral-100 h-10  `}
     >
-      <Select onValueChange={(value) => sortProductsHandler(value)}>
-        <SelectTrigger className=" w-[100px] sm:w-[135px]">
-          <SelectValue placeholder="Sort By" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="price-low-to-high">Price, low to high</SelectItem>
-          <SelectItem value="price-high-to-low">Price, high to low</SelectItem>
-          <SelectItem value="alphabetically-A-Z">
-            Alphabetically, A-Z
-          </SelectItem>
-          <SelectItem value="alphabetically-Z-A">
-            Alphabetically, Z-A
-          </SelectItem>
-        </SelectContent>
-        {/* <Separator orientation="vertical" /> */}
-      </Select>
+      {!props.searchPage ? (
+        <Select
+          onValueChange={(value) => sortProductsHandler(value)}
+          className={`${props.searchPage ? "hidden" : null}`}
+        >
+          <SelectTrigger className=" w-[100px] sm:w-[135px]">
+            <SelectValue placeholder="Sort By" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="price-low-to-high">
+              Price, low to high
+            </SelectItem>
+            <SelectItem value="price-high-to-low">
+              Price, high to low
+            </SelectItem>
+            <SelectItem value="alphabetically-A-Z">
+              Alphabetically, A-Z
+            </SelectItem>
+            <SelectItem value="alphabetically-Z-A">
+              Alphabetically, Z-A
+            </SelectItem>
+          </SelectContent>
+          {/* <Separator orientation="vertical" /> */}
+        </Select>
+      ) : null}
+
       <div className="flex justify-center items-center mx-3 h-full ">
         <SquareIcon
           fontSize="medium"
@@ -98,24 +111,28 @@ const Toolbar = () => {
         {/* <Separator orientation="vertical" /> */}
       </div>
       {/* <Separator orientation="vertical" /> */}
-      <Sheet>
-        <SheetTrigger className="px-4 sm:px-6 flex items-center  text-neutral-500   hover:text-black ">
-          <FilterAltIcon /> Filter(1)
-        </SheetTrigger>
-        <SheetContent>
-          <SheetHeader>
-            <SheetTitle>Are you absolutely sure?</SheetTitle>
-            <SheetDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </SheetDescription>
-          </SheetHeader>
-        </SheetContent>
-      </Sheet>
+      {!props.searchPage ? (
+        <Sheet>
+          <SheetTrigger className="px-4 sm:px-6 flex items-center  text-neutral-500   hover:text-black ">
+            <FilterAltIcon /> Filter(1)
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>Are you absolutely sure?</SheetTitle>
+              <SheetDescription>
+                This action cannot be undone. This will permanently delete your
+                account and remove your data from our servers.
+              </SheetDescription>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
+      ) : null}
     </div>
   ) : (
     <div
-      className={`w-screen flex justify-between items-center bg-neutral-100 h-12  `}
+      className={`w-screen flex ${
+        props.searchPage ? "justify-center" : "justify-between"
+      } items-center bg-neutral-100 h-12  `}
     >
       {/* <div className=""> */}
       <div className="flex justify-center items-center mx-3 h-full ">
@@ -138,46 +155,50 @@ const Toolbar = () => {
           fontSize="large"
           onClick={() => dispatch(setGridView("4"))}
         />
-        <Separator orientation="vertical" />
+        {!props.searchPage ? <Separator orientation="vertical" /> : null}
       </div>
-      <p className="hidden lg:flex">100 Products</p>
-      <div className="flex sm:mx-5 h-full">
-        <Separator orientation="vertical" />
-        <Select onValueChange={(value) => sortProductsHandler(value)}>
-          <SelectTrigger className=" w-[100px] sm:w-[135px]">
-            <SelectValue placeholder="Sort By" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="price-low-to-high">
-              Price, low to high
-            </SelectItem>
-            <SelectItem value="price-high-to-low">
-              Price, high to low
-            </SelectItem>
-            <SelectItem value="alphabetically-A-Z">
-              Alphabetically, A-Z
-            </SelectItem>
-            <SelectItem value="alphabetically-Z-A">
-              Alphabetically, Z-A
-            </SelectItem>
-          </SelectContent>
-        </Select>
-        <Separator orientation="vertical" />
-        <Sheet>
-          <SheetTrigger className="px-4 sm:px-6 flex items-center  text-neutral-500 hover:text-black ">
-            <FilterAltIcon /> Filter(1)
-          </SheetTrigger>
-          <SheetContent className="w-80">
-            <SheetHeader>
-              <SheetTitle>Are you absolutely sure?</SheetTitle>
-              <SheetDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
-              </SheetDescription>
-            </SheetHeader>
-          </SheetContent>
-        </Sheet>
-      </div>
+      {!props.searchPage ? (
+        <>
+          {/* <p className="  flex   ">100 Products</p> */}
+          <div className="flex sm:mx-5 h-full">
+            <Separator orientation="vertical" />
+            <Select onValueChange={(value) => sortProductsHandler(value)}>
+              <SelectTrigger className=" w-[100px] sm:w-[135px]">
+                <SelectValue placeholder="Sort By" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="price-low-to-high">
+                  Price, low to high
+                </SelectItem>
+                <SelectItem value="price-high-to-low">
+                  Price, high to low
+                </SelectItem>
+                <SelectItem value="alphabetically-A-Z">
+                  Alphabetically, A-Z
+                </SelectItem>
+                <SelectItem value="alphabetically-Z-A">
+                  Alphabetically, Z-A
+                </SelectItem>
+              </SelectContent>
+            </Select>
+            <Separator orientation="vertical" />
+            <Sheet>
+              <SheetTrigger className="px-4 sm:px-6 flex items-center  text-neutral-500 hover:text-black ">
+                <FilterAltIcon /> Filter(1)
+              </SheetTrigger>
+              <SheetContent className="w-80">
+                <SheetHeader>
+                  <SheetTitle>Are you absolutely sure?</SheetTitle>
+                  <SheetDescription>
+                    This action cannot be undone. This will permanently delete
+                    your account and remove your data from our servers.
+                  </SheetDescription>
+                </SheetHeader>
+              </SheetContent>
+            </Sheet>
+          </div>{" "}
+        </>
+      ) : null}
     </div>
   );
 };
