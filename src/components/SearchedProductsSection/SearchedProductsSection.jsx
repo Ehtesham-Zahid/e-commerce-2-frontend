@@ -63,7 +63,7 @@ const SearchedProductsSection = () => {
         <Header />
         <Toolbar searchPage={true} />
       </div>
-      <p className="text-center font-bold text-xl sm:text-2xl  my-5">
+      <p className="text-center font-bold text-xl sm:text-2xl   my-5">
         SEARCHED PRODUCTS
       </p>
       <div className={sectionClass}>
