@@ -2,7 +2,7 @@ import { Button } from "@/shadcn-components/ui/button";
 import { signup } from "@/store/features/auth/authSlice";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const SigninForm = () => {
@@ -15,6 +15,7 @@ const SigninForm = () => {
     formState: { errors },
   } = useForm();
 
+  const auth = useSelector((state) => state.auth);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,6 +43,7 @@ const SigninForm = () => {
   console.log(watch("example")); // watch input value by passing the name of it
   console.log(errors.password);
 
+  console.log("HEMLOG: ", errors);
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form
@@ -58,8 +60,12 @@ const SigninForm = () => {
           className="border border-black rounded-md p-2 "
         />
         {errors.username && (
-          <p className="text-red-500 font-semibold">Enter the email</p>
+          <p className="text-red-500 font-semibold">Enter the username</p>
         )}
+        {Object.entries(errors).length === 0 &&
+        auth.error.includes("username") ? (
+          <p className="text-red-500 font-semibold">{auth.error}</p>
+        ) : null}
       </div>
       <div className=" flex flex-col mb-5">
         <label className="text-black font-medium">Email Address</label>
@@ -73,6 +79,9 @@ const SigninForm = () => {
         {errors.email && (
           <p className="text-red-500 font-semibold">Enter the email</p>
         )}
+        {Object.entries(errors).length === 0 && auth.error.includes("email") ? (
+          <p className="text-red-500 font-semibold">{auth.error}</p>
+        ) : null}
       </div>
       <div className=" flex flex-col mb-5">
         <label className="text-black font-medium">Password</label>
@@ -104,6 +113,9 @@ const SigninForm = () => {
         {errors.passwordConfirm && (
           <p className="text-red-500 font-semibold">Confirm the Password</p>
         )}
+        {Object.entries(errors).length === 0 && auth.error.includes("match") ? (
+          <p className="text-red-500 font-semibold">{auth.error}</p>
+        ) : null}
       </div>
       {/* </div> */}
       {/* <input type="submit" /> */}

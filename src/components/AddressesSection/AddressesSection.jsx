@@ -11,6 +11,7 @@ import {
   fetchPrimaryAddress,
 } from "@/store/features/address/addressSlice";
 import AddAddressFormDialog from "../AddAddressFormDialog/AddAddressFormDialog";
+import AddressCardSkeleton from "../AddressCardSkeleton/AddressCardSkeleton";
 
 const AddressesSection = () => {
   // -----VARIABLES DECALARATION------
@@ -62,27 +63,35 @@ const AddressesSection = () => {
               <AddAddressFormDialog />{" "}
             </div>
             <div className="flex justify-start  flex-wrap overflow-auto gap-y-5  items-center my-5">
-              {address.addresses.map((address, index) => {
-                return (
-                  <AddressCard
-                    key={address._id}
-                    id={address._id}
-                    mainhunidteri={address._id}
-                    firstName={address.firstName}
-                    lastName={address.lastName}
-                    phoneNumber={address.phoneNumber}
-                    address={address.address}
-                    city={address.city}
-                    zipcode={address.zipcode}
-                    country={address.country}
-                    addressTitle={` ${
-                      address.isPrimary
-                        ? "PRIMARY ADDRESS"
-                        : `ADDRESS ${index + 1}`
-                    } `}
-                  />
-                );
-              })}
+              {address.loading ? (
+                <>
+                  <AddressCardSkeleton />
+                  <AddressCardSkeleton />
+                  <AddressCardSkeleton />
+                  <AddressCardSkeleton />
+                </>
+              ) : (
+                address.addresses.map((address, index) => {
+                  return (
+                    <AddressCard
+                      key={address._id}
+                      id={address._id}
+                      firstName={address.firstName}
+                      lastName={address.lastName}
+                      phoneNumber={address.phoneNumber}
+                      address={address.address}
+                      city={address.city}
+                      zipcode={address.zipcode}
+                      country={address.country}
+                      addressTitle={` ${
+                        address.isPrimary
+                          ? "PRIMARY ADDRESS"
+                          : `ADDRESS ${index + 1}`
+                      } `}
+                    />
+                  );
+                })
+              )}
             </div>
           </div>
         </div>

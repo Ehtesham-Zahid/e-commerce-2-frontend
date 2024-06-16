@@ -32,6 +32,7 @@ import {
   createOrderUnAuth,
 } from "@/store/features/order/orderSlice";
 import { fetchAddress } from "@/store/features/address/addressSlice";
+import { useForm } from "react-hook-form";
 
 const CheckoutForm = () => {
   const dispatch = useDispatch();
@@ -56,6 +57,13 @@ const CheckoutForm = () => {
     dispatch(logout());
     setIsLoggedIn(false);
   };
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   // const cartItems = JSON.parse(localStorage.getItem("cart"));
 
@@ -108,10 +116,11 @@ const CheckoutForm = () => {
     // dispatch(createOrderAuth(authData));
   };
 
+  // const onSubmit = () => {};
   return (
     <div className="flex justify-center lg:justify-end">
       <form
-        onSubmit={createOrderHandler}
+        onSubmit={handleSubmit(createOrderHandler)}
         className="col-span-1 p-6   w-full md:w-5/6 xl:w-4/5  2xl:w-2/3"
       >
         {isLoggedIn ? (
@@ -178,60 +187,107 @@ const CheckoutForm = () => {
               <p className="font-semibold text-2xl">Contact</p>
               <Link to="/account/signin">Login</Link>
             </div>
-            <input
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="border border-gray-400 rounded-md p-2.5 mb-2 w-full"
-            />
+            <div className="mb-2">
+              <input
+                {...register("email", { required: true })}
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="border border-gray-400 rounded-md p-2.5 w-full"
+              />
+              {errors.email && (
+                <p className="text-red-500 font-semibold">Enter the email</p>
+              )}
+            </div>
+
             <Separator orientation="horizontal" className="my-6" />
             <p className="font-semibold text-2xl my-3">Delivery</p>
             <div className="flex">
+              <div className="mb-6">
+                <input
+                  {...register("firstName", { required: true })}
+                  placeholder="First Name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="border border-gray-400 rounded-md p-2.5 w-full me-2"
+                />
+                {errors.firstName && (
+                  <p className="text-red-500 font-semibold">
+                    Enter the First Name
+                  </p>
+                )}
+              </div>
+              <div className="mb-6">
+                <input
+                  {...register("lastName", { required: true })}
+                  placeholder="Last Name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className="border border-gray-400 rounded-md p-2.5  w-full ms-2"
+                />
+                {errors.lastName && (
+                  <p className="text-red-500 font-semibold">
+                    Enter the Last Name
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="mb-6">
               <input
-                placeholder="First Name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                className="border border-gray-400 rounded-md p-2.5 mb-6 w-full me-2"
+                {...register("address", { required: true })}
+                placeholder="Address"
+                value={streetAddress}
+                onChange={(e) => setStreetAddress(e.target.value)}
+                className="border border-gray-400 rounded-md p-2.5  w-full"
               />
-              <input
-                placeholder="Last Name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                className="border border-gray-400 rounded-md p-2.5 mb-6 w-full ms-2"
-              />
+              {errors.address && (
+                <p className="text-red-500 font-semibold">Enter the Address</p>
+              )}
             </div>
             <input
-              placeholder="Address"
-              value={streetAddress}
-              onChange={(e) => setStreetAddress(e.target.value)}
-              className="border border-gray-400 rounded-md p-2.5 mb-6 w-full"
-            />
-            <input
               placeholder="Apartment, suite, etc(optional)"
-              // value={firstName}
-              // onChange={(e) => setFirstName(e.target.value)}
               className="border border-gray-400 rounded-md p-2.5 mb-6 w-full"
             />
             <div className="flex">
-              <input
-                placeholder="City"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                className="border border-gray-400 rounded-md p-2.5 mb-6 w-full me-2"
-              />
-              <input
-                placeholder="Postal Code"
-                value={zipcode}
-                onChange={(e) => setZipcode(e.target.value)}
-                className="border border-gray-400 rounded-md p-2.5 mb-6 w-full ms-2"
-              />
+              <div className="mb-6">
+                <input
+                  {...register("city", { required: true })}
+                  placeholder="City"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  className="border border-gray-400 rounded-md p-2.5   w-full me-2"
+                />
+                {errors.city && (
+                  <p className="text-red-500 font-semibold">Enter the City</p>
+                )}
+              </div>
+              <div className="mb-6">
+                <input
+                  {...register("zipCode", { required: true })}
+                  placeholder="Zip Code"
+                  value={zipcode}
+                  onChange={(e) => setZipcode(e.target.value)}
+                  className="border border-gray-400 rounded-md p-2.5   w-full ms-2"
+                />
+                {errors.zipCode && (
+                  <p className="text-red-500 font-semibold">
+                    Enter the Zip Code
+                  </p>
+                )}
+              </div>
             </div>
-            <input
-              placeholder="Phone Number"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              className="border border-gray-400 rounded-md p-2.5 mb-6 w-full"
-            />
+            <div className="mb-6">
+              <input
+                {...register("phoneNumber", { required: true })}
+                placeholder="Phone Number"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="border border-gray-400 rounded-md p-2.5  w-full"
+              />
+              {errors.phoneNumber && (
+                <p className="text-red-500 font-semibold">Enter the City</p>
+              )}
+            </div>
           </div>
         )}
         <Separator orientation="horizontal" className="my-6" />
@@ -274,12 +330,24 @@ const CheckoutForm = () => {
         >
           <AccordionItem value="item-1">
             <AccordionTrigger className="text-lg text-gray-700">
-              <p className="flex items-center font-bold">ORDER SUMMARY(2)</p>
+              <p className="flex items-center font-bold">
+                ORDER SUMMARY({cart?.items?.products.length})
+              </p>
             </AccordionTrigger>
             <AccordionContent className="text-lg">
-              <CheckoutProductCard />
-              <CheckoutProductCard />
-              <CheckoutProductCard />
+              {cart?.items?.products?.map((product) => {
+                return (
+                  <CheckoutProductCard
+                    key={product._id}
+                    title={product.title}
+                    selectedSize={product.selectedSize}
+                    productPrice={product.productPrice}
+                    quantity={product.quantity}
+                    color={product.variations[0].color}
+                    image={product.variations[0].imageUrls[0]}
+                  />
+                );
+              })}
             </AccordionContent>
           </AccordionItem>
         </Accordion>

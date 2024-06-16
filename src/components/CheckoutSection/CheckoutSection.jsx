@@ -49,11 +49,6 @@ const CheckoutSection = () => {
                       />
                     );
                   })}
-                  {/* <CheckoutProductCard />
-                <CheckoutProductCard />
-                <CheckoutProductCard />
-                <CheckoutProductCard />
-                <CheckoutProductCard /> */}
                 </div>
                 <div className="flex justify-between items-center  ">
                   <p className="font-semibold text-xl m-3 ">Total</p>

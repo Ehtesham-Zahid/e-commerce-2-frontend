@@ -12,7 +12,7 @@ const OrderCard = (props) => {
   return (
     <TableRow>
       {/* <TableCell className="font-medium">INV001</TableCell> */}
-      <TableCell>#{props.id}</TableCell>
+      <TableCell>{props.orderNumber}</TableCell>
       <TableCell>{formattedDate}</TableCell>
       <TableCell>{props.paymentStatus}</TableCell>
       <TableCell>{props.orderStatus}</TableCell>

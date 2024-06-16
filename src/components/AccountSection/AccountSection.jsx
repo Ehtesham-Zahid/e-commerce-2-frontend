@@ -24,6 +24,7 @@ import {
 import AddressCard from "../AddressCard/AddressCard";
 import { fetchOrders } from "@/store/features/order/orderSlice";
 import OrderCard from "../OrderCard/OrderCard";
+import AddressCardSkeleton from "../AddressCardSkeleton/AddressCardSkeleton";
 
 const AccountSection = () => {
   // -----VARIABLES DECALARATION------
@@ -49,7 +50,7 @@ const AccountSection = () => {
   }, [scrolled]);
 
   useEffect(() => {
-    // dispatch(fetchAddresses());
+    dispatch(fetchAddresses());
     dispatch(fetchPrimaryAddress());
     dispatch(fetchOrders());
   }, []);
@@ -77,75 +78,58 @@ const AccountSection = () => {
           <p className="mt-2 mb-5">
             View all your orders and manage your account information.
           </p>
-          <div className="flex flex-col lg:flex-row justify-between w-full">
-            <Table className="lg:w-11/12 border-b border-black ">
-              {/* <TableCaption>A list of your recent orders.</TableCaption> */}
-              <TableHeader>
-                <TableRow>
-                  {/* <TableHead className="w-[100px]">Invoice</TableHead> */}
-                  <TableHead>ORDER</TableHead>
-                  <TableHead>DATE</TableHead>
-                  <TableHead>PAYMENT STATUS</TableHead>
-                  <TableHead>FULFILLMENT STATUS</TableHead>
-                  <TableHead className="text-right">TOTAL</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {order.orders.map((order) => {
-                  return (
-                    <OrderCard
-                      key={order._id}
-                      id={order._id}
-                      orderStatus={order.status}
-                      paymentStatus={order.paymentStatus}
-                      totalPrice={order.totalPrice}
-                      date={order.createdAt}
-                    />
-                  );
-                })}
-                {/* <TableRow>
-                  <TableCell className="font-medium">INV001</TableCell>
-                  <TableCell>#1845064</TableCell>
-                  <TableCell>Febrary 6, 2024</TableCell>
-                  <TableCell>Pending</TableCell>
-                  <TableCell>Fullfilled</TableCell>
-                  <TableCell className="text-right">Rs.2,000</TableCell>
-                </TableRow> */}
-              </TableBody>
-            </Table>
-            <div>
-              {/* <Table className=" w-72">
-                 
+          <div className="flex flex-col lg:flex-row justify-between ">
+            {order.orders.length === 0 ? (
+              // <div className="flex justify-center w-full mt-36 border-e">
+              <p className="text-center font-bold text-2xl w-full my-32 sm:my-40 tracking-wide">
+                YOU HAVEN'T PLACED ANY ORDER YET
+              </p>
+            ) : (
+              // </div>
+              <Table className="lg:w-11/12 border-b border-black ">
                 <TableHeader>
                   <TableRow>
-                
-                    <TableHead>PRIMARY ADDRESS</TableHead>
+                    <TableHead>ORDER</TableHead>
+                    <TableHead>DATE</TableHead>
+                    <TableHead>PAYMENT STATUS</TableHead>
+                    <TableHead>FULFILLMENT STATUS</TableHead>
+                    <TableHead className="text-right">TOTAL</TableHead>
                   </TableRow>
                 </TableHeader>
+
                 <TableBody>
-                  <TableRow className="flex flex-col">
-                
-                    <TableCell className="text-black font-medium text-base ">
-                      Ehtesham Zahid Abbas park lane no.1 pattoki Pattoki 55300
-                      Pakistan
-                    </TableCell>
-                  </TableRow>
-                  <Link to="/account/addresses">
-                    <Button className="m-4">MANAGE</Button>
-                  </Link>
+                  {order.orders.map((order) => {
+                    return (
+                      <OrderCard
+                        key={order._id}
+                        id={order._id}
+                        orderNumber={order.orderNumber}
+                        orderStatus={order.status}
+                        paymentStatus={order.paymentStatus}
+                        totalPrice={order.totalPrice}
+                        date={order.createdAt}
+                      />
+                    );
+                  })}
                 </TableBody>
-              </Table> */}
-              <AddressCard
-                firstName={address.primaryAddress?.firstName}
-                lastName={address.primaryAddress?.lastName}
-                phoneNumber={address.primaryAddress?.phoneNumber}
-                address={address.primaryAddress?.address}
-                city={address.primaryAddress?.city}
-                zipcode={address.primaryAddress?.zipcode}
-                country={address.primaryAddress?.country}
-                addressTitle={"PRIMARY ADDRESS"}
-                page="account"
-              />
+              </Table>
+            )}
+            <div>
+              {address.loading ? (
+                <AddressCardSkeleton />
+              ) : (
+                <AddressCard
+                  firstName={address.primaryAddress?.firstName}
+                  lastName={address.primaryAddress?.lastName}
+                  phoneNumber={address.primaryAddress?.phoneNumber}
+                  address={address.primaryAddress?.address}
+                  city={address.primaryAddress?.city}
+                  zipcode={address.primaryAddress?.zipcode}
+                  country={address.primaryAddress?.country}
+                  addressTitle={"PRIMARY ADDRESS"}
+                  page="account"
+                />
+              )}
             </div>
           </div>
         </div>
