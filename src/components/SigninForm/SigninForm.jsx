@@ -3,12 +3,13 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "@/shadcn-components/ui/checkbox";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "@/store/features/auth/authSlice";
 
 const SigninForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
   const {
     register,
     handleSubmit,
@@ -45,29 +46,34 @@ const SigninForm = () => {
 
       <div className="my-4 flex flex-col">
         <input
-          {...register("email", { required: true })}
+          // {...register("email", { required: true })}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email Address"
           className="border border-black rounded-md p-2  "
         />
-        {errors.email && (
+        {/* {errors.email && (
           <p className="text-red-500 font-semibold">Enter the email</p>
-        )}
+        )} */}
       </div>
 
       <div className="mt-2 flex flex-col">
         <input
-          {...register("password", { required: true })}
+          // {...register("password", { required: true })}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           className="border border-black rounded-md p-2  "
         />
-        {errors.password && (
+        {/* {errors.password && (
           <p className="text-red-500 font-semibold  ">Enter the password</p>
-        )}
+        )} */}
       </div>
+      {auth.error ? (
+        <p className="text-red-500 font-semibold  text-center mt-0.5  ">
+          {auth.error}
+        </p>
+      ) : null}
       <div className="flex  justify-between items-center my-8">
         <div className="flex items-center">
           <Checkbox />

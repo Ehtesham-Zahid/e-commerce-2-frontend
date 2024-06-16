@@ -9,7 +9,7 @@ const initialState = {
 };
 
 export const fetchSingleProduct = createAsyncThunk(
-  "products/fetchSingleProduct",
+  "singleProduct/fetchSingleProduct",
   async ({ productId, color }, { rejectWithValue }) => {
     try {
       const response = await axios.get(

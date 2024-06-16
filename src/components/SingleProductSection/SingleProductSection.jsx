@@ -32,6 +32,8 @@ import {
   fetchProductsByVariants,
 } from "@/store/features/cart/cartSlice";
 import SingleProductSectionSkeleton from "../SingleProductSectionSkeleton/SingleProductSectionSkeleton";
+import RelatedProductsSection from "../RelatedProductsSection/RelatedProductsSection";
+import { fetchProductsByCategory } from "@/store/features/products/productsSlice";
 
 const SingleProductSection = () => {
   // -----VARIABLES DECALARATION------
@@ -49,7 +51,15 @@ const SingleProductSection = () => {
   // ----------USE EFFECTS------------
 
   useEffect(() => {
-    dispatch(fetchSingleProduct({ productId, color }));
+    dispatch(fetchSingleProduct({ productId, color })).then((result) => {
+      if (result.meta.requestStatus === "fulfilled") {
+        dispatch(
+          fetchProductsByCategory({
+            category: result.payload.product.category,
+          })
+        );
+      }
+    });
   }, [productId, color]);
 
   useEffect(() => {
@@ -66,6 +76,10 @@ const SingleProductSection = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [scrolled]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [productId, color]);
 
   // --------HANDLERS----------
 
@@ -106,9 +120,7 @@ const SingleProductSection = () => {
       <div className={`${scrolled ? "fixed top-0 z-10" : ""}`}>
         <Header />
       </div>
-      {/* {singleProduct.loading ? (
-        <Spinner />
-      ) : ( */}
+
       <div className="flex justify-center">
         <div className="flex justify-center flex-col    w-11/12 xl:w-5/6 2xl:w-3/4">
           {singleProduct.loading ? (
@@ -259,9 +271,11 @@ const SingleProductSection = () => {
               </AccordionItem>
             </Accordion>
           </div>
+          <div>
+            <RelatedProductsSection />
+          </div>
         </div>
       </div>
-      {/* )} */}
     </div>
   );
 };

@@ -22,11 +22,15 @@ import {
   fetchPrimaryAddress,
 } from "@/store/features/address/addressSlice";
 import AddressCard from "../AddressCard/AddressCard";
+import { fetchOrders } from "@/store/features/order/orderSlice";
+import OrderCard from "../OrderCard/OrderCard";
 
 const AccountSection = () => {
   // -----VARIABLES DECALARATION------
   const dispatch = useDispatch();
   const address = useSelector((state) => state.address);
+  const order = useSelector((state) => state.order);
+
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -47,6 +51,7 @@ const AccountSection = () => {
   useEffect(() => {
     // dispatch(fetchAddresses());
     dispatch(fetchPrimaryAddress());
+    dispatch(fetchOrders());
   }, []);
 
   const logoutHandler = () => {
@@ -86,46 +91,26 @@ const AccountSection = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow>
-                  {/* <TableCell className="font-medium">INV001</TableCell> */}
+                {order.orders.map((order) => {
+                  return (
+                    <OrderCard
+                      key={order._id}
+                      id={order._id}
+                      orderStatus={order.status}
+                      paymentStatus={order.paymentStatus}
+                      totalPrice={order.totalPrice}
+                      date={order.createdAt}
+                    />
+                  );
+                })}
+                {/* <TableRow>
+                  <TableCell className="font-medium">INV001</TableCell>
                   <TableCell>#1845064</TableCell>
                   <TableCell>Febrary 6, 2024</TableCell>
                   <TableCell>Pending</TableCell>
                   <TableCell>Fullfilled</TableCell>
                   <TableCell className="text-right">Rs.2,000</TableCell>
-                </TableRow>
-                <TableRow>
-                  {/* <TableCell className="font-medium">INV001</TableCell> */}
-                  <TableCell>#1845064</TableCell>
-                  <TableCell>Febrary 6, 2024</TableCell>
-                  <TableCell>Pending</TableCell>
-                  <TableCell>Fullfilled</TableCell>
-                  <TableCell className="text-right">Rs.2,000</TableCell>
-                </TableRow>
-                <TableRow>
-                  {/* <TableCell className="font-medium">INV001</TableCell> */}
-                  <TableCell>#1845064</TableCell>
-                  <TableCell>Febrary 6, 2024</TableCell>
-                  <TableCell>Pending</TableCell>
-                  <TableCell>Fullfilled</TableCell>
-                  <TableCell className="text-right">Rs.2,000</TableCell>
-                </TableRow>{" "}
-                <TableRow>
-                  {/* <TableCell className="font-medium">INV001</TableCell> */}
-                  <TableCell>#1845064</TableCell>
-                  <TableCell>Febrary 6, 2024</TableCell>
-                  <TableCell>Pending</TableCell>
-                  <TableCell>Fullfilled</TableCell>
-                  <TableCell className="text-right">Rs.2,000</TableCell>
-                </TableRow>{" "}
-                <TableRow>
-                  {/* <TableCell className="font-medium">INV001</TableCell> */}
-                  <TableCell>#1845064</TableCell>
-                  <TableCell>Febrary 6, 2024</TableCell>
-                  <TableCell>Pending</TableCell>
-                  <TableCell>Fullfilled</TableCell>
-                  <TableCell className="text-right">Rs.2,000</TableCell>
-                </TableRow>
+                </TableRow> */}
               </TableBody>
             </Table>
             <div>

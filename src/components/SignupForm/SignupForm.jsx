@@ -40,6 +40,7 @@ const SigninForm = () => {
   };
 
   console.log(watch("example")); // watch input value by passing the name of it
+  console.log(errors.password);
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
@@ -63,7 +64,7 @@ const SigninForm = () => {
       <div className=" flex flex-col mb-5">
         <label className="text-black font-medium">Email Address</label>
         <input
-          {...register("email", { required: true })}
+          {...register("email", { required: true, pattern: "/^S+@S+.S+$/" })}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email Address"
@@ -76,14 +77,19 @@ const SigninForm = () => {
       <div className=" flex flex-col mb-5">
         <label className="text-black font-medium">Password</label>
         <input
-          {...register("password", { required: true })}
+          {...register("password", { required: true, minLength: 8 })}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           className="border border-black rounded-md p-2 "
         />
-        {errors.password && (
+        {errors.password?.type === "required" && (
           <p className="text-red-500 font-semibold">Enter the password</p>
+        )}
+        {errors.password?.type === "minLength" && (
+          <p className="text-red-500 font-semibold">
+            Password must be 8 characters long
+          </p>
         )}
       </div>
       <div className=" flex flex-col mb-5">
@@ -96,7 +102,7 @@ const SigninForm = () => {
           className="border border-black rounded-md p-2"
         />
         {errors.passwordConfirm && (
-          <p className="text-red-500 font-semibold">Confirm the password</p>
+          <p className="text-red-500 font-semibold">Confirm the Password</p>
         )}
       </div>
       {/* </div> */}

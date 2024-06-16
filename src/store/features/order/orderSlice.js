@@ -9,7 +9,7 @@ const initialState = {
 
 // Generate pending, fulfilled and rejected action types
 export const createOrderAuth = createAsyncThunk(
-  "addresses/createOrderAuth",
+  "orders/createOrderAuth",
   async (data, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("token");
@@ -33,7 +33,7 @@ export const createOrderAuth = createAsyncThunk(
 );
 
 export const createOrderUnAuth = createAsyncThunk(
-  "addresses/createOrderAuth",
+  "orders/createOrderUnAuth",
   async (data, { rejectWithValue }) => {
     try {
       const response = await axios.post(
@@ -48,31 +48,32 @@ export const createOrderUnAuth = createAsyncThunk(
     }
   }
 );
-// export const fetchAddresses = createAsyncThunk(
-//   "addresses/fetchAddresses",
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       const token = localStorage.getItem("token");
-//       const config = {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       };
-//       const response = await axios.get(
-//         "http://localhost:5000/api/v1/addresses/",
-//         config
-//       );
-//       console.log(response);
-//       return response.data;
-//     } catch (error) {
-//       console.log(error);
-//       return rejectWithValue(error.response.data.error.message);
-//     }
-//   }
-// );
 
-const addressSlice = createSlice({
-  name: "cart",
+export const fetchOrders = createAsyncThunk(
+  "orders/fetchOrders",
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.get(
+        "http://localhost:5000/api/v1/orders/",
+        config
+      );
+      console.log("ORDERS: ", response);
+      return response.data.data.orders;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data.error.message);
+    }
+  }
+);
+
+const orderSlice = createSlice({
+  name: "orders",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -82,7 +83,6 @@ const addressSlice = createSlice({
     });
     builder.addCase(createOrderAuth.fulfilled, (state, action) => {
       state.loading = false;
-      //   state.addresses = action.payload;
       state.error = "";
     });
     builder.addCase(createOrderAuth.rejected, (state, action) => {
@@ -102,10 +102,23 @@ const addressSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     });
+    builder.addCase(fetchOrders.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(fetchOrders.fulfilled, (state, action) => {
+      state.loading = false;
+      state.orders = action.payload;
+      state.error = "";
+    });
+    builder.addCase(fetchOrders.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
   },
 });
 
 // export const { addToLocalCart, removeFromLocalCart, loadLocalCart } =
 //   addressSlice.actions;
 
-export default addressSlice.reducer;
+export default orderSlice.reducer;

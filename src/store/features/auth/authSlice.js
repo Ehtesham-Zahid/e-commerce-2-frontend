@@ -142,6 +142,20 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     });
+    builder.addCase(signup.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(signup.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.error = "";
+    });
+    builder.addCase(signup.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
     builder.addCase(googleAuth.pending, (state) => {
       state.loading = true;
       state.error = "";
