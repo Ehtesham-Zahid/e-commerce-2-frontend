@@ -23,10 +23,12 @@ const CheckoutSection = () => {
     dispatch(fetchAddresses());
   }, []);
   return (
-    <div>
+    <div className="min-h-screen">
       <CheckoutHeader />
       {address.loading || products.loading ? (
-        <Spinner />
+        <div className="flex justify-center  items-center w-screen mt-72">
+          <Spinner />
+        </div>
       ) : (
         <div className="flex justify-center  ">
           <div className="grid grid-cols-1 lg:grid-cols-2   bg-white w-screen">

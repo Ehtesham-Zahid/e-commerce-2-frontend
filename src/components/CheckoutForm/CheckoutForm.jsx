@@ -41,7 +41,9 @@ const CheckoutForm = () => {
   const token = localStorage.getItem("token");
   const [isLoggedIn, setIsLoggedIn] = useState(!!token); // Ensure this is a boolean
   const [paymentMethod, setPaymentMethod] = useState("Card");
-  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState(
+    address.primaryAddress?._id
+  );
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -85,7 +87,7 @@ const CheckoutForm = () => {
     zipcode,
   };
   const createOrderHandler = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     const authData = {
       paymentMethod,
@@ -128,7 +130,7 @@ const CheckoutForm = () => {
             <Accordion
               type="single"
               collapsible
-              className="border-b border-gray-400"
+              className="border-b border-gray-400 mb-3"
             >
               <AccordionItem value="item-1">
                 <AccordionTrigger className="text-lg text-gray-700 flex items-start">
@@ -152,7 +154,10 @@ const CheckoutForm = () => {
               </AccordionItem>
             </Accordion>
 
-            <RadioGroup defaultValue={address.primaryAddress?._id}>
+            <RadioGroup
+              defaultValue={address.primaryAddress?._id}
+              className="mb-6"
+            >
               <p className="font-semibold text-2xl mt-3">Address</p>
               {address.addresses?.map((address) => {
                 return (
@@ -182,115 +187,119 @@ const CheckoutForm = () => {
             </RadioGroup>
           </>
         ) : (
-          <div>
-            <div className="my-2 flex justify-between">
-              <p className="font-semibold text-2xl">Contact</p>
-              <Link to="/account/signin">Login</Link>
-            </div>
-            <div className="mb-2">
-              <input
-                {...register("email", { required: true })}
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="border border-gray-400 rounded-md p-2.5 w-full"
-              />
-              {errors.email && (
-                <p className="text-red-500 font-semibold">Enter the email</p>
-              )}
-            </div>
+          <>
+            <div>
+              <div className="my-2 flex justify-between">
+                <p className="font-semibold text-2xl">Contact</p>
+                <Link to="/account/signin">Login</Link>
+              </div>
+              <div className="mb-2 w-full">
+                <input
+                  {...register("email", { required: true })}
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="border border-gray-400 rounded-md p-2.5 w-full"
+                />
+                {errors.email && (
+                  <p className="text-red-500 font-semibold">Enter the email</p>
+                )}
+              </div>
 
-            <Separator orientation="horizontal" className="my-6" />
-            <p className="font-semibold text-2xl my-3">Delivery</p>
-            <div className="flex">
-              <div className="mb-6">
+              <Separator orientation="horizontal" className="my-6" />
+              <p className="font-semibold text-2xl my-3">Delivery</p>
+              <div className="flex">
+                <div className="mb-6 w-full">
+                  <input
+                    {...register("firstName", { required: true })}
+                    placeholder="First Name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    className="border border-gray-400 rounded-md p-2.5 w-full me-2"
+                  />
+                  {errors.firstName && (
+                    <p className="text-red-500 font-semibold">
+                      Enter the First Name
+                    </p>
+                  )}
+                </div>
+                <div className="mb-6 w-full">
+                  <input
+                    {...register("lastName", { required: true })}
+                    placeholder="Last Name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    className="border border-gray-400 rounded-md p-2.5  w-full ms-2"
+                  />
+                  {errors.lastName && (
+                    <p className="text-red-500 font-semibold">
+                      Enter the Last Name
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className="mb-6 w-full">
                 <input
-                  {...register("firstName", { required: true })}
-                  placeholder="First Name"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  className="border border-gray-400 rounded-md p-2.5 w-full me-2"
+                  {...register("address", { required: true })}
+                  placeholder="Address"
+                  value={streetAddress}
+                  onChange={(e) => setStreetAddress(e.target.value)}
+                  className="border border-gray-400 rounded-md p-2.5  w-full"
                 />
-                {errors.firstName && (
+                {errors.address && (
                   <p className="text-red-500 font-semibold">
-                    Enter the First Name
+                    Enter the Address
                   </p>
                 )}
               </div>
-              <div className="mb-6">
-                <input
-                  {...register("lastName", { required: true })}
-                  placeholder="Last Name"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  className="border border-gray-400 rounded-md p-2.5  w-full ms-2"
-                />
-                {errors.lastName && (
-                  <p className="text-red-500 font-semibold">
-                    Enter the Last Name
-                  </p>
-                )}
-              </div>
-            </div>
-            <div className="mb-6">
               <input
-                {...register("address", { required: true })}
-                placeholder="Address"
-                value={streetAddress}
-                onChange={(e) => setStreetAddress(e.target.value)}
-                className="border border-gray-400 rounded-md p-2.5  w-full"
+                placeholder="Apartment, suite, etc(optional)"
+                className="border border-gray-400 rounded-md p-2.5 mb-6 w-full"
               />
-              {errors.address && (
-                <p className="text-red-500 font-semibold">Enter the Address</p>
-              )}
-            </div>
-            <input
-              placeholder="Apartment, suite, etc(optional)"
-              className="border border-gray-400 rounded-md p-2.5 mb-6 w-full"
-            />
-            <div className="flex">
-              <div className="mb-6">
+              <div className="flex ">
+                <div className="mb-6 w-full">
+                  <input
+                    {...register("city", { required: true })}
+                    placeholder="City"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    className="border border-gray-400 rounded-md p-2.5   w-full me-2"
+                  />
+                  {errors.city && (
+                    <p className="text-red-500 font-semibold">Enter the City</p>
+                  )}
+                </div>
+                <div className="mb-6 w-full">
+                  <input
+                    {...register("zipCode", { required: true })}
+                    placeholder="Zip Code"
+                    value={zipcode}
+                    onChange={(e) => setZipcode(e.target.value)}
+                    className="border border-gray-400 rounded-md p-2.5   w-full ms-2"
+                  />
+                  {errors.zipCode && (
+                    <p className="text-red-500 font-semibold">
+                      Enter the Zip Code
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className="mb-6 w-full">
                 <input
-                  {...register("city", { required: true })}
-                  placeholder="City"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  className="border border-gray-400 rounded-md p-2.5   w-full me-2"
+                  {...register("phoneNumber", { required: true })}
+                  placeholder="Phone Number"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  className="border border-gray-400 rounded-md p-2.5  w-full"
                 />
-                {errors.city && (
+                {errors.phoneNumber && (
                   <p className="text-red-500 font-semibold">Enter the City</p>
                 )}
               </div>
-              <div className="mb-6">
-                <input
-                  {...register("zipCode", { required: true })}
-                  placeholder="Zip Code"
-                  value={zipcode}
-                  onChange={(e) => setZipcode(e.target.value)}
-                  className="border border-gray-400 rounded-md p-2.5   w-full ms-2"
-                />
-                {errors.zipCode && (
-                  <p className="text-red-500 font-semibold">
-                    Enter the Zip Code
-                  </p>
-                )}
-              </div>
             </div>
-            <div className="mb-6">
-              <input
-                {...register("phoneNumber", { required: true })}
-                placeholder="Phone Number"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                className="border border-gray-400 rounded-md p-2.5  w-full"
-              />
-              {errors.phoneNumber && (
-                <p className="text-red-500 font-semibold">Enter the City</p>
-              )}
-            </div>
-          </div>
+            <Separator orientation="horizontal" className="my-6" />
+          </>
         )}
-        <Separator orientation="horizontal" className="my-6" />
         <div>
           <p className="font-semibold text-2xl">Payment</p>
           <p className="text-sm text-gray-400">
@@ -331,7 +340,7 @@ const CheckoutForm = () => {
           <AccordionItem value="item-1">
             <AccordionTrigger className="text-lg text-gray-700">
               <p className="flex items-center font-bold">
-                ORDER SUMMARY({cart?.items?.products.length})
+                ORDER SUMMARY({cart?.items?.products?.length})
               </p>
             </AccordionTrigger>
             <AccordionContent className="text-lg">
