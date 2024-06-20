@@ -35,7 +35,7 @@ const CheckoutSection = () => {
             {/* <div className=""> */}
             <CheckoutForm />
             {/* </div> */}
-            <div className="hidden lg:flex justify-start border-s border-black flex-col  bg-gray-200 ps-8 pt-8">
+            <div className="hidden lg:flex justify-start border-s border-black flex-col  bg-gray-300 ps-8 pt-8">
               <div className="w-5/6 xl:w-4/5 2xl:w-2/3">
                 <div className=" col-span-1       ">
                   {cart?.items?.products?.map((product) => {

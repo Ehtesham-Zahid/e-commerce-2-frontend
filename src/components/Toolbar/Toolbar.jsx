@@ -111,7 +111,7 @@ const Toolbar = (props) => {
         {/* <Separator orientation="vertical" /> */}
       </div>
       {/* <Separator orientation="vertical" /> */}
-      {!props.searchPage ? (
+      {/* {!props.searchPage ? (
         <Sheet>
           <SheetTrigger className="px-4 sm:px-6 flex items-center  text-neutral-500   hover:text-black ">
             <FilterAltIcon /> Filter(1)
@@ -126,7 +126,7 @@ const Toolbar = (props) => {
             </SheetHeader>
           </SheetContent>
         </Sheet>
-      ) : null}
+      ) : null} */}
     </div>
   ) : (
     <div
@@ -181,8 +181,8 @@ const Toolbar = (props) => {
                 </SelectItem>
               </SelectContent>
             </Select>
-            <Separator orientation="vertical" />
-            <Sheet>
+            {/* <Separator orientation="vertical" /> */}
+            {/* <Sheet>
               <SheetTrigger className="px-4 sm:px-6 flex items-center  text-neutral-500 hover:text-black ">
                 <FilterAltIcon /> Filter(1)
               </SheetTrigger>
@@ -195,7 +195,7 @@ const Toolbar = (props) => {
                   </SheetDescription>
                 </SheetHeader>
               </SheetContent>
-            </Sheet>
+            </Sheet> */}
           </div>{" "}
         </>
       ) : null}

@@ -18,6 +18,7 @@ import PrivateRoutes from "./utils/PrivateRoutes";
 import { Toaster } from "react-hot-toast";
 import OrderSuccesPage from "./containers/OrderSuccessPage/OrderSuccesPage";
 import SearchedProductsPage from "./containers/SearchedProductsPage/SearchedProductsPage";
+import ForgotPasswordPage from "./containers/ForgotPasswordPage/ForgotPasswordPage";
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
         <Route path="/account/signup" element={<SignupPage />} />
         <Route path="/account/signin" element={<SigninPage />} />
         <Route path="/order-success" element={<OrderSuccesPage />} />
+        <Route
+          path="/account/forgot-password"
+          element={<ForgotPasswordPage />}
+        />
         <Route path="/search/:query" element={<SearchedProductsPage />} />{" "}
         <Route
           path="/products/:productId/:color"

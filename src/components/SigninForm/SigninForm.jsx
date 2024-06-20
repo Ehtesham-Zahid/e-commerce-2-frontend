@@ -80,9 +80,12 @@ const SigninForm = () => {
           <p className="ms-2 font-medium">Keep me signed in</p>
         </div>
 
-        <p className="text-neutral-500 text-end     hover:text-black  cursor-pointer  ">
+        <Link
+          to="/account/forgot-password"
+          className="text-neutral-500 text-end     hover:text-black  cursor-pointer  "
+        >
           Forgot?
-        </p>
+        </Link>
       </div>
 
       <Button className="w-full bg-black text-md">Signin</Button>

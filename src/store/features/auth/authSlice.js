@@ -70,24 +70,12 @@ export const googleAuth = createAsyncThunk(
 
 export const forgotPassword = createAsyncThunk(
   "authentication/forgotPassword",
-  async ({ email, toast }, { rejectWithValue }) => {
+  async (email, { rejectWithValue }) => {
     try {
       const response = await axios.post(
         `http://localhost:5000/api/v1/users/forgotPassword`,
         { email }
       );
-
-      toast.success("Email Sent!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);

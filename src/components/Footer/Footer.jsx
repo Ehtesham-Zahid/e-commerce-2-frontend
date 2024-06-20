@@ -7,7 +7,7 @@ import VisaLogo from "../../assets/Images/Logos/visa-logo.jpg";
 const Footer = () => {
   return (
     <>
-      <footer className="footer p-10 border-t-2 border-black bg-white text-black  mt-10">
+      <footer className="footer p-10 border-t-2 border-black bg-white text-black  ">
         {/* <div> */}
         <nav>
           <h6 className="footer-title text-base">Account</h6>
