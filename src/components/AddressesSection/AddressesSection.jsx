@@ -5,6 +5,8 @@ import Header from "../Header/Header";
 // import { Button } from "@/shadcn-components/ui/button";
 import AddressCard from "../AddressCard/AddressCard";
 import AddressFormDialog from "../EditAddressFormDialog/EditAddressFormDialog";
+
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAddresses,
@@ -12,6 +14,7 @@ import {
 } from "@/store/features/address/addressSlice";
 import AddAddressFormDialog from "../AddAddressFormDialog/AddAddressFormDialog";
 import AddressCardSkeleton from "../AddressCardSkeleton/AddressCardSkeleton";
+import { Link } from "react-router-dom";
 
 const AddressesSection = () => {
   // -----VARIABLES DECALARATION------
@@ -36,6 +39,7 @@ const AddressesSection = () => {
 
   useEffect(() => {
     dispatch(fetchAddresses());
+    window.scrollTo(0, 0);
   }, []);
 
   const address = useSelector((state) => state.address);
@@ -58,6 +62,14 @@ const AddressesSection = () => {
       ) : (
         <div className="flex justify-center">
           <div className="w-5/6 xl:w-4/5 2xl:w-3/4 flex flex-col mt-10 ">
+            <Link
+              to="/account"
+              className="text-sm text-gray-500 font-semibold cursor-pointer  "
+              // onClick={logoutHandler}
+            >
+              <ArrowBackIosIcon fontSize="small" className=" mb-1" /> BACK TO
+              ACCOUNT
+            </Link>
             <p className="text-3xl font-medium">ADDRESSES</p>
             <div className="my-5">
               <AddAddressFormDialog />{" "}

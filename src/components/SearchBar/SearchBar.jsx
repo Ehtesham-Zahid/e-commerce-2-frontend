@@ -11,7 +11,10 @@ import ProductCard from "../ProductCard/ProductCard";
 import { Button } from "@/shadcn-components/ui/button";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchedProducts } from "@/store/features/products/productsSlice";
+import {
+  fetchProducts,
+  setSearchedProducts,
+} from "@/store/features/products/productsSlice";
 import ProductCardMini from "../ProductCardMini/ProductCardMini";
 import { Link } from "react-router-dom";
 
@@ -27,7 +30,10 @@ const SearchBar = () => {
   return (
     <Sheet>
       <SheetTrigger>
-        <SearchIcon className="mx-2 cursor-pointer transition ease-in-out hover:translate-z-2 hover:scale-110 duration-300" />
+        <SearchIcon
+          className="mx-2 cursor-pointer transition ease-in-out hover:translate-z-2 hover:scale-110 duration-300"
+          onClick={() => dispatch(fetchProducts())}
+        />
       </SheetTrigger>
 
       <SheetContent side="top" className="w-full flex flex-col">

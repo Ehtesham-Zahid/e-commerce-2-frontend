@@ -50,6 +50,7 @@ const AccountSection = () => {
   }, [scrolled]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(fetchAddresses());
     dispatch(fetchPrimaryAddress());
     dispatch(fetchOrders());

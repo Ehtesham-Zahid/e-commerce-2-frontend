@@ -14,6 +14,10 @@ const Home = () => {
     dispatch(fetchProducts());
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const products = useSelector((state) => state.products);
 
   const groupedByCategory = products.allProducts.reduce((acc, product) => {

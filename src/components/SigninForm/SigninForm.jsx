@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "@/shadcn-components/ui/checkbox";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "@/store/features/auth/authSlice";
+import { login, resetError } from "@/store/features/auth/authSlice";
 
 const SigninForm = () => {
   const navigate = useNavigate();
@@ -91,6 +91,7 @@ const SigninForm = () => {
         <Link
           to="/account/signup"
           className="cursor-pointer underline-offset-4 hover:underline font-bold "
+          onClick={() => dispatch(resetError())}
         >
           Signup
         </Link>

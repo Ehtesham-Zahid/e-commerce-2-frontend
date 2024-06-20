@@ -22,6 +22,7 @@ import { Button } from "@/shadcn-components/ui/button";
 import ProductCardMini from "../ProductCardMini/ProductCardMini";
 import { Separator } from "@/shadcn-components/ui/separator";
 import SearchBar from "../SearchBar/SearchBar";
+import CartDrawer from "../CartDrawer/CartDrawer";
 
 const SideDrawer = () => {
   return (
@@ -32,15 +33,17 @@ const SideDrawer = () => {
             <MenuIcon fontSize="large" />
           </SheetTrigger>
         </div>
-        <img src={Logo} className="w-44" />
+        <Link to="/" className="w-44 h-14 ">
+          <img src={Logo} className="w-full h-full" />
+        </Link>
         <div className="w-44 flex justify-end items-center">
           <span className="max-[500px]:hidden mb-0.5 ">
             <PersonIcon className="mx-1  cursor-pointer transition ease-in-out  hover:translate-z-2 hover:scale-110   duration-300  " />
           </span>
 
           <SearchBar />
-
-          <ShoppingCartIcon className="mx-1  cursor-pointer transition ease-in-out  hover:translate-z-2 hover:scale-110   duration-300  " />
+          <CartDrawer />
+          {/* <ShoppingCartIcon className="mx-1  cursor-pointer transition ease-in-out  hover:translate-z-2 hover:scale-110   duration-300  " /> */}
         </div>
       </div>
       <SheetContent side="left" className="w-80">
@@ -48,7 +51,10 @@ const SideDrawer = () => {
         <ul className="w-full flex flex-col justify-center items-center mt-2">
           <li className="border-b-2 border-neutral-300 w-full my-4  ">
             <SheetClose asChild>
-              <Link to="/" className="font-semibold flex justify-between  ">
+              <Link
+                to="/collections/men"
+                className="font-semibold flex justify-between  "
+              >
                 MEN
                 <KeyboardArrowRightIcon />
               </Link>
@@ -56,7 +62,10 @@ const SideDrawer = () => {
           </li>
           <li className="border-b-2 border-neutral-300 w-full  my-4">
             <SheetClose asChild>
-              <Link to="/" className="font-semibold flex justify-between  ">
+              <Link
+                to="/collections/women"
+                className="font-semibold flex justify-between  "
+              >
                 WOMEN
                 <KeyboardArrowRightIcon />
               </Link>
@@ -64,7 +73,10 @@ const SideDrawer = () => {
           </li>{" "}
           <li className="border-b-2 border-neutral-300 w-full  my-4">
             <SheetClose asChild>
-              <Link to="/" className="font-semibold flex justify-between  ">
+              <Link
+                to="/collections/kids"
+                className="font-semibold flex justify-between  "
+              >
                 KIDS
                 <KeyboardArrowRightIcon />
               </Link>
@@ -72,7 +84,10 @@ const SideDrawer = () => {
           </li>{" "}
           <li className="border-b-2 border-neutral-300 w-full  my-4 ">
             <SheetClose asChild>
-              <Link to="/" className="font-semibold flex justify-between  ">
+              <Link
+                to="/collections/accessories"
+                className="font-semibold flex justify-between  "
+              >
                 ACCESSORIES
                 <KeyboardArrowRightIcon />
               </Link>

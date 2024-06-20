@@ -1,5 +1,5 @@
 import { Button } from "@/shadcn-components/ui/button";
-import { signup } from "@/store/features/auth/authSlice";
+import { resetError, signup } from "@/store/features/auth/authSlice";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -130,6 +130,7 @@ const SigninForm = () => {
         <Link
           to="/account/signin"
           className="cursor-pointer underline-offset-4 hover:underline font-bold"
+          onClick={() => dispatch(resetError())}
         >
           Signin
         </Link>

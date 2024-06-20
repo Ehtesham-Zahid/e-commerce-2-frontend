@@ -52,6 +52,7 @@ const AddAddressFormDialog = (props) => {
 
   const onSubmit = () => {
     // e.preventDefault();
+    console.log(isPrimary);
     dispatch(addAddress(data)).then((result) => {
       if (result.meta.requestStatus === "fulfilled") {
         dispatch(fetchAddresses());

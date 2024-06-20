@@ -146,10 +146,12 @@ const SingleProductSection = () => {
                   Rs.{singleProduct.singleProduct?.price}
                 </p>
                 <Separator className="mb-12" />
-                <p className=" mb-2 text-lg font-medium text-gray-500 ">
-                  Color - {color}
-                  {/* <span className="   py-2 px-4  rounded-full     bg-black"></span> */}
-                </p>
+                {color !== "null" ? (
+                  <p className=" mb-2 text-lg font-medium text-gray-500 ">
+                    Color - {color}
+                    {/* <span className="   py-2 px-4  rounded-full     bg-black"></span> */}
+                  </p>
+                ) : null}
                 {/* <p className="text-lg font-medium text-gray-500">Colors:</p> */}
                 <div className="flex items-center justify-start w-64 mb-8 mt-4">
                   {singleProduct.singleProduct?.variations?.map((variation) => {
@@ -170,26 +172,30 @@ const SingleProductSection = () => {
                     );
                   })}
                 </div>
-                <p className="text-lg font-medium text-gray-500 ">Size</p>
                 {/* <div className="flex justify"> */}
-                <div className="flex justify-between  flex-wrap overflow-auto gap-y-5 gap-x-2 items-center mb-12 ">
-                  {Sizes.map((size) => {
-                    return (
-                      <button
-                        key={size}
-                        onClick={() => setSelectedSize(size)}
-                        className={`rounded-sm py-1.5 border-2  text-center buttony-1.5 w-20 ${
-                          selectedSize === size
-                            ? "border-black text-black"
-                            : " border-gray-300 text-gray-400 "
-                        }`}
-                      >
-                        {size}
-                      </button>
-                    );
-                  })}
-                </div>
-                <Separator className="mb-10" />
+                {singleProduct.singleProduct?.category !== "accessories" ? (
+                  <>
+                    <p className="text-lg font-medium text-gray-500 ">Size</p>
+                    <div className="flex justify-between  flex-wrap overflow-auto gap-y-5 gap-x-2 items-center mb-12 ">
+                      {Sizes.map((size) => {
+                        return (
+                          <button
+                            key={size}
+                            onClick={() => setSelectedSize(size)}
+                            className={`rounded-sm py-1.5 border-2  text-center buttony-1.5 w-20 ${
+                              selectedSize === size
+                                ? "border-black text-black"
+                                : " border-gray-300 text-gray-400 "
+                            }`}
+                          >
+                            {size}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <Separator className="mb-10" />
+                  </>
+                ) : null}
                 <Button
                   className="w-full 2xl:mt-10 py-5"
                   onClick={addToLocalCartHandler}

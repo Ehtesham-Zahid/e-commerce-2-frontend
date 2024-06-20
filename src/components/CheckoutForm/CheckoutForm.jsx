@@ -330,7 +330,7 @@ const CheckoutForm = () => {
         </div>
         <div className="my-2 flex justify-between mt-8 lg:hidden">
           <p className="font-semibold text-2xl">Total</p>
-          <p className="font-semibold text-xl">Rs. 6,850.00</p>
+          <p className="font-semibold text-xl">Rs. {cart?.items?.totalPrice}</p>
         </div>
         <Accordion
           type="single"

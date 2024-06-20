@@ -57,7 +57,10 @@ const AddToCartModal = (props) => {
     } else {
       cart.push({
         product: `${props.productId}/${props.color}`,
-        selectedSize,
+        selectedSize:
+          singleProduct.singleProduct?.category === "accessories"
+            ? "null"
+            : selectedSize,
         quantity: 1,
       });
       localStorage.setItem("cart", JSON.stringify(cart));
@@ -71,7 +74,10 @@ const AddToCartModal = (props) => {
     <Dialog className="">
       <DialogTrigger onClick={() => fetchSingleProductHandler()}>
         {/* <div className="relative cursor-pointer"> */}
-        <div className=" relative     transition scale-110 translate-z-5 ease-in-out duration-300 bottom-24 right-5 bg-white border border-black rounded-sm px-1.5 py-1 ">
+        <div className="lg:hidden   relative     transition scale-110 translate-z-5 ease-in-out duration-300 bottom- right-3 bg-white border border-black rounded-sm px-1 py-0.5  ">
+          <AddIcon />
+        </div>
+        <div className="hidden lg:flex  relative     transition scale-110 translate-z-5 ease-in-out duration-300 bottom-24 right-5 bg-white border border-black rounded-sm px-1.5 py-1 ">
           <AddIcon />
         </div>
         {/* </div> */}
@@ -95,31 +101,37 @@ const AddToCartModal = (props) => {
                 Rs.{singleProduct.singleProduct?.price}
               </p>
               <Separator className="mb-4" />
-              <p className=" mb-2 text-lg font-medium text-gray-500 ">
-                Color - {props.color}
-                {/* <span className="   py-2 px-4  rounded-full     bg-black"></span> */}
-              </p>
+              {props.color !== "null" ? (
+                <p className=" mb-2 text-lg font-medium text-gray-500 ">
+                  Color - {props.color}
+                  {/* <span className="   py-2 px-4  rounded-full     bg-black"></span> */}
+                </p>
+              ) : null}
 
-              <p className="text-lg font-medium text-gray-500 ">Size</p>
-              {/* <div className="flex justify"> */}
-              <div className="flex justify-between  flex-wrap overflow-auto gap-y-5 gap-x-2 items-center mb-6 ">
-                {Sizes.map((size) => {
-                  return (
-                    <button
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
-                      className={`rounded-sm py-1.5 border-2  text-center buttony-1.5 w-20 ${
-                        selectedSize === size
-                          ? "border-black text-black"
-                          : " border-gray-300 text-gray-400 "
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  );
-                })}
-              </div>
-              <Separator className="mb-4" />
+              {singleProduct.singleProduct?.category !== "accessories" ? (
+                <>
+                  <p className="text-lg font-medium text-gray-500 ">Size</p>
+
+                  <div className="flex justify-between  flex-wrap overflow-auto gap-y-5 gap-x-2 items-center mb-6 ">
+                    {Sizes.map((size) => {
+                      return (
+                        <button
+                          key={size}
+                          onClick={() => setSelectedSize(size)}
+                          className={`rounded-sm py-1.5 border-2  text-center buttony-1.5 w-20 ${
+                            selectedSize === size
+                              ? "border-black text-black"
+                              : " border-gray-300 text-gray-400 "
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <Separator className="mb-4" />
+                </>
+              ) : null}
               <div className="flex">
                 <Link to={`/products/${props.id}/${props.color}`}>
                   <Button
