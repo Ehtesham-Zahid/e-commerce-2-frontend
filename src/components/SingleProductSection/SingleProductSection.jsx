@@ -84,14 +84,6 @@ const SingleProductSection = () => {
   // --------HANDLERS----------
 
   const addToLocalCartHandler = () => {
-    // if (isItemAlreadyInCart) {
-    //     console.log('Item is already in the cart. Not adding it again.');
-    // } else {
-    //     // Add the item to the cart
-    //     cart.push(itemToAdd);
-    //     console.log('Item added to the cart.');
-    // }
-
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const isItemAlreadyInCart = cart.some(
       (item) =>
@@ -127,13 +119,8 @@ const SingleProductSection = () => {
             <SingleProductSectionSkeleton />
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4  mt-10">
-              {/* {products.singleProduct?.variations.map((variation)=>{
-                variation
-              })} */}
-
               <ProductImagesSlider
                 imageUrls={singleProduct.currentVariation?.imageUrls}
-                // image1={singleProduct.singleProduct?.imageUrls[0]}
               />
               <div className="col-span-1  py-4 ">
                 <p className="text-2xl font-bold ">

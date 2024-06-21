@@ -22,6 +22,7 @@ import {
 
 import { fetchSingleProduct } from "@/store/features/singleProduct/singleProductSlice";
 import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
+import { fetchProductsByCategory } from "@/store/features/products/productsSlice";
 
 import AddIcon from "@mui/icons-material/Add";
 
@@ -39,7 +40,15 @@ const AddToCartModal = (props) => {
   const fetchSingleProductHandler = () => {
     dispatch(
       fetchSingleProduct({ productId: props.productId, color: props.color })
-    );
+    ).then((result) => {
+      if (result.meta.requestStatus === "fulfilled") {
+        dispatch(
+          fetchProductsByCategory({
+            category: result.payload.product.category,
+          })
+        );
+      }
+    });
   };
   const addToLocalCartHandler = () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
