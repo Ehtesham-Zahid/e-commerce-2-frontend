@@ -70,10 +70,10 @@ const AddToCartModal = (props) => {
   return (
     <Dialog className="">
       <DialogTrigger onClick={() => fetchSingleProductHandler()}>
-        <div className="lg:hidden   relative     transition scale-110 translate-z-5 ease-in-out duration-300 bottom- right-3 bg-white border border-black rounded-sm px-1 py-0.5  ">
+        <div className="lg:hidden     relative     transition scale-110 translate-z-5 ease-in-out duration-300 bottom- right-3 bg-white border border-black rounded-sm px-1 py-0.5  ">
           <AddIcon />
         </div>
-        <div className="hidden lg:flex  relative     transition scale-110 translate-z-5 ease-in-out duration-300 bottom-24 right-5 bg-white border border-black rounded-sm px-1.5 py-1 ">
+        <div className="hidden   lg:flex  relative     transition scale-110 translate-z-5 ease-in-out duration-300 bottom-24 right-5 bg-white border border-black rounded-sm px-1.5 py-1 ">
           <AddIcon />
         </div>
       </DialogTrigger>

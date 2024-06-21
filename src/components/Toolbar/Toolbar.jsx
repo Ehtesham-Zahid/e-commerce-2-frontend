@@ -66,7 +66,7 @@ const Toolbar = (props) => {
     <div
       className={`w-screen flex ${
         props.searchPage ? "justify-center" : "justify-between"
-      }   items-center bg-neutral-100 h-10  `}
+      }   items-center bg-neutral-100 h-10 z-10 `}
     >
       {!props.searchPage ? (
         <Select
