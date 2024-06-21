@@ -23,6 +23,7 @@ const KidsSection = () => {
   useEffect(() => {
     dispatch(fetchProductsByCategory({ category: "kids" }));
     dispatch(setCategory("kids"));
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {

@@ -17,6 +17,7 @@ const WomenSection = () => {
   useEffect(() => {
     dispatch(fetchProductsByCategory({ category: "women" }));
     dispatch(setCategory("women"));
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
