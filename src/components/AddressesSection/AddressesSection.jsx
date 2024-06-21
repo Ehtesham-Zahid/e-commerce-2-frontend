@@ -10,6 +10,8 @@ import AddressCardSkeleton from "../AddressCardSkeleton/AddressCardSkeleton";
 
 import { fetchAddresses } from "@/store/features/address/addressSlice";
 
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+
 const AddressesSection = () => {
   // -----VARIABLES DECLARATION------
   const dispatch = useDispatch();
