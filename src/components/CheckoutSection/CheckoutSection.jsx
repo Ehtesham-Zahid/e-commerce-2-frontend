@@ -25,6 +25,7 @@ const CheckoutSection = () => {
     dispatch(fetchProductsByVariants());
     dispatch(fetchPrimaryAddress());
     dispatch(fetchAddresses());
+    window.scrollTo(0, 0);
   }, []);
 
   return (
