@@ -19,6 +19,7 @@ import { Toaster } from "react-hot-toast";
 import OrderSuccesPage from "./containers/OrderSuccessPage/OrderSuccesPage";
 import SearchedProductsPage from "./containers/SearchedProductsPage/SearchedProductsPage";
 import ForgotPasswordPage from "./containers/ForgotPasswordPage/ForgotPasswordPage";
+import ResetPasswordPage from "./containers/ResetPasswordPage/ResetPasswordPage";
 
 function App() {
   return (
@@ -38,6 +39,10 @@ function App() {
         <Route
           path="/account/forgot-password"
           element={<ForgotPasswordPage />}
+        />
+        <Route
+          path="/account/reset-password/:resetToken"
+          element={<ResetPasswordPage />}
         />
         <Route path="/search/:query" element={<SearchedProductsPage />} />{" "}
         <Route

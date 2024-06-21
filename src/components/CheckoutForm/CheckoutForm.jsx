@@ -34,6 +34,9 @@ import {
 import { fetchAddress } from "@/store/features/address/addressSlice";
 import { useForm } from "react-hook-form";
 
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+
 const CheckoutForm = () => {
   const dispatch = useDispatch();
   const address = useSelector((state) => state.address);
@@ -118,11 +121,51 @@ const CheckoutForm = () => {
     // dispatch(createOrderAuth(authData));
   };
 
+  const makePaymentHandler = async () => {
+    const stripe = await loadStripe(
+      "pk_test_51NxvxCJLfoWBZ0rFZ6zvyhiFfF2tmFGCCNC6eIz5wYkGDqVyZsuV1OAPIBSy9UysU5lc1faFUAK8lCli7NcflWrW00ay7a2sZB"
+    );
+
+    const body = {
+      products: cart?.items?.products,
+    };
+
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    // const response = await axios.post(
+    //   "http://localhost:5000/api/v1/orders/create-checkout-session/",
+    //   JSON.stringify(body),
+    //   headers
+    // );
+
+    const response = await fetch(
+      "http://localhost:5000/api/v1/orders/create-checkout-session/",
+      {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+      }
+    );
+    const session = await response.json();
+
+    const result = stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      console.log(result.error);
+    }
+  };
+
   // const onSubmit = () => {};
   return (
     <div className="flex justify-center lg:justify-end">
       <form
-        onSubmit={handleSubmit(createOrderHandler)}
+        onSubmit={handleSubmit(
+          paymentMethod === "Card" ? makePaymentHandler : createOrderHandler
+        )}
         className="col-span-1 p-6   w-full md:w-5/6 xl:w-4/5  2xl:w-2/3"
       >
         {isLoggedIn ? (

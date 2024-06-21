@@ -87,6 +87,7 @@ export const resetPassword = createAsyncThunk(
   "authentication/resetPassword",
   async ({ resetToken, resetPasswordData }, { rejectWithValue }) => {
     try {
+      console.log(resetToken);
       const response = await axios.patch(
         `http://localhost:5000/api/v1/users/resetPassword/${resetToken}`,
         resetPasswordData

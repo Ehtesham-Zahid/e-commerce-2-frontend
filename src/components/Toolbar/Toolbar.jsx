@@ -73,9 +73,11 @@ const Toolbar = (props) => {
           onValueChange={(value) => sortProductsHandler(value)}
           className={`${props.searchPage ? "hidden" : null}`}
         >
-          <SelectTrigger className=" w-[100px] sm:w-[135px]">
-            <SelectValue placeholder="Sort By" />
+          <SelectTrigger className=" w-[100px] sm:w-[135px]  ">
+            {/* <SelectValue placeholder="Sort By" /> */}
+            <p>Sort By</p>
           </SelectTrigger>
+
           <SelectContent>
             <SelectItem value="price-low-to-high">
               Price, low to high
@@ -90,7 +92,6 @@ const Toolbar = (props) => {
               Alphabetically, Z-A
             </SelectItem>
           </SelectContent>
-          {/* <Separator orientation="vertical" /> */}
         </Select>
       ) : null}
 
@@ -164,7 +165,8 @@ const Toolbar = (props) => {
             <Separator orientation="vertical" />
             <Select onValueChange={(value) => sortProductsHandler(value)}>
               <SelectTrigger className=" w-[100px] sm:w-[135px]">
-                <SelectValue placeholder="Sort By" />
+                {/* <SelectValue placeholder="Sort By" /> */}
+                <p>Sort By</p>
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="price-low-to-high">

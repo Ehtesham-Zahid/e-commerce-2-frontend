@@ -2,7 +2,7 @@ import { Button } from "@/shadcn-components/ui/button";
 import { forgotPassword } from "@/store/features/auth/authSlice";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const ForgotPasswordForm = () => {
@@ -10,6 +10,7 @@ const ForgotPasswordForm = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
 
   const {
     register,
@@ -49,6 +50,11 @@ const ForgotPasswordForm = () => {
         {errors.email && (
           <p className="text-red-500 font-semibold">Enter the email</p>
         )}
+        {Object.entries(errors).length === 0 && auth.error ? (
+          <p className="text-red-500 font-semibold text-sm sm:text-base">
+            {auth.error}
+          </p>
+        ) : null}
       </div>
       <div className="flex justify-end mt-5">
         <Button
