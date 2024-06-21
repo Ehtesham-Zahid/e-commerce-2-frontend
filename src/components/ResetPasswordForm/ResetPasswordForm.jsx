@@ -1,33 +1,36 @@
-import { Button } from "@/shadcn-components/ui/button";
-import { forgotPassword, resetPassword } from "@/store/features/auth/authSlice";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
-const ResetPasswordForm = () => {
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
+import { Button } from "@/shadcn-components/ui/button";
 
+import { resetPassword } from "@/store/features/auth/authSlice";
+
+const ResetPasswordForm = () => {
+  // ------VARIABLE DECLARATIONS------
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
   const { resetToken } = useParams();
-
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
+
+  // --------USE STATES------------
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
   const resetPasswordData = {
     password,
     passwordConfirm,
   };
 
-  const resetPasswordHandler = (e) => {
-    // e.preventDefault();
+  // ------HANDLERS---------
+
+  const resetPasswordHandler = () => {
     dispatch(resetPassword({ resetToken, resetPasswordData })).then(
       (result) => {
         if (result.meta.requestStatus === "fulfilled") {
@@ -101,7 +104,7 @@ const ResetPasswordForm = () => {
           <p className="text-red-500 font-semibold">{auth.error}</p>
         ) : null}
       </div>
-      {/* <div className="flex w-full mt-5"> */}
+
       <Button
         className="me-2 text-lg px-4   bg-green-600 hover:bg-green-700 mt-5 w-full"
         size="lg"
@@ -110,7 +113,6 @@ const ResetPasswordForm = () => {
       >
         Submit
       </Button>
-      {/* </div> */}
     </form>
   );
 };

@@ -1,28 +1,30 @@
-import { Button } from "@/shadcn-components/ui/button";
-import { forgotPassword } from "@/store/features/auth/authSlice";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const ForgotPasswordForm = () => {
-  const [email, setEmail] = useState("");
+import { Button } from "@/shadcn-components/ui/button";
+import { forgotPassword } from "@/store/features/auth/authSlice";
 
+const ForgotPasswordForm = () => {
+  // --------VARIABLE DECLARATIONS---------
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
-
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
-  const forgotPasswordHandler = (e) => {
-    // e.preventDefault();
+  // --------USE STATES--------------
+  const [email, setEmail] = useState("");
+
+  // -----------HANDLERS---------
+  const forgotPasswordHandler = () => {
     dispatch(forgotPassword(email));
   };
+
   return (
     <form className="w-80 sm:w-96 bg-white shadow-lg rounded-lg flex flex-col  p-5">
       <p className="text-center font-bold text-xl my-2">FORGOT PASSWORD</p>

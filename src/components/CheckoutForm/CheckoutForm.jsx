@@ -1,19 +1,15 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { loadStripe } from "@stripe/stripe-js";
+
+import CheckoutProductCard from "../CheckoutProductCard/CheckoutProductCard";
+import AddAddressFormDialog from "../AddAddressFormDialog/AddAddressFormDialog";
+
 import { Button } from "@/shadcn-components/ui/button";
-import { Input } from "@/shadcn-components/ui/input";
 import { Label } from "@/shadcn-components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/shadcn-components/ui/radio-group";
-import AddIcon from "@mui/icons-material/Add";
-// import { Select } from "@/shadcn-components/ui/select";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/shadcn-components/ui/select";
-
 import {
   Accordion,
   AccordionContent,
@@ -21,27 +17,27 @@ import {
   AccordionTrigger,
 } from "@/shadcn-components/ui/accordion";
 import { Separator } from "@/shadcn-components/ui/separator";
-import CheckoutProductCard from "../CheckoutProductCard/CheckoutProductCard";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 import { logout } from "@/store/features/auth/authSlice";
-import { Link, useNavigate } from "react-router-dom";
-import AddAddressFormDialog from "../AddAddressFormDialog/AddAddressFormDialog";
 import {
   createOrderAuth,
   createOrderUnAuth,
 } from "@/store/features/order/orderSlice";
-import { fetchAddress } from "@/store/features/address/addressSlice";
-import { useForm } from "react-hook-form";
-
-import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
 
 const CheckoutForm = () => {
+  // -------------VARIABLE DECLARATIONS------------
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
   const address = useSelector((state) => state.address);
   const cart = useSelector((state) => state.cart);
-  const token = localStorage.getItem("token");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  // --------USE STATES-----------
   const [isLoggedIn, setIsLoggedIn] = useState(!!token); // Ensure this is a boolean
   const [paymentMethod, setPaymentMethod] = useState("Card");
   const [selectedAddress, setSelectedAddress] = useState(
@@ -53,32 +49,13 @@ const CheckoutForm = () => {
   const [city, setCity] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  // const [country, setCountry] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
 
-  const navigate = useNavigate();
-
+  // -----------HANDLERS----------
   const logoutHandler = () => {
     dispatch(logout());
     setIsLoggedIn(false);
   };
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
-  // const cartItems = JSON.parse(localStorage.getItem("cart"));
-
-  // Function to remove a property from all objects in the array
-  // const removeProperty = (arr, propToRemove) => {
-  //   return arr?.map(({ [propToRemove]: _, ...rest }) => rest);
-  // };
-
-  // Remove the 'selectedSize' property from all objects
-  // const arrayWithoutProperty = removeProperty(cartItems, "selectedSize");
 
   const addressDetails = {
     email,
@@ -89,9 +66,7 @@ const CheckoutForm = () => {
     city,
     zipcode,
   };
-  const createOrderHandler = (e) => {
-    // e.preventDefault();
-
+  const createOrderHandler = () => {
     const authData = {
       paymentMethod,
       addressId: selectedAddress,
@@ -117,8 +92,6 @@ const CheckoutForm = () => {
             ? navigate("/order-success")
             : null
         );
-
-    // dispatch(createOrderAuth(authData));
   };
 
   const makePaymentHandler = async () => {
@@ -134,12 +107,6 @@ const CheckoutForm = () => {
       "Content-Type": "application/json",
     };
 
-    // const response = await axios.post(
-    //   "http://localhost:5000/api/v1/orders/create-checkout-session/",
-    //   JSON.stringify(body),
-    //   headers
-    // );
-
     const response = await fetch(
       "http://localhost:5000/api/v1/orders/create-checkout-session/",
       {
@@ -148,18 +115,35 @@ const CheckoutForm = () => {
         body: JSON.stringify(body),
       }
     );
+
     const session = await response.json();
 
-    const result = stripe.redirectToCheckout({
-      sessionId: session.id,
-    });
+    if (session.id) {
+      localStorage.setItem(
+        "orderData",
+        JSON.stringify({
+          paymentMethod,
+          addressId: selectedAddress,
+          addressDetails,
+          totalPrice: cart.items.totalPrice,
+          token,
+        })
+      );
 
-    if (result.error) {
-      console.log(result.error);
+      console.log(session.id, "IDHAR HUN");
+
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+
+      if (result.error) {
+        console.log(result.error);
+      }
+    } else {
+      console.error("Failed to create checkout session");
     }
   };
 
-  // const onSubmit = () => {};
   return (
     <div className="flex justify-center lg:justify-end">
       <form
@@ -336,7 +320,9 @@ const CheckoutForm = () => {
                   className="border border-gray-400 rounded-md p-2.5  w-full"
                 />
                 {errors.phoneNumber && (
-                  <p className="text-red-500 font-semibold">Enter the City</p>
+                  <p className="text-red-500 font-semibold">
+                    Enter the Phone Number
+                  </p>
                 )}
               </div>
             </div>

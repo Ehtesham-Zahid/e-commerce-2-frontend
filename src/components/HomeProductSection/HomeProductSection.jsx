@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import ProductCard from "../ProductCard/ProductCard";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchProducts,
-  fetchProductsByCategory,
-} from "@/store/features/products/productsSlice";
+import { useSelector } from "react-redux";
+
 import Spinner from "../Spinner/Spinner";
+import ProductCard from "../ProductCard/ProductCard";
+
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 const HomeProductSection = (props) => {
+  // --------VARIABLE DECLARATIONS---------
+
   const products = useSelector((state) => state.products);
+
   return (
     <div className="w-screen px-2 sm:px-5  lg:px-20">
       <div className="flex justify-between items-center  mt-10 mb-5">
@@ -39,7 +39,6 @@ const HomeProductSection = (props) => {
                 id={product.id}
                 title={product.title}
                 price={product.price}
-                // description={product.description}
                 category={product.category}
                 color={product?.variations[0]?.color}
                 image={product?.variations[0]?.imageUrls[0]}

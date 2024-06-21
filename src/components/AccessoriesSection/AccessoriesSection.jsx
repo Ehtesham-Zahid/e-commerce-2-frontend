@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+
 import Banner from "../Banner/Banner";
 import Header from "../Header/Header";
 import ProductsSection from "../ProductsSection/ProductsSection";
 import Toolbar from "../Toolbar/Toolbar";
-import { useDispatch } from "react-redux";
+
 import {
   fetchProductsByCategory,
   setCategory,
 } from "@/store/features/products/productsSlice";
 
 const AccessoriesSection = () => {
-  // -----VARIABLES DECALARATION------
+  // -----VARIABLES DECLARATION------
   const dispatch = useDispatch();
+
+  // -------USE STATES----------
   const [scrolled, setScrolled] = useState(false);
+
+  // --------USE EFFECTS------------
 
   useEffect(() => {
     dispatch(fetchProductsByCategory({ category: "accessories" }));
@@ -33,6 +39,7 @@ const AccessoriesSection = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [scrolled]);
+
   return (
     <div className="min-h-screen">
       <Banner />

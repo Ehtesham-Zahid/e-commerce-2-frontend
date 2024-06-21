@@ -1,40 +1,26 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import Header from "../Header/Header";
 import Banner from "../Banner/Banner";
 import SwiperSlider from "../SwiperSlider/SwiperSlider";
 import HomeProductSection from "../HomeProductSection/HomeProductSection";
+
 import { fetchProducts } from "@/store/features/products/productsSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
   // ---------VARIABLE DECALARATIONS---------
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const products = useSelector((state) => state.products);
 
-  const groupedByCategory = products.allProducts.reduce((acc, product) => {
-    const category = product.category;
-
-    // If the category is not already a key in the accumulator, add it with an empty array
-    if (!acc[category]) {
-      acc[category] = [];
-    }
-
-    // Add the current product to the array for their category group
-    acc[category].push(product);
-
-    return acc;
-  }, {});
-
+  // ---------USE STATES-----------
   const [scrolled, setScrolled] = useState(false);
+
+  // ----------USE EFFECTS-----------
+  useEffect(() => {
+    dispatch(fetchProducts());
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,6 +36,21 @@ const Home = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [scrolled]);
+
+  const groupedByCategory = products.allProducts.reduce((acc, product) => {
+    const category = product.category;
+
+    // If the category is not already a key in the accumulator, add it with an empty array
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+
+    // Add the current product to the array for their category group
+    acc[category].push(product);
+
+    return acc;
+  }, {});
+
   return (
     <div className="">
       <Banner />

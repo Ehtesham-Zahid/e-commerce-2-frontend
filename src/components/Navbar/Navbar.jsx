@@ -1,28 +1,23 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import SearchIcon from "@mui/icons-material/Search";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
+import CartDrawer from "../CartDrawer/CartDrawer";
+import SearchBar from "../SearchBar/SearchBar";
+
 import PersonIcon from "@mui/icons-material/Person";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetTrigger,
-} from "@/shadcn-components/ui/sheet";
 
 import Logo from "../../assets/Images/Logos/main-logo-3.png";
 
 import "./Navbar.css";
-import { X } from "lucide-react";
-import { Separator } from "@/shadcn-components/ui/separator";
-import ProductCard from "../ProductCard/ProductCard";
-import { Button } from "@/shadcn-components/ui/button";
-import { useEffect, useState } from "react";
-import CartDrawer from "../CartDrawer/CartDrawer";
-import SearchBar from "../SearchBar/SearchBar";
 
 const Navbar = () => {
+  // ----------VARIABLE DECLARATIONS----------
   const token = localStorage.getItem("token");
+
+  // -------USE STATES-----------
   const [scrolled, setScrolled] = useState(false);
+
+  // ----------USE EFFECTS------------
 
   useEffect(() => {
     const handleScroll = () => {

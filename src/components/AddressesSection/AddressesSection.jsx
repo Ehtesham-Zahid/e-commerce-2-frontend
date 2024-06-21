@@ -1,27 +1,24 @@
 import { useEffect, useState } from "react";
-import Banner from "../Banner/Banner";
-import Header from "../Header/Header";
-
-// import { Button } from "@/shadcn-components/ui/button";
-import AddressCard from "../AddressCard/AddressCard";
-import AddressFormDialog from "../EditAddressFormDialog/EditAddressFormDialog";
-
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchAddresses,
-  fetchPrimaryAddress,
-} from "@/store/features/address/addressSlice";
-import AddAddressFormDialog from "../AddAddressFormDialog/AddAddressFormDialog";
-import AddressCardSkeleton from "../AddressCardSkeleton/AddressCardSkeleton";
 import { Link } from "react-router-dom";
 
-const AddressesSection = () => {
-  // -----VARIABLES DECALARATION------
-  const dispatch = useDispatch();
+import Banner from "../Banner/Banner";
+import Header from "../Header/Header";
+import AddressCard from "../AddressCard/AddressCard";
+import AddAddressFormDialog from "../AddAddressFormDialog/AddAddressFormDialog";
+import AddressCardSkeleton from "../AddressCardSkeleton/AddressCardSkeleton";
 
+import { fetchAddresses } from "@/store/features/address/addressSlice";
+
+const AddressesSection = () => {
+  // -----VARIABLES DECLARATION------
+  const dispatch = useDispatch();
+  const address = useSelector((state) => state.address);
+
+  // -----USE STATES---------
   const [scrolled, setScrolled] = useState(false);
 
+  // --------USE EFFECTS----------
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 0;
@@ -41,8 +38,6 @@ const AddressesSection = () => {
     dispatch(fetchAddresses());
     window.scrollTo(0, 0);
   }, []);
-
-  const address = useSelector((state) => state.address);
 
   return (
     <div className="min-h-screen">

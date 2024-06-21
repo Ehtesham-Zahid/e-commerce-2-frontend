@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
-import AddIcon from "@mui/icons-material/Add";
-import ProductImagesSlider from "../ProductImagesSlider/ProductImagesSlider";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+
+import ImageSlider from "../ImageSlider/ImageSlider";
+import ProductImagesSlider from "../ProductImagesSlider/ProductImagesSlider";
+import AddToCartModalSkeleton from "../AddToCartModalSkeleton/AddToCartModalSkeleton";
+
 import { Separator } from "@/shadcn-components/ui/separator";
 import { Button } from "@/shadcn-components/ui/button";
-import { Link } from "react-router-dom";
-import { fetchSingleProduct } from "@/store/features/singleProduct/singleProductSlice";
-import { useState } from "react";
-
 import {
   Dialog,
   DialogClose,
@@ -17,12 +19,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/shadcn-components/ui/dialog";
-import ImageSlider from "../ImageSlider/ImageSlider";
-import toast from "react-hot-toast";
+
+import { fetchSingleProduct } from "@/store/features/singleProduct/singleProductSlice";
 import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
-import AddToCartModalSkeleton from "../AddToCartModalSkeleton/AddToCartModalSkeleton";
+
+import AddIcon from "@mui/icons-material/Add";
 
 const AddToCartModal = (props) => {
+  // --------VARIABLE DECLARATION----------
   const Sizes = ["XS", "S", "M", "L", "XL", "XXL"];
   const dispatch = useDispatch();
   const singleProduct = useSelector((state) => state.singleProduct);
@@ -31,20 +35,13 @@ const AddToCartModal = (props) => {
 
   const [selectedSize, setSelectedSize] = useState("XS");
 
+  // -------HANDLERS-------------
   const fetchSingleProductHandler = () => {
     dispatch(
       fetchSingleProduct({ productId: props.productId, color: props.color })
     );
   };
   const addToLocalCartHandler = () => {
-    // if (isItemAlreadyInCart) {
-    //     console.log('Item is already in the cart. Not adding it again.');
-    // } else {
-    //     // Add the item to the cart
-    //     cart.push(itemToAdd);
-    //     console.log('Item added to the cart.');
-    // }
-
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const isItemAlreadyInCart = cart.some(
       (item) =>
@@ -73,14 +70,12 @@ const AddToCartModal = (props) => {
   return (
     <Dialog className="">
       <DialogTrigger onClick={() => fetchSingleProductHandler()}>
-        {/* <div className="relative cursor-pointer"> */}
         <div className="lg:hidden   relative     transition scale-110 translate-z-5 ease-in-out duration-300 bottom- right-3 bg-white border border-black rounded-sm px-1 py-0.5  ">
           <AddIcon />
         </div>
         <div className="hidden lg:flex  relative     transition scale-110 translate-z-5 ease-in-out duration-300 bottom-24 right-5 bg-white border border-black rounded-sm px-1.5 py-1 ">
           <AddIcon />
         </div>
-        {/* </div> */}
       </DialogTrigger>
       <DialogContent className="w-fit md:w-[650px] lg:w-[800px]">
         {singleProduct.loading ? (
@@ -137,7 +132,6 @@ const AddToCartModal = (props) => {
                   <Button
                     className="w-full 2xl:mt-4 py-5 me-2 border border-black hover:bg-slate-200"
                     variant="ghost"
-                    //   onClick={addToLocalCartHandler}
                   >
                     VIEW FULL DETAILS
                   </Button>

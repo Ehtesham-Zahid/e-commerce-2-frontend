@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 import McLogo from "../../assets/Images/Logos/mastercard-logo.png";
@@ -8,7 +7,6 @@ const Footer = () => {
   return (
     <>
       <footer className="footer p-10 border-t-2 border-black bg-white text-black  ">
-        {/* <div> */}
         <nav>
           <h6 className="footer-title text-base">Account</h6>
           <Link to="/account/signin" className="text-base cool-link">
@@ -63,7 +61,6 @@ const Footer = () => {
             </div>
           </fieldset>
         </form>
-        {/* </div> */}
       </footer>
       <div className="flex flex-col md:flex-row justify-between items-center  py-8 border-t border-black sm:px-24">
         <p className="font-bold text-sm sm:text-base pb-5 md:pb-0">

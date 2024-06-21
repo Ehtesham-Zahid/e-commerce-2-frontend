@@ -1,6 +1,6 @@
 import OrderSuccessSection from "@/components/OrderSuccessSection/OrderSuccessSection";
 
-const OrderSuccesPage = () => {
+const OrderSuccessPage = () => {
   return (
     <div>
       <OrderSuccessSection />
@@ -8,4 +8,4 @@ const OrderSuccesPage = () => {
   );
 };
 
-export default OrderSuccesPage;
+export default OrderSuccessPage;

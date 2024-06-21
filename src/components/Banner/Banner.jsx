@@ -1,10 +1,12 @@
 import React from "react";
-
-import PakistanFlag from "../../assets/Images/Logos/pakistan-flag.svg";
-import PersonIcon from "@mui/icons-material/Person";
 import { Link } from "react-router-dom";
 
+import PersonIcon from "@mui/icons-material/Person";
+
+import PakistanFlag from "../../assets/Images/Logos/pakistan-flag.svg";
+
 const Banner = () => {
+  // --------VARIABLE DECLARATION--------
   const token = localStorage.getItem("token");
   return (
     <div className="w-screen flex justify-end py-0.5 px-8 items-center bg-neutral-200">

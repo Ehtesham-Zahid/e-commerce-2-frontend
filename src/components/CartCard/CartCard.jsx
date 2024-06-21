@@ -1,19 +1,19 @@
-import { Separator } from "@/shadcn-components/ui/separator";
-
-import ImageP from "../../assets/Images/Products/product-1.webp";
-import QuantitySelector from "../QuantitySelector/QuantitySelector";
+/* eslint-disable react/prop-types */
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+
+import QuantitySelector from "../QuantitySelector/QuantitySelector";
+
 import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
-// import { removeFromLocalCart } from "@/store/features/cart/cartSlice";
 
 const CartCard = (props) => {
+  // ----------VARIABLE DECLARATION-----------
   const dispatch = useDispatch();
 
+  // -------HANDLERS------------
   const removeFromLocalCartHandler = () => {
     let cart = JSON.parse(localStorage.getItem("cart"));
 
-    // cart.push({ product: `${productId}/${color}`, selectedSize });
     cart.splice(props.index, 1);
     localStorage.setItem("cart", JSON.stringify(cart));
     toast.success("Item Removed!");

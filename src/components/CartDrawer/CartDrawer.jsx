@@ -1,32 +1,33 @@
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import CartCard from "../CartCard/CartCard";
+
 import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/shadcn-components/ui/sheet";
+import { Button } from "@/shadcn-components/ui/button";
+import { X } from "lucide-react";
+
+import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import { X } from "lucide-react";
-import CartCard from "../CartCard/CartCard";
-import { Button } from "@/shadcn-components/ui/button";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
-import Spinner from "../Spinner/Spinner";
 
 const CartDrawer = () => {
-  // const cart = localStorage.getItem("cart");
+  // ----------VARIABLE DECLARATIONS-------------
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
+  // ----------USE EFFECTS-----------
   useEffect(() => {
     dispatch(fetchProductsByVariants());
   }, []);
+
   return (
     <Sheet className=" ">
       <SheetTrigger>

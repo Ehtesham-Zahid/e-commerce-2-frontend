@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
-import { TableCell, TableRow } from "@/shadcn-components/ui/table";
-import React from "react";
 import { format, parseISO } from "date-fns";
+
+import { TableCell, TableRow } from "@/shadcn-components/ui/table";
+
 const OrderCard = (props) => {
+  // ---------VARIABLE DECLARATIONS----------
+
   // Parse the ISO date string
   const date = parseISO(props.date);
 
@@ -11,7 +14,6 @@ const OrderCard = (props) => {
 
   return (
     <TableRow>
-      {/* <TableCell className="font-medium">INV001</TableCell> */}
       <TableCell>{props.orderNumber}</TableCell>
       <TableCell>{formattedDate}</TableCell>
       <TableCell>{props.paymentStatus}</TableCell>

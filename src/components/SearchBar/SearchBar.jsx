@@ -1,28 +1,36 @@
-import SearchIcon from "@mui/icons-material/Search";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+import ProductCardMini from "../ProductCardMini/ProductCardMini";
+import ProductCard from "../ProductCard/ProductCard";
+
 import {
   Sheet,
   SheetClose,
   SheetContent,
   SheetTrigger,
 } from "@/shadcn-components/ui/sheet";
-import { X } from "lucide-react";
 import { Separator } from "@/shadcn-components/ui/separator";
-import ProductCard from "../ProductCard/ProductCard";
 import { Button } from "@/shadcn-components/ui/button";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { X } from "lucide-react";
+
 import {
   fetchProducts,
   setSearchedProducts,
 } from "@/store/features/products/productsSlice";
-import ProductCardMini from "../ProductCardMini/ProductCardMini";
-import { Link } from "react-router-dom";
+
+import SearchIcon from "@mui/icons-material/Search";
 
 const SearchBar = () => {
+  // ---------VARIABLE DECLARATIONS-----------
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
+
+  // --------USE STATES--------
   const [searchQuery, setSearchQuery] = useState("");
 
+  // -------------USE EFFECTS---------
   useEffect(() => {
     dispatch(setSearchedProducts(searchQuery));
   }, [searchQuery, dispatch]);

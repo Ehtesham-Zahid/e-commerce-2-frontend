@@ -1,27 +1,32 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import Spinner from "../Spinner/Spinner";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
 import CheckoutHeader from "../CheckoutHeader/CheckoutHeader";
 import CheckoutProductCard from "../CheckoutProductCard/CheckoutProductCard";
 
-import { useEffect } from "react";
 import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
 import {
   fetchAddresses,
   fetchPrimaryAddress,
 } from "@/store/features/address/addressSlice";
-import Spinner from "../Spinner/Spinner";
 
 const CheckoutSection = () => {
+  // -----------VARIABLE DECLARATIONS-------------
+
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const products = useSelector((state) => state.products);
   const address = useSelector((state) => state.address);
-  const dispatch = useDispatch();
 
+  // --------USE EFFECTS-------
   useEffect(() => {
     dispatch(fetchProductsByVariants());
     dispatch(fetchPrimaryAddress());
     dispatch(fetchAddresses());
   }, []);
+
   return (
     <div className="min-h-screen">
       <CheckoutHeader />
@@ -32,9 +37,8 @@ const CheckoutSection = () => {
       ) : (
         <div className="flex justify-center  ">
           <div className="grid grid-cols-1 lg:grid-cols-2   bg-white w-screen">
-            {/* <div className=""> */}
             <CheckoutForm />
-            {/* </div> */}
+
             <div className="hidden lg:flex justify-start border-s border-black flex-col  bg-gray-300 ps-8 pt-8">
               <div className="w-5/6 xl:w-4/5 2xl:w-2/3">
                 <div className=" col-span-1       ">

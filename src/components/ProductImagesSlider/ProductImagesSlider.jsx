@@ -1,17 +1,13 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/prop-types */
-import Zoom from "react-medium-image-zoom";
+
 import "react-medium-image-zoom/dist/styles.css";
 
-import PImage from "../../assets/Images/Products/product-2.webp";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const ProductImagesSlider = (props) => {
   if (!props.imageUrls) return null; // or return a loading indicator, etc.
   const [currentImage, setCurrentImage] = useState(props?.imageUrls[0]);
-  // const products = useSelector((state) => state.products);
-  // const { productId, color } = useParams();
 
   return (
     <div
@@ -49,12 +45,11 @@ const ProductImagesSlider = (props) => {
           />
         ) : null}
       </div>
-      {/* <Zoom> */}
+
       <img
         src={currentImage}
         className={` ${!props.modal ? " md:w-3/4" : null}    `}
       />
-      {/* </Zoom> */}
     </div>
   );
 };

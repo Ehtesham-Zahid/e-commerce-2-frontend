@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
-import { SheetClose } from "@/shadcn-components/ui/sheet";
 import { Link } from "react-router-dom";
+
+import { SheetClose } from "@/shadcn-components/ui/sheet";
 
 const ProductCardMini = (props) => {
   return props.searchBar ? (

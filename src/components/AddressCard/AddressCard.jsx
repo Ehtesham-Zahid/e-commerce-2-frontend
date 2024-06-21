@@ -1,4 +1,9 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import EditAddressFormDialog from "../EditAddressFormDialog/EditAddressFormDialog";
+
 import {
   Table,
   TableBody,
@@ -8,7 +13,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/shadcn-components/ui/table";
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,22 +24,20 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/shadcn-components/ui/alert-dialog";
-
 import { Checkbox } from "@/shadcn-components/ui/checkbox";
 import { Button } from "@/shadcn-components/ui/button";
-import AddressFormDialog from "../EditAddressFormDialog/EditAddressFormDialog";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import {
   deleteAddress,
   fetchAddresses,
   updateAddress,
 } from "@/store/features/address/addressSlice";
-import EditAddressFormDialog from "../EditAddressFormDialog/EditAddressFormDialog";
 
 const AddressCard = (props) => {
+  // ========VARIABLE DECLARATIONS----------
   const dispatch = useDispatch();
   const address = useSelector((state) => state.address);
+
+  // ---------HANDLERS-----------
 
   const deleteAddressHandler = () => {
     dispatch(deleteAddress(props.id)).then((result) => {
@@ -59,10 +61,8 @@ const AddressCard = (props) => {
   return (
     <div className="w-full md:w-72 me-10 mb-10">
       <Table className="">
-        {/* <TableCaption>A list of your recent orders.</TableCaption> */}
         <TableHeader>
           <TableRow>
-            {/* <TableHead className="w-[100px]">Invoice</TableHead> */}
             <TableHead>{props.addressTitle}</TableHead>
           </TableRow>
         </TableHeader>
@@ -74,7 +74,6 @@ const AddressCard = (props) => {
             </p>
           ) : (
             <TableRow className="flex flex-col">
-              {/* <TableCell className="font-medium">INV001</TableCell> */}
               <TableCell className="text-black font-medium text-base ">
                 <p>
                   {props.firstName} {props.lastName}

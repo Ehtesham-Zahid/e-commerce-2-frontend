@@ -1,20 +1,14 @@
 /* eslint-disable react/prop-types */
-
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
+
 import AddToCartModal from "../AddToCartModal/AddToCartModal";
+
 import { SheetClose } from "@/shadcn-components/ui/sheet";
-import { Button } from "@/shadcn-components/ui/button";
 
 const ProductCard = (props) => {
+  // ---------USE STATES--------
   const [isHovered, setIsHovered] = useState(false);
-
-  // const divStyle = {
-  //   backgroundImage: `url(${isHovered ? props.image2 : props.image})`,
-  //   backgroundSize: "cover",
-  //   backgroundRepeat: "no-repeat",
-  // };
 
   return props.searchBar ? (
     <div
@@ -26,7 +20,6 @@ const ProductCard = (props) => {
         <Link to={`/products/${props.id}/${props.color}`}>
           <img
             src={isHovered ? props.image2 : props.image}
-            // style={divStyle}
             className={`rounded-sm  `}
           />
         </Link>
@@ -55,7 +48,6 @@ const ProductCard = (props) => {
       <Link to={`/products/${props.id}/${props.color}`}>
         <img
           src={isHovered ? props.image2 : props.image}
-          // style={divStyle}
           className={`rounded-sm  `}
         />
       </Link>

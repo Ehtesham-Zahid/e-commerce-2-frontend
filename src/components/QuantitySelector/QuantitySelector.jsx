@@ -1,14 +1,20 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
+import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
+
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+
 const QuantitySelector = (props) => {
+  // -------VARIABLE DELARATIONS--------
   const dispatch = useDispatch();
+
+  // ---------USE STATES------------
   const [quantity, setQuantity] = useState(props.quantity);
 
+  // -----------HANDLERS---------
   const decrementQuantityHandler = () => {
     //some logic here
     if (quantity > 1) {
@@ -20,6 +26,7 @@ const QuantitySelector = (props) => {
       dispatch(fetchProductsByVariants());
     }
   };
+
   const incrementQuantityHandler = () => {
     //some logic here
     setQuantity(quantity + 1);
@@ -29,6 +36,7 @@ const QuantitySelector = (props) => {
 
     dispatch(fetchProductsByVariants());
   };
+
   return (
     <div className="flex border items-center justify-around   border-gray-300 w-24 py-1 ">
       <p

@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
+
 import { Button } from "@/shadcn-components/ui/button";
 import { Checkbox } from "@/shadcn-components/ui/checkbox";
-import AddIcon from "@mui/icons-material/Add";
-// import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { useForm } from "react-hook-form";
 import {
   Dialog,
   DialogClose,
@@ -12,16 +13,28 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/shadcn-components/ui/dialog";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { SelectItem } from "@/shadcn-components/ui/select";
+
 import {
   addAddress,
   fetchAddresses,
   updateAddress,
 } from "@/store/features/address/addressSlice";
-import { SelectItem } from "@/shadcn-components/ui/select";
+
+import AddIcon from "@mui/icons-material/Add";
 
 const AddAddressFormDialog = (props) => {
+  // -----VARIABLES DECALARATION------
+  const dispatch = useDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  // ----------USE STATES---------
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
@@ -31,27 +44,19 @@ const AddAddressFormDialog = (props) => {
   const [country, setCountry] = useState("");
   const [isPrimary, setIsPrimary] = useState(false);
 
-  const dispatch = useDispatch();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
-  const data = {
-    firstName,
-    lastName,
-    address,
-    phoneNumber,
-    city,
-    zipcode: zipCode,
-    country,
-    isPrimary,
-  };
-
+  // ---------HANDLERS---------
   const onSubmit = () => {
-    // e.preventDefault();
+    const data = {
+      firstName,
+      lastName,
+      address,
+      phoneNumber,
+      city,
+      zipcode: zipCode,
+      country,
+      isPrimary,
+    };
+
     console.log(isPrimary);
     dispatch(addAddress(data)).then((result) => {
       if (result.meta.requestStatus === "fulfilled") {

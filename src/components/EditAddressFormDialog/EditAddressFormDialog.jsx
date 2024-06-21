@@ -1,24 +1,20 @@
 /* eslint-disable react/prop-types */
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+
 import { Button } from "@/shadcn-components/ui/button";
 import { Checkbox } from "@/shadcn-components/ui/checkbox";
-// import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { useForm } from "react-hook-form";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/shadcn-components/ui/dialog";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import {
-  fetchAddresses,
-  updateAddress,
-} from "@/store/features/address/addressSlice";
 
 const EditAddressFormDialog = (props) => {
+  // -----------VARIABLE DECLARATIONS-----------
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  // --------USE STATES-------------
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
@@ -27,14 +23,6 @@ const EditAddressFormDialog = (props) => {
   const [zipCode, setZipCode] = useState("");
   const [country, setCountry] = useState("");
   const [isPrimary, setIsPrimary] = useState(false);
-
-  const dispatch = useDispatch();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
 
   const data = {
     firstName,
@@ -176,10 +164,7 @@ const EditAddressFormDialog = (props) => {
                 </p>
               )}
             </div>
-            {/* <div className="flex items-center my-5">
-              <Checkbox onClick={() => setIsPrimary(!isPrimary)} />
-              <p className="ms-2 font-medium">Set as default address</p>
-            </div> */}
+
             <div
               className="flex items-center my-5"
               onClick={() => setIsPrimary(!isPrimary)}
@@ -189,7 +174,7 @@ const EditAddressFormDialog = (props) => {
                 Set as primary address
               </label>
             </div>
-            {/* <DialogClose asChild> */}
+
             <Button className="w-full">SAVE ADDRESS</Button>
           </form>
         </div>

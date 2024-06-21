@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+
 import Banner from "../Banner/Banner";
 import Header from "../Header/Header";
 import ProductsSection from "../ProductsSection/ProductsSection";
 import Toolbar from "../Toolbar/Toolbar";
-import { useDispatch, useSelector } from "react-redux";
+
 import {
-  fetchProducts,
   fetchProductsByCategory,
   setCategory,
 } from "@/store/features/products/productsSlice";
-import SingleProductSectionSkeleton from "../SingleProductSectionSkeleton/SingleProductSectionSkeleton";
 
 const MenSection = () => {
   // -----VARIABLES DECALARATION------
   const dispatch = useDispatch();
 
+  // ---------USE STATES----------
   const [scrolled, setScrolled] = useState(false);
 
+  // ---------USE EFTS----------
   useEffect(() => {
     dispatch(fetchProductsByCategory({ category: "men" }));
     dispatch(setCategory("men"));

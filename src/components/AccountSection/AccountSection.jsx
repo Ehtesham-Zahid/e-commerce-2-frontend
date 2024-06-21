@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Banner from "../Banner/Banner";
 import Header from "../Header/Header";
+import AddressCard from "../AddressCard/AddressCard";
+import OrderCard from "../OrderCard/OrderCard";
+import AddressCardSkeleton from "../AddressCardSkeleton/AddressCardSkeleton";
 
 import {
   Table,
@@ -14,26 +18,27 @@ import {
   TableRow,
 } from "@/shadcn-components/ui/table";
 import { Button } from "@/shadcn-components/ui/button";
-import { Link } from "react-router-dom";
+
 import { logout } from "@/store/features/auth/authSlice";
-import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAddresses,
   fetchPrimaryAddress,
 } from "@/store/features/address/addressSlice";
-import AddressCard from "../AddressCard/AddressCard";
 import { fetchOrders } from "@/store/features/order/orderSlice";
-import OrderCard from "../OrderCard/OrderCard";
-import AddressCardSkeleton from "../AddressCardSkeleton/AddressCardSkeleton";
 
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 const AccountSection = () => {
   // -----VARIABLES DECALARATION------
+
   const dispatch = useDispatch();
   const address = useSelector((state) => state.address);
   const order = useSelector((state) => state.order);
 
+  // ----------USE STATES---------
+
   const [scrolled, setScrolled] = useState(false);
 
+  // ---------USE EFFECTS----------
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 0;
@@ -56,6 +61,7 @@ const AccountSection = () => {
     dispatch(fetchOrders());
   }, []);
 
+  // ---------HANDLERS---------
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -115,7 +121,7 @@ const AccountSection = () => {
                 </TableBody>
               </Table>
             )}
-            <div>
+            <div className="mt-4 lg:mt-0">
               {address.loading ? (
                 <AddressCardSkeleton />
               ) : (

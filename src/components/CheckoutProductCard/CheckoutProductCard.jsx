@@ -1,4 +1,4 @@
-import CardImage from "../../assets/Images/Products/product-1.webp";
+/* eslint-disable react/prop-types */
 
 const CheckoutProductCard = (props) => {
   return (
