@@ -5,14 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Header from "../Header/Header";
 import Banner from "../Banner/Banner";
-import Spinner from "../Spinner/Spinner";
 import ProductImagesSlider from "../ProductImagesSlider/ProductImagesSlider";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/shadcn-components/ui/avatar";
 import {
   Accordion,
   AccordionContent,

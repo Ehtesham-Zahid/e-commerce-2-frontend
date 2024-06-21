@@ -40,15 +40,7 @@ const AddToCartModal = (props) => {
   const fetchSingleProductHandler = () => {
     dispatch(
       fetchSingleProduct({ productId: props.productId, color: props.color })
-    ).then((result) => {
-      if (result.meta.requestStatus === "fulfilled") {
-        dispatch(
-          fetchProductsByCategory({
-            category: result.payload.product.category,
-          })
-        );
-      }
-    });
+    );
   };
   const addToLocalCartHandler = () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -74,6 +66,14 @@ const AddToCartModal = (props) => {
 
       dispatch(fetchProductsByVariants());
     }
+  };
+
+  const fetchProductsByCategoryHandler = () => {
+    dispatch(
+      fetchProductsByCategory({
+        category: singleProduct.singleProduct?.category,
+      })
+    );
   };
 
   return (
@@ -141,6 +141,7 @@ const AddToCartModal = (props) => {
                   <Button
                     className="w-full 2xl:mt-4 py-5 me-2 border border-black hover:bg-slate-200"
                     variant="ghost"
+                    onClick={fetchProductsByCategoryHandler}
                   >
                     VIEW FULL DETAILS
                   </Button>
