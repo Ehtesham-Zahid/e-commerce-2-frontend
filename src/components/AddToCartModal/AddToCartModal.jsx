@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
 import ImageSlider from "../ImageSlider/ImageSlider";
-import ProductImagesSlider from "../ProductImagesSlider/ProductImagesSlider";
 import AddToCartModalSkeleton from "../AddToCartModalSkeleton/AddToCartModalSkeleton";
 
 import { Separator } from "@/shadcn-components/ui/separator";
@@ -14,9 +13,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/shadcn-components/ui/dialog";
 
