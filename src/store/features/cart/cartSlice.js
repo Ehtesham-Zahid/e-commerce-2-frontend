@@ -15,7 +15,7 @@ export const fetchProductsByVariants = createAsyncThunk(
     try {
       const parsedData = JSON.parse(variantsData); // Ensure data is parsed correctly
       const response = await axios.post(
-        "http://localhost:5000/api/v1/products/variants/",
+        "https://e-commerce-2-backend.vercel.app/api/v1/products/variants/",
         parsedData,
         { headers: { "Content-Type": "application/json" } }
       );

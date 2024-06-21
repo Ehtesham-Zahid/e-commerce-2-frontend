@@ -108,7 +108,7 @@ const CheckoutForm = () => {
     };
 
     const response = await fetch(
-      "http://localhost:5000/api/v1/orders/create-checkout-session/",
+      "https://e-commerce-2-backend.vercel.app/api/v1/orders/create-checkout-session/",
       {
         method: "POST",
         headers: headers,

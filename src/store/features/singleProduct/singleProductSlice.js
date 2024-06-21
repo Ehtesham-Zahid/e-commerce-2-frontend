@@ -13,7 +13,7 @@ export const fetchSingleProduct = createAsyncThunk(
   async ({ productId, color }, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/products/${productId}`
+        `https://e-commerce-2-backend.vercel.app/api/v1/products/${productId}`
       );
       console.log(response);
       return {

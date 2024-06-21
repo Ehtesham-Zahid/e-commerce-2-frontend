@@ -17,7 +17,9 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get("http://localhost:5000/api/v1/products");
+      const response = await axios.get(
+        "https://e-commerce-2-backend.vercel.app/api/v1/products"
+      );
       console.log(response);
       return response.data.allProducts;
     } catch (error) {
@@ -34,7 +36,7 @@ export const fetchProductsByCategory = createAsyncThunk(
     console.log(category);
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/products/category/${category}?sort=${sort}&limit=${limit}`
+        `https://e-commerce-2-backend.vercel.app/api/v1/products/category/${category}?sort=${sort}&limit=${limit}`
       );
       console.log(sort);
       console.log(response);

@@ -22,7 +22,7 @@ export const fetchAddresses = createAsyncThunk(
         },
       };
       const response = await axios.get(
-        "http://localhost:5000/api/v1/addresses/",
+        "https://e-commerce-2-backend.vercel.app/api/v1/addresses/",
         config
       );
       console.log(response);
@@ -45,7 +45,7 @@ export const fetchAddress = createAsyncThunk(
         },
       };
       const response = await axios.get(
-        `http://localhost:5000/api/v1/addresses/${addressId}`,
+        `https://e-commerce-2-backend.vercel.app/api/v1/addresses/${addressId}`,
         config
       );
       console.log(response);
@@ -68,7 +68,7 @@ export const fetchPrimaryAddress = createAsyncThunk(
         },
       };
       const response = await axios.get(
-        "http://localhost:5000/api/v1/addresses/primary",
+        "https://e-commerce-2-backend.vercel.app/api/v1/addresses/primary",
         config
       );
       console.log(response);
@@ -91,7 +91,7 @@ export const addAddress = createAsyncThunk(
         },
       };
       const response = await axios.post(
-        `http://localhost:5000/api/v1/addresses/`,
+        `https://e-commerce-2-backend.vercel.app/api/v1/addresses/`,
         data,
         config
       );
@@ -115,7 +115,7 @@ export const deleteAddress = createAsyncThunk(
         },
       };
       const response = await axios.delete(
-        `http://localhost:5000/api/v1/addresses/${addressId}`,
+        `https://e-commerce-2-backend.vercel.app/api/v1/addresses/${addressId}`,
         config
       );
       console.log(response);
@@ -139,7 +139,7 @@ export const updateAddress = createAsyncThunk(
         },
       };
       const response = await axios.put(
-        `http://localhost:5000/api/v1/addresses/${addressId}`,
+        `https://e-commerce-2-backend.vercel.app/api/v1/addresses/${addressId}`,
         data,
         config
       );

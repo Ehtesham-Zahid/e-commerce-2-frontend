@@ -19,7 +19,7 @@ export const createOrderAuth = createAsyncThunk(
         },
       };
       const response = await axios.post(
-        "http://localhost:5000/api/v1/orders/createOrderAuth/",
+        "https://e-commerce-2-backend.vercel.app/api/v1/orders/createOrderAuth/",
         data,
         config
       );
@@ -37,7 +37,7 @@ export const createOrderUnAuth = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/orders/createOrderUnAuth/",
+        "https://e-commerce-2-backend.vercel.app/api/v1/orders/createOrderUnAuth/",
         data
       );
       console.log(response);
@@ -60,7 +60,7 @@ export const fetchOrders = createAsyncThunk(
         },
       };
       const response = await axios.get(
-        "http://localhost:5000/api/v1/orders/",
+        "https://e-commerce-2-backend.vercel.app/api/v1/orders/",
         config
       );
       console.log("ORDERS: ", response);

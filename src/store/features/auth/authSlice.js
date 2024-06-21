@@ -16,7 +16,7 @@ export const login = createAsyncThunk(
   async (loginData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/v1/users/login/`,
+        `https://e-commerce-2-backend.vercel.app/api/v1/users/login/`,
         loginData
       );
 
@@ -35,7 +35,7 @@ export const signup = createAsyncThunk(
   async (signupData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/v1/users/signup/`,
+        `https://e-commerce-2-backend.vercel.app/api/v1/users/signup/`,
         signupData
       );
 
@@ -55,7 +55,7 @@ export const googleAuth = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/v1/users/googleAuth`,
+        `https://e-commerce-2-backend.vercel.app/api/v1/users/googleAuth`,
         data
       );
       localStorage.setItem("token", response.data.token);
@@ -73,7 +73,7 @@ export const forgotPassword = createAsyncThunk(
   async (email, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/v1/users/forgotPassword`,
+        `https://e-commerce-2-backend.vercel.app/api/v1/users/forgotPassword`,
         { email }
       );
       return response.data;
@@ -89,7 +89,7 @@ export const resetPassword = createAsyncThunk(
     try {
       console.log(resetToken);
       const response = await axios.patch(
-        `http://localhost:5000/api/v1/users/resetPassword/${resetToken}`,
+        `https://e-commerce-2-backend.vercel.app/api/v1/users/resetPassword/${resetToken}`,
         resetPasswordData
       );
 
