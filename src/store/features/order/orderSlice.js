@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   orders: [],
@@ -93,9 +93,8 @@ const orderSlice = createSlice({
       state.loading = true;
       state.error = "";
     });
-    builder.addCase(createOrderUnAuth.fulfilled, (state, action) => {
+    builder.addCase(createOrderUnAuth.fulfilled, (state) => {
       state.loading = false;
-      //   state.addresses = action.payload;
       state.error = "";
     });
     builder.addCase(createOrderUnAuth.rejected, (state, action) => {
@@ -117,8 +116,5 @@ const orderSlice = createSlice({
     });
   },
 });
-
-// export const { addToLocalCart, removeFromLocalCart, loadLocalCart } =
-//   addressSlice.actions;
 
 export default orderSlice.reducer;

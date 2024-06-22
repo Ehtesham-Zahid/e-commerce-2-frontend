@@ -1,3 +1,8 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+import { useDispatch, useSelector } from "react-redux";
+
 /* eslint-disable react/prop-types */
 import {
   Select,
@@ -6,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shadcn-components/ui/select";
-
 import {
   Sheet,
   SheetContent,
@@ -15,28 +19,31 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/shadcn-components/ui/sheet";
-
 import { Separator } from "@/shadcn-components/ui/separator";
 
-import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
+import {
+  fetchProductsByCategory,
+  setGridView,
+} from "@/store/features/products/productsSlice";
 
+import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import GridViewIcon from "@mui/icons-material/GridView";
 import GridOnIcon from "@mui/icons-material/GridOn";
 import ViewCompactIcon from "@mui/icons-material/ViewCompact";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import SquareIcon from "@mui/icons-material/Square";
-import { useMediaQuery } from "react-responsive";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchProductsByCategory,
-  setGridView,
-} from "@/store/features/products/productsSlice";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 
 const Toolbar = (props) => {
+  // ----------VARIABLE DECLARATIONS-----------
+
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
+  // ----------USE STATES--------
   const [scrolled, setScrolled] = useState(false);
 
+  // ----------USE EFFECTS--------
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 0;
@@ -51,10 +58,7 @@ const Toolbar = (props) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [scrolled]);
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
 
-  const isMobile = useMediaQuery({ maxWidth: 768 });
   // ---------HANDLERS---------
   const sortProductsHandler = (sort) => {
     dispatch(
@@ -64,7 +68,7 @@ const Toolbar = (props) => {
 
   return isMobile ? (
     <div
-      className={`w-screen flex ${
+      className={`w-full flex ${
         props.searchPage ? "justify-center" : "justify-between"
       }   items-center bg-neutral-100 h-10 z-10 `}
     >
@@ -74,7 +78,6 @@ const Toolbar = (props) => {
           className={`${props.searchPage ? "hidden" : null}`}
         >
           <SelectTrigger className=" w-[100px] sm:w-[135px]  ">
-            {/* <SelectValue placeholder="Sort By" /> */}
             <p>Sort By</p>
           </SelectTrigger>
 
@@ -131,7 +134,7 @@ const Toolbar = (props) => {
     </div>
   ) : (
     <div
-      className={`w-screen flex ${
+      className={`w-full flex ${
         props.searchPage ? "justify-center" : "justify-between"
       } items-center bg-neutral-100 h-12  `}
     >
@@ -198,7 +201,7 @@ const Toolbar = (props) => {
                 </SheetHeader>
               </SheetContent>
             </Sheet> */}
-          </div>{" "}
+          </div>
         </>
       ) : null}
     </div>

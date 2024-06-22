@@ -1,26 +1,25 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import Banner from "../Banner/Banner";
 import Header from "../Header/Header";
-import ProductsSection from "../ProductsSection/ProductsSection";
 import Toolbar from "../Toolbar/Toolbar";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchProducts,
-  fetchProductsByCategory,
-  setCategory,
-  setSearchedProducts,
-} from "@/store/features/products/productsSlice";
-import SingleProductSectionSkeleton from "../SingleProductSectionSkeleton/SingleProductSectionSkeleton";
-import { useParams } from "react-router-dom";
 import ProductCard from "../ProductCard/ProductCard";
 import Spinner from "../Spinner/Spinner";
 
+import {
+  fetchProducts,
+  setSearchedProducts,
+} from "@/store/features/products/productsSlice";
+
 const SearchedProductsSection = () => {
   // -----VARIABLES DECALARATION------
+
   const { query } = useParams();
   const dispatch = useDispatch();
-
   const products = useSelector((state) => state.products);
+
   let sectionClass;
   if (products.gridView === "1") {
     sectionClass = "grid grid-cols-1  p-2 ";
@@ -31,9 +30,11 @@ const SearchedProductsSection = () => {
   } else if (products.gridView === "4") {
     sectionClass = "grid grid-cols-4 lg:grid-cols-6 gap-2 p-2 ";
   }
+  // ----------USE STATES-----------
 
   const [scrolled, setScrolled] = useState(false);
 
+  // -----------USE EFFECTS--------------
   useEffect(() => {
     dispatch(fetchProducts()).then((result) =>
       result.meta.requestStatus === "fulfilled"
@@ -56,10 +57,11 @@ const SearchedProductsSection = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [scrolled]);
+
   return (
     <div className="min-h-screen">
       <Banner />
-      <div className={`${scrolled ? "fixed top-0" : ""}`}>
+      <div className={`z-10 ${scrolled ? "fixed top-0" : ""}`}>
         <Header />
         <Toolbar searchPage={true} />
       </div>
@@ -80,7 +82,6 @@ const SearchedProductsSection = () => {
                   id={product.id}
                   title={product.title}
                   price={product.price}
-                  // description={product.description}
                   category={product.category}
                   color={product?.variations[0]?.color}
                   image={product?.variations[0]?.imageUrls[0]}
@@ -91,7 +92,6 @@ const SearchedProductsSection = () => {
                   id={product.id}
                   title={product.title}
                   price={product.price}
-                  // description={product.description}
                   category={product.category}
                   color={product?.variations[1]?.color}
                   image={product?.variations[1]?.imageUrls[0]}
@@ -104,7 +104,6 @@ const SearchedProductsSection = () => {
                 id={product.id}
                 title={product.title}
                 price={product.price}
-                // description={product.description}
                 category={product.category}
                 color={product?.variations[0]?.color}
                 image={product?.variations[0]?.imageUrls[0]}

@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 import PersonIcon from "@mui/icons-material/Person";
@@ -9,7 +8,7 @@ const Banner = () => {
   // --------VARIABLE DECLARATION--------
   const token = localStorage.getItem("token");
   return (
-    <div className="w-screen flex justify-end py-0.5 px-8 items-center bg-neutral-200">
+    <div className="w-full flex justify-end py-0.5 px-8 items-center bg-neutral-200">
       <Link
         to={token ? "/account" : "/account/signin"}
         className=" border-r-2 px-3 border-neutral-600 font-normal cursor-pointer text-neutral-700 mx-1"

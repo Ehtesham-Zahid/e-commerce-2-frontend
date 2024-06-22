@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
@@ -239,8 +239,5 @@ const addressSlice = createSlice({
     });
   },
 });
-
-// export const { addToLocalCart, removeFromLocalCart, loadLocalCart } =
-//   addressSlice.actions;
 
 export default addressSlice.reducer;

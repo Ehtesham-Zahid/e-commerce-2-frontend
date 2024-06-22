@@ -1,21 +1,20 @@
-import { Button } from "@/shadcn-components/ui/button";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { Checkbox } from "@/shadcn-components/ui/checkbox";
 import { useDispatch, useSelector } from "react-redux";
+
+import { Button } from "@/shadcn-components/ui/button";
+import { Checkbox } from "@/shadcn-components/ui/checkbox";
+
 import { login, resetError } from "@/store/features/auth/authSlice";
 
 const SigninForm = () => {
+  // --------VARIABLE DECALARATIONS-----------
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { handleSubmit } = useForm();
+  // ---------USE STATES------------
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +23,9 @@ const SigninForm = () => {
     email,
     password,
   };
-  const onSubmit = (data) => {
+
+  // -----------HANDLERS--------------
+  const onSubmit = () => {
     dispatch(login(loginData))
       .then((result) => {
         result.meta.requestStatus === "fulfilled" ? navigate(-1) : null;
@@ -33,8 +34,6 @@ const SigninForm = () => {
         console.log(err);
       });
   };
-
-  console.log(watch("example")); // watch input value by passing the name of it
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
@@ -56,17 +55,12 @@ const SigninForm = () => {
             <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
           </svg>
           <input
-            // {...register("email", { required: true })}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email Address"
             className="w-full  "
           />
         </label>
-
-        {/* {errors.email && (
-          <p className="text-red-500 font-semibold">Enter the email</p>
-        )} */}
       </div>
 
       <div className="mt-2 flex flex-col">
@@ -84,17 +78,12 @@ const SigninForm = () => {
             />
           </svg>
           <input
-            // {...register("password", { required: true })}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             className="w-full"
           />
         </label>
-
-        {/* {errors.password && (
-          <p className="text-red-500 font-semibold  ">Enter the password</p>
-        )} */}
       </div>
       {auth.error ? (
         <p className="text-red-500 font-semibold  text-center mt-0.5  ">

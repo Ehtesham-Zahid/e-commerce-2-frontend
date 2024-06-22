@@ -1,6 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
 import axios from "axios";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
@@ -22,7 +21,6 @@ export const login = createAsyncThunk(
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userId", response.data.user._id);
-      //   localStorage.setItem("email", response.data.user.email);
 
       return response.data;
     } catch (error) {
@@ -41,7 +39,6 @@ export const signup = createAsyncThunk(
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userId", response.data.user._id);
-      // localStorage.setItem("email", response.data.user.email);
 
       return response.data;
     } catch (error) {
@@ -142,20 +139,6 @@ const authSlice = createSlice({
       state.error = "";
     });
     builder.addCase(signup.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
-    builder.addCase(googleAuth.pending, (state) => {
-      state.loading = true;
-      state.error = "";
-    });
-    builder.addCase(googleAuth.fulfilled, (state, action) => {
-      state.loading = false;
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.error = "";
-    });
-    builder.addCase(googleAuth.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

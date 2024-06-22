@@ -27,15 +27,6 @@ const SingleProductSectionSkeleton = () => {
         </div>
       </div>
     </div>
-    //   {/* <div className="flex items-center">
-    //     <div>
-    //       <Skeleton className="w-36 h-36 mt-5" />
-    //       <Skeleton className="w-36 h-36 mt-5" />
-    //       <Skeleton className="w-36 h-36 mt-5" />
-    //     </div>
-    //     <Skeleton className="w-[450px] h-[450px] mt-5 ms-5" />
-    //   </div>
-    //   <div></div> */}
   );
 };
 

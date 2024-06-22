@@ -1,5 +1,3 @@
-import React from "react";
-
 import SpinnerImg from "../../assets/Images/Spinner/spinner.png";
 
 const Spinner = () => {

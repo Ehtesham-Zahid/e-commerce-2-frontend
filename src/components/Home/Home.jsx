@@ -54,7 +54,7 @@ const Home = () => {
   return (
     <div className="">
       <Banner />
-      <div className={`${scrolled ? "fixed top-0 z-10" : ""}`}>
+      <div className={`z-10 ${scrolled ? "fixed top-0  w-screen" : ""}`}>
         <Header />
       </div>
       <SwiperSlider />

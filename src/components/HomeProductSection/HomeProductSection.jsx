@@ -13,7 +13,7 @@ const HomeProductSection = (props) => {
   const products = useSelector((state) => state.products);
 
   return (
-    <div className="w-screen px-2 sm:px-5  lg:px-20">
+    <div className="w-full px-2 sm:px-5  lg:px-20">
       <div className="flex justify-between items-center  mt-10 mb-5">
         <p className="text-xl sm:text-3xl font-semibold text-start">
           <strong className="text-stone-400">IRON</strong>WEAR{" "}

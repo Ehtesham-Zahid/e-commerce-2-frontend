@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,13 +12,10 @@ import AddressCardSkeleton from "../AddressCardSkeleton/AddressCardSkeleton";
 import {
   Table,
   TableBody,
-  TableCaption,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/shadcn-components/ui/table";
-import { Button } from "@/shadcn-components/ui/button";
 
 import { logout } from "@/store/features/auth/authSlice";
 import {
@@ -70,7 +68,7 @@ const AccountSection = () => {
   return (
     <div className="min-h-screen">
       <Banner />
-      <div className={`${scrolled ? "fixed top-0" : ""}`}>
+      <div className={`z-10 ${scrolled ? "w-screen fixed top-0" : ""}`}>
         <Header />
       </div>
       <div className="flex justify-center">

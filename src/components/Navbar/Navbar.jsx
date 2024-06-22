@@ -36,7 +36,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`text-black border-b border-black  flex w-screen justify-between items-center    py-1 px-6 bg-white `}
+      className={`text-black border-b border-black  flex w-full  justify-between items-center    py-1 px-6 bg-white  `}
     >
       <Link to="/">
         <img src={Logo} className="w-44 lg:w-52 " />

@@ -1,21 +1,24 @@
-import { Button } from "@/shadcn-components/ui/button";
-import { resetError, signup } from "@/store/features/auth/authSlice";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Button } from "@/shadcn-components/ui/button";
+
+import { resetError, signup } from "@/store/features/auth/authSlice";
 
 const SigninForm = () => {
+  // -------VARIABLE DECLARATIONS----------
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
-  const auth = useSelector((state) => state.auth);
+  // ----------USE STATES-------------
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +30,9 @@ const SigninForm = () => {
     password,
     passwordConfirm,
   };
-  const onSubmit = (data) => {
+
+  // -----------HANDLERS------------
+  const onSubmit = () => {
     dispatch(signup(signupData))
       .then((result) => {
         console.log(result);
@@ -40,10 +45,6 @@ const SigninForm = () => {
       });
   };
 
-  console.log(watch("example")); // watch input value by passing the name of it
-  console.log(errors.password);
-
-  console.log("HEMLOG: ", errors);
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form
@@ -109,13 +110,7 @@ const SigninForm = () => {
       </div>
       <div className=" flex flex-col mb-3">
         <label className="text-black font-medium">Password</label>
-        {/* <input
-          {...register("password", { required: true, minLength: 8 })}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          className="border border-black rounded-md p-2 "
-        /> */}
+
         <label className="input input-bordered flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -179,14 +174,8 @@ const SigninForm = () => {
           <p className="text-red-500 font-semibold">{auth.error}</p>
         ) : null}
       </div>
-      {/* </div> */}
-      {/* <input type="submit" /> */}
-      <Button
-        // variant="outline"
-        className="w-full border-black mt-4 text-md"
-      >
-        Signup
-      </Button>
+
+      <Button className="w-full border-black mt-4 text-md">Signup</Button>
       <p className="text-black text-center mt-4">
         Already have an account?{" "}
         <Link

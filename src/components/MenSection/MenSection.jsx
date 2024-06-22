@@ -43,7 +43,7 @@ const MenSection = () => {
   return (
     <div className="min-h-screen">
       <Banner />
-      <div className={`z-10 ${scrolled ? "fixed top-0" : ""}`}>
+      <div className={`z-10  ${scrolled ? "w-screen fixed top-0" : ""}`}>
         <Header />
         <Toolbar />
       </div>

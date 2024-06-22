@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "../Header/Header";
 import Banner from "../Banner/Banner";
 import ProductImagesSlider from "../ProductImagesSlider/ProductImagesSlider";
+import SingleProductSectionSkeleton from "../SingleProductSectionSkeleton/SingleProductSectionSkeleton";
+import RelatedProductsSection from "../RelatedProductsSection/RelatedProductsSection";
 
 import {
   Accordion,
@@ -19,14 +21,9 @@ import { Separator } from "@/shadcn-components/ui/separator";
 import RecyclingIcon from "@mui/icons-material/Recycling";
 import DescriptionIcon from "@mui/icons-material/Description";
 import WarningIcon from "@mui/icons-material/Warning";
-import { fetchSingleProduct } from "@/store/features/singleProduct/singleProductSlice";
 
-import {
-  // addToLocalCart,
-  fetchProductsByVariants,
-} from "@/store/features/cart/cartSlice";
-import SingleProductSectionSkeleton from "../SingleProductSectionSkeleton/SingleProductSectionSkeleton";
-import RelatedProductsSection from "../RelatedProductsSection/RelatedProductsSection";
+import { fetchSingleProduct } from "@/store/features/singleProduct/singleProductSlice";
+import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
 import { fetchProductsByCategory } from "@/store/features/products/productsSlice";
 
 const SingleProductSection = () => {
@@ -130,10 +127,9 @@ const SingleProductSection = () => {
                 {color !== "null" ? (
                   <p className=" mb-2 text-lg font-medium text-gray-500 ">
                     Color - {color}
-                    {/* <span className="   py-2 px-4  rounded-full     bg-black"></span> */}
                   </p>
                 ) : null}
-                {/* <p className="text-lg font-medium text-gray-500">Colors:</p> */}
+
                 <div className="flex items-center justify-start w-64 mb-8 mt-4">
                   {singleProduct.singleProduct?.variations?.map((variation) => {
                     return (
@@ -153,7 +149,7 @@ const SingleProductSection = () => {
                     );
                   })}
                 </div>
-                {/* <div className="flex justify"> */}
+
                 {singleProduct.singleProduct?.category !== "accessories" ? (
                   <>
                     <p className="text-lg font-medium text-gray-500 ">Size</p>

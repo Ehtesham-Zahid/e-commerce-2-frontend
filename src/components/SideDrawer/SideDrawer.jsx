@@ -1,28 +1,22 @@
+import { Link } from "react-router-dom";
+
+import SearchBar from "../SearchBar/SearchBar";
+import CartDrawer from "../CartDrawer/CartDrawer";
+
 import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
   SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/shadcn-components/ui/sheet";
+import { X } from "lucide-react";
+
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 import Logo from "../../assets/Images/Logos/main-logo-3.png";
-import { Link } from "react-router-dom";
-import { X } from "lucide-react";
-import ProductCard from "../ProductCard/ProductCard";
-// import { Separator } from "@radix-ui/react-select";
-import { Button } from "@/shadcn-components/ui/button";
-import ProductCardMini from "../ProductCardMini/ProductCardMini";
-import { Separator } from "@/shadcn-components/ui/separator";
-import SearchBar from "../SearchBar/SearchBar";
-import CartDrawer from "../CartDrawer/CartDrawer";
 
 const SideDrawer = () => {
   return (
@@ -43,7 +37,6 @@ const SideDrawer = () => {
 
           <SearchBar />
           <CartDrawer />
-          {/* <ShoppingCartIcon className="mx-1  cursor-pointer transition ease-in-out  hover:translate-z-2 hover:scale-110   duration-300  " /> */}
         </div>
       </div>
       <SheetContent side="left" className="w-80">

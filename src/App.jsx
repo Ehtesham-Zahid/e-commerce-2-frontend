@@ -1,9 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
+import { Toaster } from "react-hot-toast";
+
+import Footer from "./components/Footer/Footer";
+
 import HomePage from "./containers/HomePage/HomePage";
 import MenPage from "./containers/MenPage/MenPage";
-import Banner from "./components/Banner/Banner";
-import Header from "./components/Header/Header";
 import WomenPage from "./containers/WomenPage/WomenPage";
 import KidsPage from "./containers/KidsPage/KidsPage";
 import AccessoriesPage from "./containers/AccessoriesPage/AccessoriesPage";
@@ -11,23 +12,22 @@ import SignupPage from "./containers/SignupPage/SignupPage";
 import SigninPage from "./containers/SigninPage/SigninPage";
 import SingleProductPage from "./containers/SingleProductPage/SingleProductPage";
 import CheckoutPage from "./containers/CheckoutPage/CheckoutPage";
-import Footer from "./components/Footer/Footer";
 import AccountPage from "./containers/AccountPage/AccountPage";
 import AddressesPage from "./containers/AddressesPage/AddressesPage";
-import PrivateRoutes from "./utils/PrivateRoutes";
-import { Toaster } from "react-hot-toast";
 import OrderSuccessPage from "./containers/OrderSuccessPage/OrderSuccessPage";
 import SearchedProductsPage from "./containers/SearchedProductsPage/SearchedProductsPage";
 import ForgotPasswordPage from "./containers/ForgotPasswordPage/ForgotPasswordPage";
 import ResetPasswordPage from "./containers/ResetPasswordPage/ResetPasswordPage";
 import OrderCancelPage from "./containers/OrderCancelPage/OrderCancelPage";
 
+import PrivateRoutes from "./utils/PrivateRoutes";
+
+import "./App.css";
+
 function App() {
   return (
     <div style={{ fontFamily: "Lato, sans-serif" }}>
       <Toaster />
-      {/* <Banner />
-      <Header /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/collections/men" element={<MenPage />} />
@@ -56,7 +56,7 @@ function App() {
           <Route path="/account" element={<AccountPage />} />
           <Route path="/account/addresses" element={<AddressesPage />} />
         </Route>
-      </Routes>{" "}
+      </Routes>
       <Footer />
     </div>
   );
