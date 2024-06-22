@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/shadcn-components/ui/button";
 import { forgotPassword } from "@/store/features/auth/authSlice";
+import toast from "react-hot-toast";
 
 const ForgotPasswordForm = () => {
   // --------VARIABLE DECLARATIONS---------
@@ -22,7 +23,11 @@ const ForgotPasswordForm = () => {
 
   // -----------HANDLERS---------
   const forgotPasswordHandler = () => {
-    dispatch(forgotPassword(email));
+    dispatch(forgotPassword(email)).then((result) => {
+      if (result.meta.requestStatus === "fulfilled") {
+        toast.success("Email Sent!");
+      }
+    });
   };
 
   return (
