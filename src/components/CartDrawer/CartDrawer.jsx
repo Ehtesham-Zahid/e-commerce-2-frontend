@@ -50,7 +50,7 @@ const CartDrawer = () => {
           <div className="flex justify-center items-center mt-64 lg:mt-72">
             <Spinner />
           </div>
-        ) : cart?.items?.length !== 0 && cart?.items?.products?.length !== 0 ? (
+        ) : cart?.items?.length !== 0 || cart?.items?.products?.length !== 0 ? (
           <>
             <div className="overflow-auto px-4 mb-20">
               {cart.items?.products?.map((item, index) => {
