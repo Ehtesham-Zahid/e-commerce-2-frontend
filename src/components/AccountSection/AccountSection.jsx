@@ -27,6 +27,7 @@ import {
 import { fetchOrders } from "@/store/features/order/orderSlice";
 
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import Spinner from "../Spinner/Spinner";
 const AccountSection = () => {
   // -----VARIABLES DECALARATION------
 
@@ -86,7 +87,11 @@ const AccountSection = () => {
             View all your orders and manage your account information.
           </p>
           <div className="flex flex-col lg:flex-row justify-between ">
-            {order.orders.length === 0 ? (
+            {order.loading ? (
+              <div className="flex justify-center items-center my-40 w-full">
+                <Spinner />
+              </div>
+            ) : order.orders.length === 0 ? (
               // <div className="flex justify-center w-full mt-36 border-e">
               <p className="text-center font-bold text-2xl w-full my-32 sm:my-40 tracking-wide">
                 YOU HAVEN'T PLACED ANY ORDER YET

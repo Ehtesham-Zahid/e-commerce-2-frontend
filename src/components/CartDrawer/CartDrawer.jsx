@@ -50,7 +50,7 @@ const CartDrawer = () => {
           </SheetClose>
         </div>
         {cart?.loading ? (
-          <div className="flex justify-center items-center mt-64 lg:mt-72">
+          <div className="flex justify-center items-center mt-72">
             <Spinner />
           </div>
         ) : cart?.items?.length !== 0 ? (

@@ -48,13 +48,17 @@ const EditAddressFormDialog = (props) => {
 
       <dialog id={props.id} className="modal">
         <div className="modal-box">
-          <form method="dialog  ">
+          <form>
             {/* if there is a button in form, it will close the modal */}
             <p className="font-bold text-[17px] absolute left-6 top-3 ">
               Edit Address
             </p>
 
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-4 top-2  mt">
+            <button
+              className="btn btn-sm btn-circle btn-ghost absolute right-4 top-2  mt"
+              onClick={() => document.getElementById(props.id).close()}
+              type="button"
+            >
               ✕
             </button>
           </form>
@@ -62,14 +66,14 @@ const EditAddressFormDialog = (props) => {
             className="mt-6 "
             onSubmit={(e) => handleSubmit(props.updateAddressHandler(e, data))}
           >
-            <div className="flex  justify-between mb-3">
-              <div className="flex jus flex-col">
+            <div className="flex flex-col sm:flex-row justify-between mb-3">
+              <div className="flex   flex-col mb-3 sm:mb-0">
                 <input
                   {...register("firstName", { required: true })}
                   placeholder="First Name"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="border border-gray-400  rounded-md p-2.5      w-[225px] "
+                  className="border border-gray-400  rounded-md p-2.5      w-full sm:w-[225px] "
                 />{" "}
                 {errors.firstName && (
                   <p className="text-red-500 font-semibold text-sm">
@@ -83,7 +87,7 @@ const EditAddressFormDialog = (props) => {
                   placeholder="Last Name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className="border border-gray-400  rounded-md p-2.5     w-[225px] "
+                  className="border border-gray-400  rounded-md p-2.5     w-full sm:w-[225px] "
                 />{" "}
                 {errors.lastName && (
                   <p className="text-red-500 font-semibold text-sm">
