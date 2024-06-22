@@ -86,7 +86,7 @@ const AddToCartModal = (props) => {
         {singleProduct.loading ? (
           <AddToCartModalSkeleton />
         ) : (
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 mt-1.5 gap-6">
             <ImageSlider
               imageUrls={singleProduct.currentVariation?.imageUrls}
             />
