@@ -79,8 +79,6 @@ const CheckoutForm = () => {
       totalPrice: cart.items.totalPrice,
     };
 
-    console.log(selectedAddress);
-
     token
       ? dispatch(createOrderAuth(authData)).then((result) =>
           result.meta.requestStatus === "fulfilled"
@@ -129,8 +127,6 @@ const CheckoutForm = () => {
           token,
         })
       );
-
-      console.log(session.id, "IDHAR HUN");
 
       const result = await stripe.redirectToCheckout({
         sessionId: session.id,

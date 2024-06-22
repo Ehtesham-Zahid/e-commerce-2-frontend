@@ -25,10 +25,9 @@ export const fetchAddresses = createAsyncThunk(
         "https://e-commerce-2-backend.vercel.app/api/v1/addresses/",
         config
       );
-      console.log(response);
+
       return response.data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response.data.error.message);
     }
   }
@@ -48,10 +47,9 @@ export const fetchAddress = createAsyncThunk(
         `https://e-commerce-2-backend.vercel.app/api/v1/addresses/${addressId}`,
         config
       );
-      console.log(response);
+
       return response.data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response.data.error.message);
     }
   }
@@ -71,10 +69,9 @@ export const fetchPrimaryAddress = createAsyncThunk(
         "https://e-commerce-2-backend.vercel.app/api/v1/addresses/primary",
         config
       );
-      console.log(response);
+
       return response.data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response.data.error.message);
     }
   }
@@ -95,10 +92,9 @@ export const addAddress = createAsyncThunk(
         data,
         config
       );
-      console.log(response);
+
       return response.data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response.data.error.message);
     }
   }
@@ -118,10 +114,9 @@ export const deleteAddress = createAsyncThunk(
         `https://e-commerce-2-backend.vercel.app/api/v1/addresses/${addressId}`,
         config
       );
-      console.log(response);
+
       return response.data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response.data.error.message);
     }
   }
@@ -131,7 +126,6 @@ export const updateAddress = createAsyncThunk(
   "addresses/updateAddress",
   async ({ addressId, data }, { rejectWithValue }) => {
     try {
-      console.log(addressId);
       const token = localStorage.getItem("token");
       const config = {
         headers: {
@@ -143,10 +137,9 @@ export const updateAddress = createAsyncThunk(
         data,
         config
       );
-      console.log(response);
+
       return response.data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response.data.error.message);
     }
   }

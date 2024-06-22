@@ -61,7 +61,7 @@ const SearchedProductsSection = () => {
   return (
     <div className="min-h-screen">
       <Banner />
-      <div className={`z-10 ${scrolled ? "fixed top-0" : ""}`}>
+      <div className={`z-10 ${scrolled ? "fixed top-0 w-screen" : ""}`}>
         <Header />
         <Toolbar searchPage={true} />
       </div>

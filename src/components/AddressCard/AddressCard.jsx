@@ -49,7 +49,7 @@ const AddressCard = (props) => {
 
   const updateAddressHandler = (e, data) => {
     e.preventDefault();
-    console.log("IDDD: ", props.id);
+
     dispatch(updateAddress({ addressId: props.id, data })).then((result) => {
       if (result.meta.requestStatus === "fulfilled") {
         dispatch(fetchAddresses());

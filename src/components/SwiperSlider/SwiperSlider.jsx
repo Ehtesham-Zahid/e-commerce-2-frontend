@@ -29,8 +29,6 @@ const SwiperSlider = () => {
       slidesPerView={1}
       pagination={{ clickable: true }}
       autoplay={true}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log("slide change")}
       className="  h-screen"
     >
       <SwiperSlide className="slider1 flex justify-center items-center flex-col">

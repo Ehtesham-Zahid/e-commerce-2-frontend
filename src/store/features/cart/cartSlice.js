@@ -22,8 +22,6 @@ export const fetchProductsByVariants = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log(error);
-      console.log(error.response);
       return rejectWithValue(error.response.data.message);
       // return rejectWithValue(error.response.data.message);
     }

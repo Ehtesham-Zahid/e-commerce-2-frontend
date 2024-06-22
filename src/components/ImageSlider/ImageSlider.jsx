@@ -18,8 +18,6 @@ const ImageSlider = (props) => {
       slidesPerView={1}
       navigation
       pagination={{ clickable: true }}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log("slide change")}
       className="w-full col-span-1  "
     >
       <SwiperSlide className="flex justify-center items-center">

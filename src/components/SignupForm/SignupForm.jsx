@@ -35,7 +35,6 @@ const SigninForm = () => {
   const onSubmit = () => {
     dispatch(signup(signupData))
       .then((result) => {
-        console.log(result);
         result.meta.requestStatus === "fulfilled"
           ? navigate("/account/")
           : null;

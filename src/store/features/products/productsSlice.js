@@ -20,10 +20,9 @@ export const fetchProducts = createAsyncThunk(
       const response = await axios.get(
         "https://e-commerce-2-backend.vercel.app/api/v1/products"
       );
-      console.log(response);
+
       return response.data.allProducts;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response.data.error.message);
     }
   }
@@ -33,16 +32,14 @@ export const fetchProductsByCategory = createAsyncThunk(
   "products/fetchProductsByCategory",
   async ({ category, sort, limit }, { rejectWithValue }) => {
     // Default limit is 4
-    console.log(category);
+
     try {
       const response = await axios.get(
         `https://e-commerce-2-backend.vercel.app/api/v1/products/category/${category}?sort=${sort}&limit=${limit}`
       );
-      console.log(sort);
-      console.log(response);
+
       return response.data.products;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response.data.error.message);
     }
   }

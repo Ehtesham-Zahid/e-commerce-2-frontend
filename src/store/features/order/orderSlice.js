@@ -23,10 +23,9 @@ export const createOrderAuth = createAsyncThunk(
         data,
         config
       );
-      console.log(response);
+
       return response.data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response.data.error.message);
     }
   }
@@ -40,10 +39,9 @@ export const createOrderUnAuth = createAsyncThunk(
         "https://e-commerce-2-backend.vercel.app/api/v1/orders/createOrderUnAuth/",
         data
       );
-      console.log(response);
+
       return response.data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response.data.error.message);
     }
   }
@@ -63,10 +61,9 @@ export const fetchOrders = createAsyncThunk(
         "https://e-commerce-2-backend.vercel.app/api/v1/orders/",
         config
       );
-      console.log("ORDERS: ", response);
+
       return response.data.data.orders;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response.data.error.message);
     }
   }

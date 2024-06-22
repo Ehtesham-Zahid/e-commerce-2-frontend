@@ -84,7 +84,6 @@ export const resetPassword = createAsyncThunk(
   "authentication/resetPassword",
   async ({ resetToken, resetPasswordData }, { rejectWithValue }) => {
     try {
-      console.log(resetToken);
       const response = await axios.patch(
         `https://e-commerce-2-backend.vercel.app/api/v1/users/resetPassword/${resetToken}`,
         resetPasswordData

@@ -15,7 +15,7 @@ export const fetchSingleProduct = createAsyncThunk(
       const response = await axios.get(
         `https://e-commerce-2-backend.vercel.app/api/v1/products/${productId}`
       );
-      console.log(response);
+
       return {
         product: response.data,
         variation: response.data.variations.find(
@@ -23,7 +23,6 @@ export const fetchSingleProduct = createAsyncThunk(
         ),
       };
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response.data.error.message);
     }
   }

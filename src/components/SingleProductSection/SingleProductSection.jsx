@@ -21,6 +21,7 @@ import { Separator } from "@/shadcn-components/ui/separator";
 import RecyclingIcon from "@mui/icons-material/Recycling";
 import DescriptionIcon from "@mui/icons-material/Description";
 import WarningIcon from "@mui/icons-material/Warning";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 import { fetchSingleProduct } from "@/store/features/singleProduct/singleProductSlice";
 import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
@@ -100,7 +101,7 @@ const SingleProductSection = () => {
   return (
     <div className="">
       <Banner />
-      <div className={`${scrolled ? "fixed top-0 z-10" : ""}`}>
+      <div className={` z-10 ${scrolled ? "fixed top-0 w-screen" : ""}`}>
         <Header />
       </div>
 
@@ -195,21 +196,49 @@ const SingleProductSection = () => {
                     DESCRIPTION
                   </p>
                 </AccordionTrigger>
-                <AccordionContent className="text-medium tracking-wider leading-7">
-                  Yes. It adheres to the WAI-ARIA design pattern. Yes. It
-                  adheres to the WAI-ARIA design pattern. Yes. It adheres to the
-                  WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA
-                  design pattern. Yes. It adheres to the WAI-ARIA design
-                  pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes.
-                  It adheres to the WAI-ARIA design pattern. Yes. It adheres to
-                  the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA
-                  design pattern. Yes. It adheres to the WAI-ARIA design
-                  pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes.
-                  It adheres to the WAI-ARIA design pattern. Yes. It adheres to
-                  the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA
-                  design pattern. Yes. It adheres to the WAI-ARIA design
-                  pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes.
-                  It adheres to the WAI-ARIA design pattern.
+                <AccordionContent className="text-xs md:text-[13px] tracking-wider leading-7  ">
+                  <p className="mb-5">
+                    Elevate Your Style with{" "}
+                    <strong>
+                      <span className="text-gray-500">IRON</span>WEAR
+                    </strong>
+                  </p>
+                  <p className="mb-5">
+                    Discover the perfect blend of fashion and comfort with our
+                    latest collection. Designed with meticulous attention to
+                    detail, each piece is crafted from high-quality materials to
+                    ensure a perfect fit and lasting durability.
+                  </p>
+                  <p className="font-semibold">Key Features:</p>
+                  <p>
+                    <FiberManualRecordIcon fontSize="xs" />{" "}
+                    <strong>Premium Quality:</strong> Made from top-notch
+                    fabrics for exceptional comfort and longevity.
+                  </p>
+                  <p>
+                    <FiberManualRecordIcon fontSize="xs" />{" "}
+                    <strong>Stylish Design:</strong> Made from top-notch fabrics
+                    for exceptional comfort and longevity.
+                  </p>{" "}
+                  <p>
+                    <FiberManualRecordIcon fontSize="xs" />{" "}
+                    <strong>Perfect Fit:</strong> Made from top-notch fabrics
+                    for exceptional comfort and longevity.
+                  </p>{" "}
+                  <p className="mb-5">
+                    <FiberManualRecordIcon fontSize="xs" />{" "}
+                    <strong>Versatile Wear:</strong> Made from top-notch fabrics
+                    for exceptional comfort and longevity.
+                  </p>
+                  <p className="mb-5">
+                    Whether you're looking to update your everyday essentials or
+                    make a statement at your next event,{" "}
+                    <strong>
+                      <span className="text-gray-500">IRON</span>WEAR
+                    </strong>{" "}
+                    has the perfect piece for you. Embrace the latest trends and
+                    showcase your unique style with our collection.
+                  </p>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
