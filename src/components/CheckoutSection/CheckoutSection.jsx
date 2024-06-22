@@ -29,10 +29,10 @@ const CheckoutSection = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-fit">
       <CheckoutHeader />
       {address.loading || products.loading ? (
-        <div className="flex justify-center  items-center w-screen mt-72">
+        <div className="flex justify-center  items-center w-screen my-72">
           <Spinner />
         </div>
       ) : (
