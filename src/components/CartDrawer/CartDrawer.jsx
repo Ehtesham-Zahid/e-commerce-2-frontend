@@ -25,14 +25,17 @@ const CartDrawer = () => {
   const cart = useSelector((state) => state.cart);
 
   // ----------USE EFFECTS-----------
-  useEffect(() => {
-    dispatch(fetchProductsByVariants());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchProductsByVariants());
+  // }, []);
 
   return (
     <Sheet className=" ">
       <SheetTrigger>
-        <ShoppingCartIcon className="mx-2 cursor-pointer transition ease-in-out  hover:translate-z-2 hover:scale-110   duration-300" />
+        <ShoppingCartIcon
+          className="mx-2 cursor-pointer transition ease-in-out  hover:translate-z-2 hover:scale-110   duration-300"
+          onClick={() => dispatch(fetchProductsByVariants())}
+        />
       </SheetTrigger>
 
       <SheetContent
