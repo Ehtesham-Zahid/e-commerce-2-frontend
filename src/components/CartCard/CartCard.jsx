@@ -4,7 +4,10 @@ import toast from "react-hot-toast";
 
 import QuantitySelector from "../QuantitySelector/QuantitySelector";
 
-import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
+import {
+  fetchProductsByVariants,
+  resetCartItems,
+} from "@/store/features/cart/cartSlice";
 
 const CartCard = (props) => {
   // ----------VARIABLE DECLARATION-----------
@@ -15,7 +18,13 @@ const CartCard = (props) => {
     let cart = JSON.parse(localStorage.getItem("cart"));
 
     cart.splice(props.index, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
+    if (cart.length === 0) {
+      localStorage.removeItem("cart");
+      dispatch(resetCartItems());
+    } else {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
     toast.success("Item Removed!");
 
     dispatch(fetchProductsByVariants());

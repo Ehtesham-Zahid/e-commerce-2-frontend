@@ -32,7 +32,11 @@ export const fetchProductsByVariants = createAsyncThunk(
 const cartSlice = createSlice({
   name: "cart",
   initialState,
-  reducers: {},
+  reducers: {
+    resetCartItems(state) {
+      state.items = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchProductsByVariants.pending, (state) => {
       state.loading = true;
@@ -50,7 +54,6 @@ const cartSlice = createSlice({
   },
 });
 
-// export const { addToLocalCart, removeFromLocalCart, loadLocalCart } =
-//   cartSlice.actions;
+export const { resetCartItems } = cartSlice.actions;
 
 export default cartSlice.reducer;
