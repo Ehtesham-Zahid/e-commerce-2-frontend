@@ -17,6 +17,7 @@ import { fetchProductsByVariants } from "@/store/features/cart/cartSlice";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import Spinner from "../Spinner/Spinner";
 
 const CartDrawer = () => {
   // ----------VARIABLE DECLARATIONS-------------
@@ -45,7 +46,11 @@ const CartDrawer = () => {
             <span className="sr-only">Close</span>
           </SheetClose>
         </div>
-        {cart?.items?.products?.length !== 0 ? (
+        {cart?.loading ? (
+          <div className="flex justify-center items-center mt-64 lg:mt-72">
+            <Spinner />
+          </div>
+        ) : cart?.items?.length !== 0 && cart?.items?.products?.length !== 0 ? (
           <>
             <div className="overflow-auto px-4 mb-20">
               {cart.items?.products?.map((item, index) => {
