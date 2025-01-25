@@ -8,7 +8,7 @@ const ProductCardMini = (props) => {
     <SheetClose asChild>
       <Link
         to={`/products/${props.id}/${props.color}`}
-        className="flex items-center justify-start my-2"
+        className="flex items-center justify-start my-2 text-black"
       >
         <img className="w-20 h-20 rounded-lg" src={props.image} />
 
@@ -21,7 +21,7 @@ const ProductCardMini = (props) => {
   ) : (
     <Link
       to={`/products/${props.id}/${props.color}`}
-      className="flex items-center justify-start my-2"
+      className="flex items-center justify-start my-2 text-black"
     >
       <img className="w-20 h-20 rounded-lg" src={props.image} />
 

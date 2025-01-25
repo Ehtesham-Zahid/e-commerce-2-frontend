@@ -26,7 +26,10 @@ import "./App.css";
 
 function App() {
   return (
-    <div style={{ fontFamily: "Lato, sans-serif" }}>
+    <div
+      style={{ fontFamily: "Lato, sans-serif" }}
+      className="bg-white text-black"
+    >
       <Toaster />
       <Routes>
         <Route path="/" element={<HomePage />} />

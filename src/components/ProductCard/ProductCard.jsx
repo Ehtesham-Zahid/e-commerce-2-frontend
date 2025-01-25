@@ -12,7 +12,7 @@ const ProductCard = (props) => {
 
   return props.searchBar ? (
     <div
-      className="mx-0.5"
+      className="mx-0.5 text-black"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -41,7 +41,7 @@ const ProductCard = (props) => {
     </div>
   ) : (
     <div
-      className="mx-0.5"
+      className="mx-0.5 text-black"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

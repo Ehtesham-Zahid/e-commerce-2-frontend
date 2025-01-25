@@ -47,13 +47,15 @@ const Footer = () => {
           <h6 className="footer-title text-base">Newsletter</h6>
           <fieldset className="form-control w-80">
             <label className="label">
-              <span className="label-text">Enter your email address</span>
+              <span className="label-text text-black">
+                Enter your email address
+              </span>
             </label>
             <div className="join">
               <input
                 type="email"
                 placeholder="johndoe@gmail.com"
-                className="input input-bordered join-item"
+                className="input input-bordered join-item bg-white border border-black text-black"
               />
               <button className="btn  bg-black text-white hover:bg-slate-800 join-item">
                 Subscribe
@@ -63,7 +65,7 @@ const Footer = () => {
         </form>
       </footer>
       <div className="flex flex-col md:flex-row justify-between items-center  py-8 border-t border-black sm:px-24">
-        <p className="font-bold text-sm sm:text-base pb-5 md:pb-0">
+        <p className="font-bold text-sm sm:text-base pb-5 md:pb-0 text-black">
           © 2024 | IRONWEAR Fitness | All Rights Reserved.
         </p>
         <div className="flex  ">

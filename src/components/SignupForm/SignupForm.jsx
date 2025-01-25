@@ -53,7 +53,7 @@ const SigninForm = () => {
       <div className=" flex flex-col mb-3">
         <label className="text-black font-medium">Username</label>
 
-        <label className="input input-bordered flex items-center gap-2">
+        <label className="input input-bordered flex items-center gap-2  bg-white border-black text-black">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -81,7 +81,7 @@ const SigninForm = () => {
       </div>
       <div className=" flex flex-col mb-3">
         <label className="text-black font-medium">Email Address</label>
-        <label className="input input-bordered flex items-center gap-2">
+        <label className="input input-bordered flex items-center gap-2  bg-white border-black text-black">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -110,7 +110,7 @@ const SigninForm = () => {
       <div className=" flex flex-col mb-3">
         <label className="text-black font-medium">Password</label>
 
-        <label className="input input-bordered flex items-center gap-2">
+        <label className="input input-bordered flex items-center gap-2  bg-white border-black text-black">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -144,7 +144,7 @@ const SigninForm = () => {
       <div className=" flex flex-col mb-3">
         <label className="text-black font-medium">Password Confirm</label>
 
-        <label className="input input-bordered flex items-center gap-2">
+        <label className="input input-bordered flex items-center gap-2  bg-white border-black text-black">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"

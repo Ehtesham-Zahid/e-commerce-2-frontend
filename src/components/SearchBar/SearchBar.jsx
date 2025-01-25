@@ -48,7 +48,7 @@ const SearchBar = () => {
         <div className="flex">
           <SearchIcon className="mx-2 text-neutral-400 mt-1" fontSize="large" />
           <input
-            className="border-b border-neutral-400 w-full py-2 outline-none me-10"
+            className=" bg-white text-black border-b border-neutral-400 w-full py-2 outline-none me-10"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="SEARCH FOR..."

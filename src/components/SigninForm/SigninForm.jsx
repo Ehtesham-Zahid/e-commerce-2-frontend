@@ -44,7 +44,7 @@ const SigninForm = () => {
       <p className="text-xl mb-5 ">Hi, Welcome Back!</p>
 
       <div className="my-4 flex flex-col">
-        <label className="input input-bordered w-full flex items-center gap-2">
+        <label className="input input-bordered w-full flex items-center gap-2 bg-white border-black text-black">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -64,7 +64,7 @@ const SigninForm = () => {
       </div>
 
       <div className="mt-2 flex flex-col">
-        <label className="input input-bordered flex items-center gap-2">
+        <label className="input input-bordered flex items-center gap-2  bg-white border-black text-black">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
