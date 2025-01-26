@@ -66,7 +66,7 @@ const Footer = () => {
       </footer>
       <div className="flex flex-col md:flex-row justify-between items-center  py-8 border-t border-black sm:px-24">
         <p className="font-bold text-sm sm:text-base pb-5 md:pb-0 text-black">
-          © 2024 | IRONWEAR Fitness | All Rights Reserved.
+          © 2025 | IRONWEAR Fitness | All Rights Reserved.
         </p>
         <div className="flex  ">
           <img
