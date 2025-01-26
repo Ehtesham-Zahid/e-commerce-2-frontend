@@ -89,7 +89,7 @@ const AddAddressFormDialog = (props) => {
       )}
 
       <dialog id="my_modal_1" className="modal">
-        <div className="modal-box">
+        <div className="modal-box bg-white">
           <form>
             {/* if there is a button in form, it will close the modal */}
             <p className="font-bold text-[17px] absolute left-6 top-3 ">
@@ -104,7 +104,7 @@ const AddAddressFormDialog = (props) => {
             </button>
           </form>
           <form
-            className="mt-6 "
+            className="mt-6  "
             // onSubmit={handleSubmit(onSubmit)}
           >
             <div className="flex flex-col sm:flex-row justify-between mb-3">
@@ -114,7 +114,7 @@ const AddAddressFormDialog = (props) => {
                   placeholder="First Name"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="border border-gray-400  rounded-md p-2.5     w-full sm:w-[225px] "
+                  className="border border-black  rounded-md p-2.5     w-full sm:w-[225px]  bg-white "
                 />{" "}
                 {errors.firstName && (
                   <p className="text-red-500 font-semibold text-sm">
@@ -128,7 +128,7 @@ const AddAddressFormDialog = (props) => {
                   placeholder="Last Name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className="border border-gray-400  rounded-md p-2.5    w-full  sm:w-[225px] "
+                  className="border border-black  rounded-md p-2.5    w-full  sm:w-[225px] bg-white "
                 />{" "}
                 {errors.lastName && (
                   <p className="text-red-500 font-semibold text-sm">
@@ -143,7 +143,7 @@ const AddAddressFormDialog = (props) => {
                 placeholder="Phone Number"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                className="border border-gray-400  rounded-md p-2.5   w-full "
+                className="border border-black  rounded-md p-2.5   w-full bg-white "
               />{" "}
               {errors.lastName && (
                 <p className="text-red-500 font-semibold text-sm">
@@ -157,7 +157,7 @@ const AddAddressFormDialog = (props) => {
                 placeholder="Address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                className="border border-gray-400  rounded-md p-2.5   w-full "
+                className="border border-black  rounded-md p-2.5   w-full bg-white "
               />{" "}
               {errors.address && (
                 <p className="text-red-500 font-semibold text-sm">
@@ -172,7 +172,7 @@ const AddAddressFormDialog = (props) => {
                 placeholder="City"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
-                className="border border-gray-400  rounded-md p-2.5   w-full "
+                className="border border-black  rounded-md p-2.5   w-full bg-white"
               />
               {errors.city && (
                 <p className="text-red-500 font-semibold text-sm">
@@ -186,7 +186,7 @@ const AddAddressFormDialog = (props) => {
                 placeholder="Zip Code"
                 value={zipCode}
                 onChange={(e) => setZipCode(e.target.value)}
-                className="border border-gray-400  rounded-md p-2.5    w-full "
+                className="border border-black  rounded-md p-2.5    w-full bg-white"
               />
               {errors.zipCode && (
                 <p className="text-red-500 font-semibold text-sm">
@@ -201,7 +201,7 @@ const AddAddressFormDialog = (props) => {
                 placeholder="Country"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
-                className="border border-gray-400  rounded-md p-2.5   w-full "
+                className="border border-black  rounded-md p-2.5   w-full bg-white"
               />{" "}
               {errors.country && (
                 <p className="text-red-500 font-semibold text-sm  ">

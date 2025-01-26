@@ -153,7 +153,7 @@ const CheckoutForm = () => {
             <Accordion
               type="single"
               collapsible
-              className="border-b border-gray-400 mb-3"
+              className="border-b border-black mb-3"
             >
               <AccordionItem value="item-1">
                 <AccordionTrigger className="text-lg text-gray-700 flex items-start">
@@ -222,7 +222,7 @@ const CheckoutForm = () => {
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="border border-gray-400 rounded-md p-2.5 w-full"
+                  className="border border-black rounded-md p-2.5 w-full bg-white"
                 />
                 {errors.email && (
                   <p className="text-red-500 font-semibold">Enter the email</p>
@@ -238,7 +238,7 @@ const CheckoutForm = () => {
                     placeholder="First Name"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="border border-gray-400 rounded-md p-2.5 w-full me-2"
+                    className="border border-black rounded-md p-2.5 w-full me-2 bg-white"
                   />
                   {errors.firstName && (
                     <p className="text-red-500 font-semibold">
@@ -252,7 +252,7 @@ const CheckoutForm = () => {
                     placeholder="Last Name"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="border border-gray-400 rounded-md p-2.5  w-full ms-2"
+                    className="border border-black rounded-md p-2.5  w-full ms-2 bg-white"
                   />
                   {errors.lastName && (
                     <p className="text-red-500 font-semibold">
@@ -267,7 +267,7 @@ const CheckoutForm = () => {
                   placeholder="Address"
                   value={streetAddress}
                   onChange={(e) => setStreetAddress(e.target.value)}
-                  className="border border-gray-400 rounded-md p-2.5  w-full"
+                  className="border border-black rounded-md p-2.5  w-full bg-white"
                 />
                 {errors.address && (
                   <p className="text-red-500 font-semibold">
@@ -277,7 +277,7 @@ const CheckoutForm = () => {
               </div>
               <input
                 placeholder="Apartment, suite, etc(optional)"
-                className="border border-gray-400 rounded-md p-2.5 mb-6 w-full"
+                className="border border-black rounded-md p-2.5 mb-6 w-full bg-white"
               />
               <div className="flex ">
                 <div className="mb-6 w-full">
@@ -286,7 +286,7 @@ const CheckoutForm = () => {
                     placeholder="City"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
-                    className="border border-gray-400 rounded-md p-2.5   w-full me-2"
+                    className="border border-black rounded-md p-2.5   w-full me-2 bg-white"
                   />
                   {errors.city && (
                     <p className="text-red-500 font-semibold">Enter the City</p>
@@ -298,7 +298,7 @@ const CheckoutForm = () => {
                     placeholder="Zip Code"
                     value={zipcode}
                     onChange={(e) => setZipcode(e.target.value)}
-                    className="border border-gray-400 rounded-md p-2.5   w-full ms-2"
+                    className="border border-black rounded-md p-2.5   w-full ms-2 bg-white"
                   />
                   {errors.zipCode && (
                     <p className="text-red-500 font-semibold">
@@ -313,7 +313,7 @@ const CheckoutForm = () => {
                   placeholder="Phone Number"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
-                  className="border border-gray-400 rounded-md p-2.5  w-full"
+                  className="border  rounded-md p-2.5  w-full bg-white border-black"
                 />
                 {errors.phoneNumber && (
                   <p className="text-red-500 font-semibold">
