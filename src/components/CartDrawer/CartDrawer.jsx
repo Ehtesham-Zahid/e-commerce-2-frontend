@@ -30,7 +30,7 @@ const CartDrawer = () => {
   // }, []);
 
   return (
-    <Sheet className=" ">
+    <Sheet className="">
       <SheetTrigger>
         <ShoppingCartIcon
           className="mx-2 cursor-pointer transition ease-in-out  hover:translate-z-2 hover:scale-110   duration-300"
@@ -40,7 +40,7 @@ const CartDrawer = () => {
 
       <SheetContent
         side="right"
-        className="flex flex-col p-0 max-[450px]:w-[325px]"
+        className="flex flex-col p-0 max-[450px]:w-[325px] text-black"
       >
         <div className="flex justify-between items-center px-6 py-4 ">
           <p className="text-xl font-medium tracking-wide">CART</p>
